@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Clock3,
-  FileText,
   Mail,
   MapPin,
   MessageCircle,
@@ -154,72 +152,75 @@ export default function Contact() {
             </div>
 
             <aside className="space-y-3">
-              <div className="grid grid-cols-[1fr_48px] gap-2 overflow-hidden rounded-lg border border-emerald-100 bg-[#ebf9f1] p-3.5 sm:p-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0da85b] text-white">
-                      <MessageCircle className="h-4 w-4" />
+              <div className="grid grid-cols-1 gap-3 overflow-hidden rounded-xl border border-emerald-100 bg-[#eaf8f0] p-4 sm:grid-cols-[minmax(0,1fr)_76px] sm:p-5">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0dbb68] text-white shadow-sm">
+                      <MessageCircle className="h-5 w-5" />
                     </span>
-                    <h3 className="text-[13px] font-bold text-slate-800">Prefer to Chat?</h3>
+                    <h3 className="text-base font-bold text-[#152b40]">Prefer to Chat?</h3>
                   </div>
-                  <p className="ml-9 mt-1 text-[10px] leading-relaxed text-slate-600">
+                  <p className="ml-[52px] mt-2 text-xs leading-relaxed text-slate-600 sm:text-[13px]">
                     {businessConfig.whatsappConfigured
                       ? 'Reach our team directly on WhatsApp for quick support about product availability and quotations.'
-                      : 'Call or email our team for product availability, support and quotations.'}
+                      : 'Reach our team for product availability, support and quotations.'}
                   </p>
                   {businessConfig.whatsappConfigured ? (
                     <a
                       href={buildWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="ml-9 mt-2 inline-flex items-center gap-1 rounded-md border border-green-500 px-3 py-1.5 text-[10px] font-semibold text-green-800 transition hover:bg-green-50"
+                      className="ml-[52px] mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#23b967] bg-white px-4 text-xs font-semibold text-[#12a85a] shadow-sm transition hover:bg-green-50"
                     >
-                      Chat on WhatsApp <ArrowRight className="h-3 w-3" />
+                      Chat on WhatsApp <ArrowRight className="h-4 w-4" />
                     </a>
                   ) : (
                     <a
                       href={`tel:${businessConfig.phoneRaw}`}
-                      className="ml-9 mt-2 inline-flex items-center gap-1 rounded-md border border-green-500 px-3 py-1.5 text-[10px] font-semibold text-green-800 transition hover:bg-green-50"
+                      className="ml-[52px] mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#23b967] bg-white px-4 text-xs font-semibold text-[#12a85a] shadow-sm transition hover:bg-green-50"
                     >
-                      Call our team <Phone className="h-3 w-3" />
+                      Call our team <Phone className="h-4 w-4" />
                     </a>
                   )}
                 </div>
-                <div aria-hidden="true" className="relative hidden items-end justify-center sm:flex">
-                  <div className="h-[78px] w-[38px] rounded-[8px] border-[2px] border-slate-700 bg-slate-900 p-1 shadow-md">
-                    <div className="flex h-full items-center justify-center rounded-[4px] bg-gradient-to-b from-emerald-50 to-emerald-100">
-                      <MessageCircle className="h-5 w-5 fill-[#0da85b] text-[#0da85b]" />
+                <div aria-hidden="true" className="relative hidden min-h-[132px] items-center justify-center sm:flex">
+                  <div className="relative h-[128px] w-[62px] rotate-[5deg] rounded-[12px] border-[2px] border-[#101820] bg-[#101820] p-[4px] shadow-lg">
+                    <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[8px] bg-gradient-to-b from-[#12b56c] to-[#07894d]">
+                      <span className="absolute left-1/2 top-0 h-[8px] w-[27px] -translate-x-1/2 rounded-b-md bg-[#101820]" />
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+                        <MessageCircle className="h-5 w-5 text-white" />
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-lg border border-slate-200 bg-white p-3.5 shadow-[0_4px_20px_rgba(15,42,70,0.05)] sm:p-4">
-                <div className="mb-2.5 flex items-center gap-2">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0866f5]">
-                    <Clock3 className="h-4 w-4" />
+              <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-[0_4px_20px_rgba(15,42,70,0.06)] sm:p-5">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eff7ff] text-[#0866f5]">
+                    <Clock3 className="h-5 w-5" />
                   </span>
-                  <h3 className="text-[13px] font-bold text-slate-800">Business Hours</h3>
+                  <h3 className="text-base font-semibold text-[#152b40]">Business Hours</h3>
                 </div>
-                <ul className="space-y-1.5 pl-9 text-[10px]">
+                <ul className="space-y-0 pl-12 text-xs sm:text-[13px]">
                   {businessConfig.businessHours.map(({ day, hours }) => (
-                    <li key={day} className="flex justify-between gap-2 border-b border-slate-100 pb-1 last:border-0 last:pb-0">
-                      <span className="text-slate-600">{day}</span>
+                    <li key={day} className="flex justify-between gap-3 border-b border-slate-100 py-2 last:border-0 last:pb-0">
+                      <span className="text-slate-600">{day.replace(' – ', ' - ')}</span>
                       <span className="text-right font-medium text-slate-700">{hours}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="grid grid-cols-[1fr_82px] gap-2 overflow-hidden rounded-lg border border-slate-200 bg-white p-3.5 shadow-[0_4px_20px_rgba(15,42,70,0.05)] sm:p-4">
+              <div className="grid grid-cols-[minmax(0,1fr)_minmax(116px,42%)] gap-3 overflow-hidden rounded-xl border border-slate-100 bg-white p-4 shadow-[0_4px_20px_rgba(15,42,70,0.06)] sm:gap-4 sm:p-5">
                 <div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0866f5]">
-                      <MapPin className="h-4 w-4" />
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eff7ff] text-[#0866f5]">
+                      <MapPin className="h-5 w-5 fill-[#0866f5] text-white" />
                     </span>
-                    <h3 className="text-[13px] font-bold text-slate-800">Our Location</h3>
+                    <h3 className="text-base font-semibold text-[#152b40]">Our Location</h3>
                   </div>
-                  <p className="pl-9 text-[10px] leading-relaxed text-slate-600">
+                  <p className="pl-12 text-xs leading-relaxed text-slate-600 sm:text-[13px]">
                     {businessConfig.address.line1}, {businessConfig.address.city},
                     <br />
                     {businessConfig.address.state} {businessConfig.address.pincode},{' '}
@@ -229,9 +230,9 @@ export default function Contact() {
                     href={`https://www.google.com/maps/search/?api=1&query=${mapAddress}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ml-9 mt-1 inline-flex items-center gap-1 text-[10px] font-semibold text-[#0866f5] hover:underline"
+                    className="ml-12 mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#0866f5] hover:underline"
                   >
-                    Get Directions <ArrowRight className="h-3 w-3" />
+                    Get Directions <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>
                 <a
@@ -239,52 +240,43 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open Vinyanak Surgicals location in Google Maps"
-                  className="relative flex min-h-[66px] items-center justify-center overflow-hidden rounded-md border border-slate-200 bg-[#eef3f4] text-red-500"
+                  className="relative flex min-h-[124px] items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-[#eaf0ed] text-red-500"
                   style={{
                     backgroundImage:
-                      'linear-gradient(30deg, transparent 44%, #cbd5d4 45%, #cbd5d4 48%, transparent 49%), linear-gradient(140deg, transparent 38%, #d8cfc6 39%, #d8cfc6 42%, transparent 43%), linear-gradient(90deg, transparent 62%, #d7e3df 63%, #d7e3df 66%, transparent 67%)',
+                      'linear-gradient(35deg, transparent 44%, #cbd9d6 45%, #cbd9d6 47%, transparent 48%), linear-gradient(145deg, transparent 38%, #d9d0c7 39%, #d9d0c7 41%, transparent 42%), linear-gradient(90deg, transparent 62%, #d1e1dc 63%, #d1e1dc 66%, transparent 67%), linear-gradient(0deg, transparent 28%, #dce5e1 29%, #dce5e1 31%, transparent 32%), #eef2ef',
                   }}
                 >
-                  <MapPin className="h-6 w-6 fill-red-500 text-white drop-shadow" />
+                  <span className="absolute left-2 top-2 rounded bg-white/95 px-2 py-1 text-[9px] font-semibold text-slate-700 shadow-sm">
+                    Vinyanak Surgicals
+                  </span>
+                  <MapPin className="mt-5 h-8 w-8 fill-red-500 text-white drop-shadow-md" />
                 </a>
               </div>
 
-              <div className="relative overflow-hidden rounded-lg bg-[#0b2d55] p-3.5 text-white shadow-[0_4px_20px_rgba(15,42,70,0.1)] sm:p-4">
-                <div aria-hidden="true" className="absolute -right-2 top-3 rotate-6 opacity-10">
-                  <FileText className="h-24 w-24" />
-                </div>
-                <h3 className="relative text-[13px] font-bold">Need an Institutional Quotation?</h3>
-                <p className="relative mt-1 max-w-[270px] text-[10px] leading-relaxed text-blue-100">
-                  Request a detailed quotation for your hospital, clinic or institution. Use our
-                  dedicated form.
-                </p>
-                <Link
-                  to="/request-a-quote"
-                  className="relative mt-2.5 inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-[#0866f5] px-3 py-2 text-[10px] font-semibold text-white transition hover:bg-blue-600"
-                >
-                  Institutional Quotation Form <ArrowRight className="h-3 w-3" />
-                </Link>
-              </div>
             </aside>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-slate-100 bg-white py-4">
-        <div className="container-x grid grid-cols-2 gap-y-4 md:grid-cols-4">
+      <section className="border-y border-slate-100 bg-white py-5 md:py-6">
+        <div className="container-x grid grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-4 md:gap-x-0">
           {benefits.map(({ icon: Icon, title, detail }, index) => (
             <div
               key={title}
-              className={`flex items-center gap-2.5 px-2 sm:px-3 ${
-                index > 0 ? 'sm:border-l sm:border-slate-200' : ''
+              className={`flex min-w-0 items-center gap-3 px-2 sm:gap-4 sm:px-3 md:px-4 lg:px-5 ${
+                index > 0 ? 'md:border-l md:border-slate-200' : ''
               }`}
             >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[#0866f5]">
-                <Icon className="h-4 w-4" />
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eff7ff] text-[#0866f5] sm:h-14 sm:w-14 md:h-[68px] md:w-[68px]">
+                <Icon className="h-6 w-6 stroke-[2.2] sm:h-7 sm:w-7 md:h-8 md:w-8" />
               </span>
-              <span>
-                <span className="block text-[10px] font-bold text-slate-800">{title}</span>
-                <span className="mt-0.5 block text-[9px] leading-snug text-slate-500">{detail}</span>
+              <span className="min-w-0">
+                <span className="block text-xs font-bold leading-snug text-[#172b42] sm:text-sm md:text-[15px]">
+                  {title}
+                </span>
+                <span className="mt-1 block text-[11px] leading-snug text-slate-600 sm:text-xs md:text-[13px]">
+                  {detail}
+                </span>
               </span>
             </div>
           ))}
