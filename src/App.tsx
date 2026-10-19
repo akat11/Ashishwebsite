@@ -11,7 +11,6 @@ import ProductDetail from '@/pages/ProductDetail';
 import Departments from '@/pages/Departments';
 import Brands from '@/pages/Brands';
 import Services from '@/pages/Services';
-import FAQ from '@/pages/FAQ';
 import Contact from '@/pages/Contact';
 import Quote from '@/pages/Quote';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
@@ -40,7 +39,7 @@ export default function App() {
             {/* Retired resource routes redirect cleanly to products catalogue */}
             <Route path="/resources" element={<Navigate to="/products" replace />} />
             <Route path="/resources/*" element={<Navigate to="/products" replace />} />
-            <Route path="/faq" element={<FAQ />} />
+            <Route path="/faq" element={<Navigate to="/products" replace />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/request-a-quote" element={<Quote />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

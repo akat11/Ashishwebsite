@@ -141,9 +141,6 @@ export default function Header() {
             <NavLink to="/services" className={navLinkClass}>
               Services
             </NavLink>
-            <NavLink to="/faq" className={navLinkClass}>
-              FAQ
-            </NavLink>
             <NavLink to="/about-us" className={navLinkClass}>
               About
             </NavLink>
@@ -201,9 +198,6 @@ export default function Header() {
             </NavLink>
             <NavLink to="/services" className="block px-3 py-2.5 text-sm font-medium text-navy-700 hover:bg-navy-50 rounded-md">
               Services
-            </NavLink>
-            <NavLink to="/faq" className="block px-3 py-2.5 text-sm font-medium text-navy-700 hover:bg-navy-50 rounded-md">
-              FAQ
             </NavLink>
             <NavLink to="/about-us" className="block px-3 py-2.5 text-sm font-medium text-navy-700 hover:bg-navy-50 rounded-md">
               About Us

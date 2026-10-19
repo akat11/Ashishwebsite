@@ -11,7 +11,6 @@ export default function Sitemap() {
     { label: 'Departments', path: '/departments' },
     { label: 'Brands', path: '/brands' },
     { label: 'Services', path: '/services' },
-    { label: 'FAQ', path: '/faq' },
     { label: 'Contact Us', path: '/contact-us' },
     { label: 'Request a Quote', path: '/request-a-quote' },
   ];

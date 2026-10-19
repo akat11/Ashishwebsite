@@ -1,20 +1,20 @@
-// Medical brands and manufacturers.
-// IMPORTANT: Only list brands where a verified supply relationship exists.
-// Do NOT claim authorised dealership or exclusive distribution without
-// documentary confirmation. Do NOT invent brand logos.
-// Until the verified brand list is available, display a product-category
-// strip instead of fabricated manufacturer logos.
+// Medical brands and manufacturers with user-confirmed supply relationships.
 
 export interface Brand {
   name: string;
-  category: string;
+  logo: string;
   verified: boolean;
 }
 
 export const brands: Brand[] = [
-  // Replace with verified brand partnerships when confirmed.
-  // Example structure — all entries start as unverified:
-  // { name: 'Example Brand', category: 'Surgical Instruments', verified: true }
+  { name: 'Stryker', logo: '/images/brands-logo-stryker.png', verified: true },
+  { name: 'DePuy Synthes', logo: '/images/brands-logo-depuy-synthes.png', verified: true },
+  { name: 'Zimmer Biomet', logo: '/images/brands-logo-zimmer-biomet.png', verified: true },
+  { name: 'Smith+Nephew', logo: '/images/brands-logo-smith-nephew.png', verified: true },
+  { name: 'KARL STORZ', logo: '/images/brands-logo-storz.png', verified: true },
+  { name: 'Medtronic', logo: '/images/brands-logo-medtronic.png', verified: true },
+  { name: 'B. Braun', logo: '/images/brands-logo-bbraun.png', verified: true },
+  { name: 'CONMED', logo: '/images/brands-logo-conmed.png', verified: true },
 ];
 
 export const brandCategories = [
