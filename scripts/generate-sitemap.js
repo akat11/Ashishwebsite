@@ -19,6 +19,7 @@ async function generateSitemap() {
     { loc: `${BASE_URL}/departments`, priority: '0.7', changefreq: 'monthly' },
     { loc: `${BASE_URL}/brands`, priority: '0.6', changefreq: 'monthly' },
     { loc: `${BASE_URL}/services`, priority: '0.7', changefreq: 'monthly' },
+    { loc: `${BASE_URL}/faq`, priority: '0.6', changefreq: 'monthly' },
     { loc: `${BASE_URL}/contact-us`, priority: '0.8', changefreq: 'monthly' },
     { loc: `${BASE_URL}/request-a-quote`, priority: '0.8', changefreq: 'monthly' },
     { loc: `${BASE_URL}/sitemap`, priority: '0.5', changefreq: 'monthly' },
