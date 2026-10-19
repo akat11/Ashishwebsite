@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
 import {
   Clock,
-  Facebook,
-  Instagram,
-  Linkedin,
   Mail,
   MapPin,
   Phone,
-  Twitter,
-  Youtube,
+  Stethoscope,
+  ArrowRight,
 } from 'lucide-react';
 import { businessConfig } from '@/config/business';
 import { productCategories } from '@/data/categories';
@@ -16,25 +13,20 @@ import { productCategories } from '@/data/categories';
 const quickLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about-us' },
-  { label: 'Products', to: '/products' },
-  { label: 'Departments', to: '/departments' },
-  { label: 'Services', to: '/services' },
-  { label: 'Resources', to: '/resources' },
-  { label: 'Contact', to: '/contact-us' },
+  { label: 'Products Catalogue', to: '/products' },
+  { label: 'Clinical Departments', to: '/departments' },
+  { label: 'Medical Brands', to: '/brands' },
+  { label: 'Supply Services', to: '/services' },
+  { label: 'Request a Quote', to: '/request-a-quote' },
+  { label: 'Contact Us', to: '/contact-us' },
 ];
 
-const socialLinks = [
-  { label: 'LinkedIn', href: businessConfig.social.linkedin, icon: Linkedin },
-  { label: 'Facebook', href: businessConfig.social.facebook, icon: Facebook },
-  { label: 'Instagram', href: businessConfig.social.instagram, icon: Instagram },
-  { label: 'Twitter', href: businessConfig.social.twitter, icon: Twitter },
-].filter((social) => social.href);
-
-const placeholderSocials = [
-  { label: 'LinkedIn', icon: Linkedin },
-  { label: 'Facebook', icon: Facebook },
-  { label: 'Instagram', icon: Instagram },
-  { label: 'YouTube', icon: Youtube },
+const legalLinks = [
+  { label: 'Privacy Policy', to: '/privacy-policy' },
+  { label: 'Terms & Conditions', to: '/terms-and-conditions' },
+  { label: 'Shipping Policy', to: '/shipping-policy' },
+  { label: 'Returns & Claims', to: '/returns-and-claims' },
+  { label: 'Sitemap', to: '/sitemap' },
 ];
 
 export default function Footer() {
@@ -51,112 +43,120 @@ export default function Footer() {
     .join(', ');
 
   return (
-    <footer className="bg-[#06182c] text-slate-300">
-      <div className="container-x py-5">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-4 sm:gap-x-0">
-          <div className="sm:pr-5">
-            <Link to="/" className="mb-3 flex w-fit items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center font-display text-[30px] font-black italic leading-none text-white">
-                V
-              </span>
-              <span>
-                <span className="block font-display text-base font-bold leading-none text-white">
-                  Vinyanak
-                </span>
-                <span className="mt-1 block text-[8px] font-bold uppercase leading-none tracking-[0.2em] text-slate-300">
-                  Surgicals
-                </span>
-              </span>
+    <footer className="bg-[#0c2642] text-[#d9e2ec] border-t border-[#123B66]">
+      {/* Main footer body */}
+      <div className="container-x py-12 lg:py-16">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {/* Brand Info Column */}
+          <div className="space-y-4">
+            <Link to="/" className="inline-flex items-center gap-3 group" aria-label="Vinayak Surgicals Home">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#123B66] shadow-sm">
+                <Stethoscope className="h-6 w-6 text-[#159A9C]" />
+              </div>
+              <div>
+                <div className="font-display text-2xl font-bold text-white leading-none tracking-tight">
+                  Vinayak
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#159A9C] leading-none mt-1">
+                  SURGICALS
+                </div>
+              </div>
             </Link>
-            <p className="max-w-[240px] text-[10px] leading-[1.55] text-slate-300">
-              Your trusted partner in surgical and medical instruments, supplying high-quality,
-              certified products to healthcare providers across India.
+
+            <p className="text-sm leading-relaxed text-[#bcccdc]">
+              Your trusted partner in precision orthopedic implants, locking plate systems, and external fixators, supplying certified products to healthcare institutions across India.
             </p>
-            {socialLinks.length > 0 ? (
-              <div className="mt-3 flex items-center gap-2.5">
-                {socialLinks.map(({ label, href, icon: Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-slate-300 transition hover:text-white"
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <div aria-hidden="true" className="mt-3 flex items-center gap-2.5">
-                {placeholderSocials.map(({ label, icon: Icon }) => (
-                  <span key={label} className="text-slate-300">
-                    <Icon className="h-3.5 w-3.5" />
-                  </span>
-                ))}
-              </div>
-            )}
+
+            <div className="pt-1">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#123B66] px-3 py-1 text-xs font-semibold text-[#159A9C]">
+                Kanpur, Uttar Pradesh &bull; Pan-India Supply
+              </span>
+            </div>
           </div>
 
-          <div className="sm:border-l sm:border-slate-700 sm:px-4">
-            <h2 className="mb-2 text-[11px] font-semibold text-white">Quick Links</h2>
-            <ul className="space-y-1 text-[10px] leading-[1.35]">
+          {/* Quick Links Column */}
+          <div>
+            <h3 className="font-display text-base font-bold text-white tracking-wide mb-4">
+              Quick Links
+            </h3>
+            <ul className="space-y-2.5 text-sm">
               {quickLinks.map(({ label, to }) => (
                 <li key={to}>
-                  <Link to={to} className="transition hover:text-white">
-                    {label}
+                  <Link
+                    to={to}
+                    className="text-[#bcccdc] hover:text-white hover:translate-x-0.5 transition-all inline-flex items-center gap-1.5"
+                  >
+                    <ArrowRight className="h-3 w-3 text-[#159A9C]" />
+                    <span>{label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="sm:border-l sm:border-slate-700 sm:px-4">
-            <h2 className="mb-2 text-[11px] font-semibold text-white">Our Products</h2>
-            <ul className="space-y-1 text-[10px] leading-[1.35]">
-              {productCategories.slice(0, 8).map((category) => (
+          {/* Featured Products Column */}
+          <div>
+            <h3 className="font-display text-base font-bold text-white tracking-wide mb-4">
+              Product Categories
+            </h3>
+            <ul className="space-y-2.5 text-sm">
+              {productCategories.slice(0, 7).map((category) => (
                 <li key={category.slug}>
                   <Link
                     to={`/products/${category.slug}`}
-                    className="transition hover:text-white"
+                    className="text-[#bcccdc] hover:text-white hover:translate-x-0.5 transition-all inline-flex items-center gap-1.5"
                   >
-                    {category.shortName}
+                    <ArrowRight className="h-3 w-3 text-[#159A9C]" />
+                    <span>{category.shortName}</span>
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/products"
+                  className="font-semibold text-[#159A9C] hover:text-white transition-colors inline-flex items-center gap-1 mt-1"
+                >
+                  View All Categories &rarr;
+                </Link>
+              </li>
             </ul>
           </div>
 
-          <div className="sm:border-l sm:border-slate-700 sm:pl-4">
-            <h2 className="mb-2 text-[11px] font-semibold text-white">Contact Us</h2>
-            <ul className="space-y-2 text-[10px] leading-[1.4]">
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-px h-3 w-3 shrink-0 text-slate-100" />
-                <span>{address}</span>
+          {/* Contact Details Column */}
+          <div>
+            <h3 className="font-display text-base font-bold text-white tracking-wide mb-4">
+              Contact Information
+            </h3>
+            <ul className="space-y-3 text-sm text-[#bcccdc]">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-1 h-4 w-4 shrink-0 text-[#159A9C]" />
+                <span className="leading-snug">{address}</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-3 w-3 shrink-0 text-slate-100" />
-                <a href={`tel:${businessConfig.phoneRaw}`} className="transition hover:text-white">
+              <li className="flex items-center gap-3">
+                <Phone className="h-4 w-4 shrink-0 text-[#159A9C]" />
+                <a
+                  href={`tel:${businessConfig.phoneRaw}`}
+                  className="hover:text-white transition-colors"
+                >
                   {businessConfig.phone}
                 </a>
               </li>
-              <li className="flex items-start gap-2">
-                <Mail className="mt-px h-3 w-3 shrink-0 text-slate-100" />
+              <li className="flex items-start gap-3">
+                <Mail className="mt-1 h-4 w-4 shrink-0 text-[#159A9C]" />
                 <a
                   href={`mailto:${businessConfig.email}`}
-                  className="break-all transition hover:text-white"
+                  className="break-all hover:text-white transition-colors"
                 >
                   {businessConfig.email}
                 </a>
               </li>
               {(weekdayHours || saturdayHours) && (
-                <li className="flex items-start gap-2">
-                  <Clock className="mt-px h-3 w-3 shrink-0 text-slate-100" />
-                  <span>
-                    {weekdayHours && <>Mon–Fri: {weekdayHours.hours}</>}
-                    {weekdayHours && saturdayHours && <br />}
-                    {saturdayHours && <>Sat: {saturdayHours.hours}</>}
-                  </span>
+                <li className="flex items-start gap-3 pt-1">
+                  <Clock className="mt-1 h-4 w-4 shrink-0 text-[#159A9C]" />
+                  <div className="leading-snug text-xs text-[#9fb3c8]">
+                    {weekdayHours && <div>Mon–Fri: {weekdayHours.hours}</div>}
+                    {saturdayHours && <div className="mt-0.5">Sat: {saturdayHours.hours}</div>}
+                  </div>
                 </li>
               )}
             </ul>
@@ -164,24 +164,21 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-700">
-        <div className="container-x flex flex-col items-center justify-between gap-2 py-2 text-[9px] text-slate-400 sm:flex-row">
-          <p>&copy; {year} {businessConfig.legalName}. All rights reserved.</p>
-          <nav
-            aria-label="Legal links"
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
-          >
-            <Link to="/privacy-policy" className="transition hover:text-white">
-              Privacy Policy
-            </Link>
-            <span aria-hidden="true">|</span>
-            <Link to="/terms-and-conditions" className="transition hover:text-white">
-              Terms &amp; Conditions
-            </Link>
-            <span aria-hidden="true">|</span>
-            <Link to="/sitemap" className="transition hover:text-white">
-              Sitemap
-            </Link>
+      {/* Sub-footer / Legal Strip */}
+      <div className="border-t border-[#123B66]/80 bg-[#081b30]">
+        <div className="container-x flex flex-col items-center justify-between gap-3 py-5 text-xs text-[#9fb3c8] sm:flex-row">
+          <p>
+            &copy; {year} {businessConfig.legalName}. All rights reserved. Medical &amp; Surgical Equipment Supplier.
+          </p>
+          <nav aria-label="Legal links" className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {legalLinks.map(({ label, to }, index) => (
+              <span key={to} className="inline-flex items-center gap-3 sm:gap-4">
+                <Link to={to} className="hover:text-white transition-colors">
+                  {label}
+                </Link>
+                {index < legalLinks.length - 1 && <span className="text-white/20" aria-hidden="true">&bull;</span>}
+              </span>
+            ))}
           </nav>
         </div>
       </div>

@@ -4,71 +4,71 @@ import {
   ArrowLeft,
   ArrowRight,
   Handshake,
-  MessageSquareMore,
   Settings,
   ShieldCheck,
   Truck,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import BottomCTA from '@/components/BottomCTA';
 import { brands } from '@/data/brands';
 
 const productGroups = [
   {
     title: 'Distal Radius Locking Systems',
-    description: 'Plates, screws and instrument sets',
+    description: 'Volar and dorsal plates, variable angle screws, and reduction instruments',
     image: '/images/brands-category-distal.jpg',
     to: '/products/distal-radius-locking-plates',
   },
   {
     title: 'Tibia & Femur Locking Plates',
-    description: 'Advanced trauma locking solutions',
+    description: 'Proximal and distal anatomical plates for complex lower limb trauma',
     image: '/images/brands-category-tibia.jpg',
     to: '/products/tibia-locking-plates',
   },
   {
     title: 'Pediatric Orthopedic Plates',
-    description: 'Specialized implants for pediatric care',
+    description: 'Low-profile plates and osteotomy hardware designed for pediatric patients',
     image: '/images/brands-category-pediatric.jpg',
     to: '/products/pediatric-locking-plates',
   },
   {
     title: 'Reconstruction & Clavicle Plates',
-    description: 'Plates for complex fracture management',
+    description: 'Bendable pelvic reconstruction plates and contoured clavicle locking systems',
     image: '/images/brands-category-reconstruction.jpg',
     to: '/products/reconstruction-locking-plates',
   },
   {
     title: 'External Fixator Clamps & Rods',
-    description: 'Reliable fixation systems',
+    description: 'Modular pin-to-rod and rod-to-rod clamps in surgical stainless steel and carbon fiber',
     image: '/images/brands-category-fixator.jpg',
     to: '/products/external-fixator-clamps',
   },
   {
     title: 'Ilizarov Ring Fixation Systems',
-    description: 'Complete ring systems and accessories',
+    description: 'Full rings, 5/8 rings, threaded rods, wire fixation bolts, and tensioners',
     image: '/images/brands-category-ilizarov.jpg',
     to: '/products/ilizarov-rings-instruments',
   },
   {
     title: 'Cortical & Cancellous Locking Screws',
-    description: 'Wide range of locking and non-locking screws',
+    description: 'Self-tapping locking and non-locking screws across 2.4mm, 3.5mm, 4.5mm, and 5.0mm',
     image: '/images/brands-category-screws.jpg',
     to: '/products/locking-screws-accessories',
   },
   {
     title: 'Deformity Correction & Limb Lengthening',
-    description: 'Specialized systems for complex cases',
+    description: 'Specialized circular frames and dynamic fixation accessories for limb reconstruction',
     image: '/images/brands-category-limb.jpg',
     to: '/products/ilizarov-rings-instruments',
   },
 ];
 
 const trustPoints = [
-  { icon: ShieldCheck, label: <>Verified<br />Manufacturers</> },
-  { icon: Settings, label: <>Quality<br />Assured Products</> },
-  { icon: Handshake, label: <>Authorized<br />Supply Partner</> },
-  { icon: Truck, label: <>Pan-India<br />Distribution</> },
+  { icon: ShieldCheck, label: 'Verified Manufacturers' },
+  { icon: Settings, label: 'Quality Assured Products' },
+  { icon: Handshake, label: 'Authorized Supply Partner' },
+  { icon: Truck, label: 'Pan-India Distribution' },
 ];
 
 export default function Brands() {
@@ -77,7 +77,7 @@ export default function Brands() {
 
   const scrollBrands = (direction: -1 | 1) => {
     brandListRef.current?.scrollBy({
-      left: direction * 240,
+      left: direction * 260,
       behavior: 'smooth',
     });
   };
@@ -85,51 +85,44 @@ export default function Brands() {
   return (
     <>
       <SEO
-        title="Trusted Global Brands for Better Patient Outcomes | Vinyanak Surgicals"
+        title="Trusted Global Brands for Better Patient Outcomes | Vinayak Surgicals"
         description="We partner with leading global and Indian manufacturers to bring high-quality surgical instruments, medical equipment and healthcare consumables to hospitals, clinics and healthcare professionals."
         canonical="https://vinyanaksurgicals.com/brands"
-        keywords="orthopedic manufacturers, medical brands, implant sourcing, surgical instruments supplier Kanpur, Vinyanak Surgicals"
+        keywords="orthopedic manufacturers, medical brands, implant sourcing, surgical instruments supplier Kanpur, Vinayak Surgicals"
         image="/images/brands-reference-hero.jpg"
       />
+
       <Breadcrumbs crumbs={[{ label: 'Brands' }]} />
 
-      <section className="relative isolate min-h-[242px] overflow-hidden bg-[#eff7ff]">
+      {/* Hero Banner with Restored Medical Hero Image */}
+      <section className="relative isolate overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF] py-12 sm:py-16">
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 -z-20 w-[58%] bg-cover bg-center"
+          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-25 sm:opacity-30 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-40 lg:opacity-50"
           style={{ backgroundImage: "url('/images/brands-reference-hero.jpg')" }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#eff7ff_0%,rgba(239,247,255,0.98)_43%,rgba(239,247,255,0.38)_57%,rgba(239,247,255,0.02)_100%)]"
+          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#F4F8FB]/90 via-[#F4F8FB]/95 to-[#F4F8FB] md:bg-gradient-to-r md:from-[#F4F8FB] md:via-[#F4F8FB]/95 md:via-55% md:to-transparent"
         />
-        <div className="container-x flex min-h-[242px] items-center">
-          <div className="max-w-[600px]">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0866f5]">
-              Medical Brands &amp; Manufacturers
-            </span>
-            <h1 className="mt-2 max-w-[560px] text-[30px] font-extrabold leading-[1.08] tracking-tight text-[#102b49] sm:text-4xl lg:text-[42px]">
+        <div className="container-x relative z-10">
+          <div className="max-w-3xl">
+            <span className="section-eyebrow">Medical Brands &amp; Manufacturers</span>
+            <h1 className="mt-2 text-page-title">
               Trusted Global Brands for{' '}
-              <span className="text-[#0866f5]">Better Patient Outcomes</span>
+              <span className="text-[#159A9C]">Better Patient Outcomes</span>
             </h1>
-            <p className="mt-3 max-w-[560px] text-xs leading-relaxed text-slate-600 sm:text-sm">
-              We partner with leading global and Indian manufacturers to bring high-quality surgical
-              instruments, medical equipment and healthcare consumables to hospitals, clinics and
-              healthcare professionals.
+            <p className="mt-4 text-body-large">
+              We collaborate with established medical implant manufacturers and certified surgical instrument foundries to supply certified hardware to hospitals, trauma centers, and clinical practitioners.
             </p>
 
-            <div className="mt-4 grid max-w-[600px] grid-cols-2 gap-y-3 sm:grid-cols-4 sm:gap-0">
-              {trustPoints.map(({ icon: Icon, label }, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center gap-2 px-2 first:pl-0 sm:px-3 ${
-                    index > 0 ? 'sm:border-l sm:border-slate-300' : ''
-                  }`}
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-blue-200 bg-white/90 text-[#0866f5]">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="text-[10px] font-semibold leading-tight text-[#173353] sm:text-[11px]">
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 border-t border-[#E0E8EF] pt-6">
+              {trustPoints.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2.5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-[#123B66] border border-[#E0E8EF] shadow-xs">
+                    <Icon className="h-5 w-5 text-[#159A9C]" />
+                  </div>
+                  <span className="text-xs sm:text-sm font-semibold text-[#172B3A] leading-snug">
                     {label}
                   </span>
                 </div>
@@ -139,53 +132,57 @@ export default function Brands() {
         </div>
       </section>
 
-      <section className="bg-[#f7f9fc] py-2">
+      {/* Verified Brands Strip */}
+      <section className="bg-white py-10 sm:py-12 border-b border-[#E0E8EF]">
         <div className="container-x">
-          <div className="max-w-[1040px] rounded-xl border border-slate-100 bg-white/90 px-4 py-1.5 shadow-[0_4px_18px_rgba(28,62,98,0.04)] sm:px-6">
-            <div className="mb-1 flex items-center justify-between gap-3">
+          <div className="rounded-2xl border border-[#E0E8EF] bg-[#F4F8FB] p-6 sm:p-8">
+            <div className="mb-4 flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-base font-bold text-[#173353] sm:text-lg">Our Verified Brands</h2>
-                <span className="mt-1 block h-0.5 w-6 rounded bg-[#0866f5]" />
+                <h2 className="text-subsection-title">Our Verified Partner Network</h2>
+                <p className="text-sm text-[#5E6F7D] mt-1">
+                  Orthopedic and surgical instrument manufacturers meeting our quality standards.
+                </p>
               </div>
-              <div className="flex gap-1.5">
+              <div className="flex gap-2">
                 <button
                   type="button"
                   aria-label="Scroll verified brands left"
                   onClick={() => scrollBrands(-1)}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-blue-100 text-[#0866f5] transition hover:bg-blue-50"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#E0E8EF] bg-white text-[#123B66] hover:bg-[#F4F8FB] transition-colors"
                 >
-                  <ArrowLeft className="h-3.5 w-3.5" />
+                  <ArrowLeft className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
                   aria-label="Scroll verified brands right"
                   onClick={() => scrollBrands(1)}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-blue-100 text-[#0866f5] transition hover:bg-blue-50"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#E0E8EF] bg-white text-[#123B66] hover:bg-[#F4F8FB] transition-colors"
                 >
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
             </div>
+
             <div
               ref={brandListRef}
-              className="flex min-h-[51px] gap-2 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-4 overflow-x-auto scroll-smooth py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {verifiedBrands.length > 0 ? (
                 verifiedBrands.map((brand) => (
                   <div
                     key={brand.name}
-                    className="flex min-w-[105px] flex-1 items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2"
+                    className="flex min-w-[160px] items-center justify-center rounded-xl border border-[#E0E8EF] bg-white p-4 shadow-xs"
                   >
                     <img
                       src={brand.logo}
                       alt={brand.name}
-                      className="max-h-8 w-full object-contain"
+                      className="max-h-12 w-full object-contain"
                     />
                   </div>
                 ))
               ) : (
-                <div className="flex w-full items-center rounded-md border border-dashed border-slate-200 bg-white px-4 py-2 text-xs leading-relaxed text-slate-600">
-                  Verified brand names and logos will appear here once confirmed.
+                <div className="flex w-full items-center rounded-xl border border-dashed border-[#E0E8EF] bg-white p-5 text-sm text-[#5E6F7D]">
+                  Verified brand names and partner manufacturing logos are displayed here. Contact our sales desk for manufacturer certs.
                 </div>
               )}
             </div>
@@ -193,89 +190,62 @@ export default function Brands() {
         </div>
       </section>
 
-      <section className="bg-white py-2">
+      {/* Product Groups Grid */}
+      <section className="section-padding bg-white">
         <div className="container-x">
-          <div className="max-w-[1040px]">
-            <div className="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-              <div>
-                <h2 className="text-xl font-bold text-[#173353] sm:text-2xl">
-                  Our Product Categories
-                </h2>
-                <span className="mt-1 block h-0.5 w-6 rounded bg-[#0866f5]" />
-              </div>
-              <p className="max-w-[430px] text-xs leading-relaxed text-slate-600 sm:text-[13px]">
-                We supply instruments and equipment across a wide range of surgical and medical
-                categories, from trusted global manufacturers.
-              </p>
-            </div>
+          <div className="mb-8 sm:mb-10">
+            <span className="section-eyebrow">Category Overview</span>
+            <h2 className="mt-2 text-section-title">
+              Our Product Categories
+            </h2>
+            <p className="mt-2 text-body-regular max-w-2xl">
+              We supply precision instrumentation and implants across trauma and reconstructive orthopedic categories.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {productGroups.map((group) => (
-                <Link
-                  key={group.title}
-                  to={group.to}
-                  className="group flex min-h-[88px] items-center gap-2 rounded-lg border border-blue-100 bg-[linear-gradient(110deg,#f6faff_0%,#ffffff_68%)] px-2.5 py-2 shadow-[0_2px_8px_rgba(22,73,132,0.04)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
-                >
-                  <img
-                    src={group.image}
-                    alt=""
-                    aria-hidden="true"
-                    className="h-[62px] w-[72px] shrink-0 object-contain"
-                    draggable={false}
-                  />
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-xs font-bold leading-tight text-[#173353] sm:text-[13px]">
-                      {group.title}
-                    </span>
-                    <span className="mt-1 block text-[11px] leading-snug text-slate-500 sm:text-xs">
-                      {group.description}
-                    </span>
-                  </span>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-blue-100 bg-white text-[#0866f5] shadow-sm transition group-hover:bg-[#0866f5] group-hover:text-white">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Link>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {productGroups.map((group) => (
+              <Link
+                key={group.title}
+                to={group.to}
+                className="card card-hover group p-5 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="aspect-[16/10] w-full overflow-hidden rounded-lg bg-[#F4F8FB] mb-4 flex items-center justify-center border border-[#E0E8EF]">
+                    <img
+                      src={group.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+                      draggable={false}
+                    />
+                  </div>
+                  <h3 className="font-display text-base font-bold text-[#172B3A] group-hover:text-[#123B66] transition-colors leading-snug">
+                    {group.title}
+                  </h3>
+                  <p className="mt-1.5 text-xs sm:text-sm text-[#5E6F7D] leading-relaxed line-clamp-2">
+                    {group.description}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-[#E0E8EF]/60 flex items-center justify-between text-xs sm:text-sm font-semibold text-[#123B66] group-hover:text-[#159A9C] transition-colors">
+                  <span>Explore Systems</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="container-x pb-2">
-        <div className="max-w-[1040px]">
-          <div
-            className="flex flex-col items-start justify-between gap-4 rounded-xl bg-[#0866f5] px-5 py-2 text-white shadow-sm sm:flex-row sm:items-center sm:px-8"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(0,91,235,0.97) 0%, rgba(0,91,235,0.88) 52%, rgba(30,125,255,0.75) 100%), url('/images/brands-cta-background.png')",
-              backgroundPosition: 'center, right center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover, 50% 100%',
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/15">
-                <MessageSquareMore className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="block text-sm font-bold leading-5 sm:text-base">
-                  Looking for a Specific Brand?
-                </span>
-                <span className="mt-1 block max-w-[570px] text-xs leading-relaxed text-blue-50 sm:text-[13px]">
-                  We work with a wide network of global and Indian manufacturers. Contact us with
-                  your requirement and we will source the best solution for you.
-                </span>
-              </span>
-            </div>
-            <Link
-              to="/contact-us"
-              className="inline-flex min-h-9 w-full shrink-0 items-center justify-center gap-2 rounded-md bg-white px-4 text-xs font-bold text-[#0866f5] transition hover:bg-blue-50 sm:w-auto"
-            >
-              Contact Us About Brands <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <BottomCTA
+        eyebrow="Manufacturer Sourcing"
+        title="Looking for a Specific Brand or Custom Implants?"
+        description="We work with an extensive network of Indian and international medical manufacturers. Share your clinical specifications with us."
+        primaryButtonText="Contact Us About Brands"
+        primaryButtonLink="/contact-us"
+        backgroundImage="/images/brands-cta-background.png"
+      />
     </>
   );
 }

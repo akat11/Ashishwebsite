@@ -10,99 +10,42 @@ import {
   Headphones,
   HeartHandshake,
   PackageCheck,
-  Phone,
   Search,
   Settings,
   Truck,
 } from 'lucide-react';
 import VideoHero from '@/components/VideoHero';
 import DepartmentCard from '@/components/DepartmentCard';
+import ProductCard from '@/components/ProductCard';
+import CategoryCard from '@/components/CategoryCard';
+import InstitutionMarquee from '@/components/InstitutionMarquee';
+import BottomCTA from '@/components/BottomCTA';
 import SEO from '@/components/SEO';
 import { productCategories } from '@/data/categories';
 import { products } from '@/data/products';
 import { departments } from '@/data/departments';
-import { businessConfig } from '@/config/business';
-import type { Product } from '@/data/products';
 import type { ProductCategory } from '@/data/categories';
-
-function HomeCategoryCard({ category }: { category: ProductCategory }) {
-  return (
-    <Link
-      to={`/products/${category.slug}`}
-      className="group overflow-hidden rounded-md border border-slate-200 bg-white shadow-[0_2px_7px_rgba(17,45,76,0.08)] transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
-    >
-      <div className="aspect-[1.38] overflow-hidden bg-gradient-to-br from-slate-100 to-white">
-        <img
-          src={category.image}
-          alt={category.shortName}
-          loading="lazy"
-          className="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-      <div className="border-t border-slate-100 px-2 py-2 text-center">
-        <h3 className="line-clamp-1 text-[9px] font-bold text-navy-800 group-hover:text-blue-700 sm:text-[10px]">
-          {category.shortName}
-        </h3>
-      </div>
-    </Link>
-  );
-}
-
-function HomeProductCard({ product }: { product: Product }) {
-  const category = productCategories.find((item) => item.slug === product.category);
-
-  return (
-    <Link
-      to={`/products/${product.category}/${product.slug}`}
-      className="group overflow-hidden rounded-md border border-slate-200 bg-white shadow-[0_2px_7px_rgba(17,45,76,0.08)] transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
-    >
-      <div className="aspect-[1.62] overflow-hidden bg-gradient-to-br from-[#f0f1f3] via-white to-[#e9ebee]">
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-      <div className="min-h-[100px] px-2.5 py-2">
-        <span className="text-[7px] font-bold uppercase tracking-[0.12em] text-blue-600">
-          {category?.shortName ?? 'Orthopedic Implants'}
-        </span>
-        <h3 className="mt-0.5 line-clamp-2 text-[9px] font-bold leading-[1.35] text-navy-800 group-hover:text-blue-700 sm:text-[10px]">
-          {product.name}
-        </h3>
-        <p className="mt-1 line-clamp-2 text-[8px] leading-[1.35] text-slate-500">
-          {product.description}
-        </p>
-        <span className="mt-1.5 inline-flex items-center gap-1 text-[8px] font-bold text-blue-600">
-          View Details
-          <ArrowRight className="h-2.5 w-2.5 transition-transform group-hover:translate-x-0.5" />
-        </span>
-      </div>
-    </Link>
-  );
-}
 
 const reasons = [
   {
     icon: Gem,
-    title: 'Quality Products',
-    description: 'Reliable implants and instruments for clinical use.',
+    title: 'Certified Implant Quality',
+    description: 'Implant-grade Stainless Steel 316L and Titanium Grade 5 conforming to clinical orthopedic standards.',
   },
   {
     icon: Settings,
-    title: 'Wide Product Range',
-    description: 'Solutions for trauma, reconstruction and specialized procedures.',
+    title: 'Comprehensive Range',
+    description: 'Anatomical locking plates, modular external fixators, Ilizarov circular frames, and cortical/cancellous screws.',
   },
   {
     icon: Truck,
-    title: 'Pan-India Supply',
-    description: 'Serving hospitals, clinics and distributors across India.',
+    title: 'Pan-India Distribution',
+    description: 'Fast and reliable logistics serving hospitals, medical colleges, and distributors across India.',
   },
   {
     icon: Headphones,
-    title: 'Dedicated Support',
-    description: 'Assistance with product selection, quotations and order support.',
+    title: 'Dedicated Surgical Support',
+    description: 'Assistance with technical specifications, hospital tenders, catalogue matching, and rapid quotations.',
   },
 ];
 
@@ -110,31 +53,31 @@ const processSteps = [
   {
     icon: ClipboardCheck,
     number: '01',
-    title: 'Product Selection',
-    description: 'Choose from our range of orthopedic implants and instruments.',
+    title: 'Requirement Review',
+    description: 'Select products from our catalogue or submit custom clinical specifications.',
   },
   {
     icon: Search,
     number: '02',
     title: 'Quotation & Consultation',
-    description: 'Get competitive pricing and technical product support.',
+    description: 'Receive competitive institutional pricing, specifications, and availability details.',
   },
   {
     icon: FileCheck2,
     number: '03',
     title: 'Order Processing',
-    description: 'Fast and reliable order handling with quality checks.',
+    description: 'Thorough quality check and verification prior to dispatch for safe delivery.',
   },
   {
     icon: Truck,
     number: '04',
-    title: 'Delivery & Support',
-    description: 'Timely delivery with continued post-supply support.',
+    title: 'Timely Dispatch',
+    description: 'Secure, padded transit packaging and continuous logistics coordination to your destination.',
   },
 ];
 
 export default function Home() {
-  const featuredProducts = products.filter((product) => product.featured).slice(0, 15);
+  const featuredProducts = products.filter((product) => product.featured).slice(0, 8);
   const homeCategories = [
     ...productCategories.slice(0, 7),
     productCategories.find((category) => category.slug === 'locking-screws-accessories'),
@@ -143,15 +86,15 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Vinyanak Surgicals — Orthopedic Locking Plates & External Fixator Systems | Kanpur, India"
+        title="Vinayak Surgicals — Orthopedic Locking Plates & External Fixator Systems | Kanpur, India"
         description="Supplying precision orthopedic locking plate systems, external fixators, Ilizarov rings, and fixation screws in Stainless Steel 316L and Titanium Grade 5 across Kanpur, Uttar Pradesh, and pan-India."
         canonical="https://vinyanaksurgicals.com/"
-        keywords="orthopedic locking plates, external fixator systems, ilizarov rings, distal radius plates, proximal tibia locking plate, femur locking plates, orthopedic screws, trauma implants, Kanpur, Uttar Pradesh, India, Vinyanak Surgicals"
+        keywords="orthopedic locking plates, external fixator systems, ilizarov rings, distal radius plates, proximal tibia locking plate, femur locking plates, orthopedic screws, trauma implants, Kanpur, Uttar Pradesh, India, Vinayak Surgicals"
         image="/images/categories/distal-radius-locking-plates.jpg"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
-          name: 'Vinyanak Surgicals',
+          name: 'Vinayak Surgicals',
           url: 'https://vinyanaksurgicals.com',
           potentialAction: {
             '@type': 'SearchAction',
@@ -161,164 +104,191 @@ export default function Home() {
         }}
       />
 
+      {/* Hero Section */}
       <VideoHero />
 
-      <section className="bg-[#f1f7fd] py-5 sm:py-6">
+      {/* Trust Institution Marquee */}
+      <InstitutionMarquee />
+
+      {/* Product Categories Section */}
+      <section className="bg-[#F4F8FB] section-padding">
         <div className="container-x">
-          <div className="mb-3 flex items-end justify-between gap-3">
+          <div className="mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-blue-600">
-                Product Categories
-              </span>
-              <h2 className="mt-0.5 font-display text-lg font-extrabold text-[#102746] sm:text-xl">
+              <span className="section-eyebrow">Product Categories</span>
+              <h2 className="mt-2 text-section-title">
                 Explore Our Product Range
               </h2>
-              <p className="mt-1 hidden text-[10px] text-slate-600 sm:block">
-                Orthopedic implants, external fixation systems and surgical instruments for a wide range of procedures.
+              <p className="mt-2 max-w-2xl text-body-regular">
+                Precision orthopedic implants, anatomically contoured locking plates, external fixation systems, and surgical screws for trauma and reconstructive procedures.
               </p>
             </div>
             <Link
               to="/products"
-              className="mb-1 inline-flex shrink-0 items-center gap-1 text-[9px] font-bold text-blue-600 hover:text-blue-800"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#123B66] hover:text-[#159A9C] transition-colors shrink-0"
             >
-              View All Categories
-              <ArrowRight className="h-3 w-3" />
+              <span>View All 10 Categories</span>
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {homeCategories.map((category) => (
-              <HomeCategoryCard key={category.slug} category={category} />
+              <CategoryCard key={category.slug} category={category} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-5 sm:py-6">
+      {/* Featured Products Section */}
+      <section className="bg-white section-padding">
         <div className="container-x">
-          <div className="mb-3 flex items-end justify-between gap-3">
+          <div className="mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-blue-600">
-                Our Products
-              </span>
-              <h2 className="mt-0.5 font-display text-lg font-extrabold text-[#102746] sm:text-xl">
+              <span className="section-eyebrow">Catalogue Highlights</span>
+              <h2 className="mt-2 text-section-title">
                 Leading Orthopedic Surgical Solutions
               </h2>
+              <p className="mt-2 max-w-2xl text-body-regular">
+                Certified locking compression plates, external fixator clamps, and fixation assemblies engineered for stable mechanical anchorage and clinical success.
+              </p>
             </div>
             <Link
               to="/products"
-              className="mb-1 inline-flex shrink-0 items-center gap-1 text-[9px] font-bold text-blue-600 hover:text-blue-800"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#123B66] hover:text-[#159A9C] transition-colors shrink-0"
             >
-              View All Products
-              <ArrowRight className="h-3 w-3" />
+              <span>Browse All Products</span>
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-2.5 lg:grid-cols-5">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
             {featuredProducts.map((product) => (
-              <HomeProductCard key={product.slug} product={product} />
+              <ProductCard key={product.slug} product={product} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#032746] py-7 text-white sm:py-8">
-        <div className="container-x grid items-center gap-5 lg:grid-cols-[1fr_1.02fr] lg:gap-8">
+      {/* About Vinayak Surgicals Overview */}
+      <section className="bg-[#0c2642] py-16 sm:py-20 lg:py-24 text-white">
+        <div className="container-x grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           <div>
-            <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-cyan-400">
-              About Vinyanak Surgicals
+            <span className="section-eyebrow text-[#159A9C]">
+              About Vinayak Surgicals
             </span>
-            <h2 className="mt-1.5 font-display text-xl font-extrabold text-white sm:text-2xl">
-              Built for Surgical Excellence
+            <h2 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+              Built for Surgical Excellence &amp; Reliable Institutional Supply
             </h2>
-            <p className="mt-1 text-sm font-semibold text-blue-100">
-              Precision Sourcing &amp; Reliable Supply
+            <p className="mt-3 text-base sm:text-lg font-semibold text-[#159A9C]">
+              Kanpur-Based Hub &bull; Pan-India Healthcare Distribution
             </p>
-            <p className="mt-2 max-w-xl text-[10px] leading-relaxed text-slate-200 sm:text-[11px]">
-              We supply high-quality orthopedic implants and surgical instruments to hospitals,
-              clinics and healthcare professionals across India. Our focus is on product quality,
-              dependable service and responsive support.
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#bcccdc]">
+              We supply precision orthopedic implants, anatomical locking plates, and surgical fixation systems to hospitals, trauma centers, nursing homes, and orthopedic surgeons across Uttar Pradesh and pan-India. Our focus is unwavering commitment to product quality, clinical dimensional accuracy, and responsive supply.
             </p>
-            <div className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 text-[9px] text-blue-100 sm:grid-cols-2">
+
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm font-medium text-[#d9e2ec]">
               {[
-                'Wide range of implants & instruments',
-                'Quality-focused sourcing',
-                'Reliable supply & timely delivery',
-                'Support for hospitals and clinics',
+                'Implant-grade SS 316L & Titanium Grade 5',
+                'Comprehensive trauma & reconstruction catalogue',
+                'Prompt institutional quotation within 24 hours',
+                'Specialized sourcing support for unique cases',
               ].map((item) => (
-                <span key={item} className="inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-blue-400" />
-                  {item}
-                </span>
+                <div key={item} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[#159A9C] mt-0.5" />
+                  <span>{item}</span>
+                </div>
               ))}
             </div>
-            <Link
-              to="/about-us"
-              className="mt-4 inline-flex items-center gap-1 rounded-md bg-blue-600 px-3.5 py-2 text-[9px] font-bold text-white transition-colors hover:bg-blue-500"
-            >
-              Learn More
-              <ArrowRight className="h-3 w-3" />
-            </Link>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                to="/about-us"
+                className="btn-teal"
+              >
+                <span>Read More About Us</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/request-a-quote"
+                className="btn-secondary !bg-white/10 !text-white !border-white/30 hover:!bg-white hover:!text-[#123B66]"
+              >
+                <span>Request a Quote</span>
+              </Link>
+            </div>
           </div>
-          <div className="overflow-hidden rounded-md border border-blue-400/50 shadow-lg">
+
+          <div className="overflow-hidden rounded-2xl border border-white/20 shadow-2xl relative">
             <img
               src="/images/business-overview-surgery.png"
-              alt="Surgical team working with orthopedic instruments"
+              alt="Surgical team working with precision orthopedic instruments in an operating theatre"
               loading="lazy"
-              className="aspect-[1.65] w-full object-cover"
+              className="aspect-[4/3] w-full object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0c2642]/60 via-transparent to-transparent pointer-events-none" />
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-5 sm:py-6">
+      {/* Why Choose Us */}
+      <section className="bg-white section-padding">
         <div className="container-x">
-          <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-blue-600">
-            Why Choose Us
-          </span>
-          <h2 className="mt-0.5 font-display text-lg font-extrabold text-[#102746] sm:text-xl">
-            Your Trusted Orthopedic Partner
-          </h2>
-          <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <span className="section-eyebrow justify-center">Why Choose Us</span>
+            <h2 className="mt-2 text-section-title">
+              Your Trusted Orthopedic Partner
+            </h2>
+            <p className="mt-3 text-body-regular">
+              We understand the critical precision required in orthopedic trauma surgery. That is why our products and distribution adhere strictly to clinical requirements.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reasons.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="flex items-start gap-2.5 rounded-md border border-slate-100 bg-white p-3 shadow-[0_2px_7px_rgba(17,45,76,0.06)]"
+                className="card p-6 flex flex-col justify-between hover:border-[#159A9C]/40 hover:shadow-md transition-all"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50">
-                  <Icon className="h-4 w-4 text-blue-600" />
-                </span>
-                <span>
-                  <span className="block text-[10px] font-bold text-navy-800">{title}</span>
-                  <span className="mt-1 block text-[9px] leading-snug text-slate-500">{description}</span>
-                </span>
+                <div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] mb-5 border border-[#E0E8EF]">
+                    <Icon className="h-6 w-6 text-[#159A9C]" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-[#172B3A] mb-2 leading-snug">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-[#5E6F7D] leading-relaxed">
+                    {description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#f1f7fd] py-5 sm:py-6">
+      {/* Departments We Serve */}
+      <section className="bg-[#F4F8FB] section-padding">
         <div className="container-x">
-          <div className="mb-3 flex items-end justify-between gap-3">
+          <div className="mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-blue-600">
+              <span className="section-eyebrow">Clinical Specialties</span>
+              <h2 className="mt-2 text-section-title">
                 Departments We Serve
-              </span>
-              <h2 className="mt-0.5 font-display text-lg font-extrabold text-[#102746] sm:text-xl">
-                Clinical Specialties
               </h2>
-              <p className="mt-1 text-[10px] text-slate-600">
-                Our products support a wide range of surgical departments and clinical applications.
+              <p className="mt-2 max-w-2xl text-body-regular">
+                Our surgical fixation solutions support hospitals, clinics, and specialized orthopedic departments.
               </p>
             </div>
             <Link
               to="/departments"
-              className="mb-1 inline-flex shrink-0 items-center gap-1 text-[9px] font-bold text-blue-600 hover:text-blue-800"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#123B66] hover:text-[#159A9C] transition-colors shrink-0"
             >
-              Explore Departments
-              <ArrowRight className="h-3 w-3" />
+              <span>Explore All Departments</span>
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {departments.slice(0, 6).map((department) => (
               <DepartmentCard key={department.slug} department={department} />
             ))}
@@ -326,110 +296,106 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-5 sm:py-6">
+      {/* Our 4-Step Process */}
+      <section className="bg-white section-padding">
         <div className="container-x">
-          <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-blue-600">
-            Our Process
-          </span>
-          <h2 className="mt-0.5 font-display text-lg font-extrabold text-[#102746] sm:text-xl">
-            Reliable Sourcing, Proven Process
-          </h2>
-          <p className="mt-1 text-[10px] text-slate-600">
-            From product selection to delivery, we ensure a smooth and reliable experience.
-          </p>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map(({ icon: Icon, number, title, description }, index) => (
-              <div key={number} className="relative flex items-start gap-2.5">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50">
-                  <Icon className="h-4 w-4 text-blue-600" />
-                </span>
-                <span>
-                  <span className="block text-[8px] font-bold text-blue-600">{number}</span>
-                  <span className="block text-[10px] font-bold text-navy-800">{title}</span>
-                  <span className="mt-1 block text-[9px] leading-snug text-slate-500">{description}</span>
-                </span>
-                {index < processSteps.length - 1 && (
-                  <ArrowRight className="absolute right-0 top-3 hidden h-3.5 w-3.5 text-blue-400 lg:block" />
-                )}
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <span className="section-eyebrow justify-center">Our Sourcing Process</span>
+            <h2 className="mt-2 text-section-title">
+              Reliable Sourcing, Proven Process
+            </h2>
+            <p className="mt-3 text-body-regular">
+              From requirement consultation to packaging and dispatch, our systematic process ensures seamless procurement for healthcare institutions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {processSteps.map(({ icon: Icon, number, title, description }) => (
+              <div
+                key={number}
+                className="card p-6 flex flex-col justify-between relative bg-white border border-[#E0E8EF] hover:border-[#159A9C]/40 hover:shadow-md transition-all"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
+                      <Icon className="h-6 w-6 text-[#159A9C]" />
+                    </div>
+                    <span className="font-display text-2xl font-black text-[#123B66]/20">
+                      {number}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#172B3A] mb-2 leading-snug">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-[#5E6F7D] leading-relaxed">
+                    {description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-[#042846] py-5 text-white">
+      {/* Sourcing Quality & Standards Feature */}
+      <section className="relative isolate overflow-hidden bg-[#0c2642] py-16 sm:py-20 text-white">
         <img
           src="/images/hero-surgical-scene.jpg"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-40"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#032746] via-[#06345b]/95 to-[#06345b]/50" />
-        <div className="container-x relative">
-          <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-cyan-300">
-            Sourcing Quality, After Standards India
-          </span>
-          <h2 className="mt-1 font-display text-lg font-extrabold text-white sm:text-xl">
-            Reliable Supply for Surgical Care
-          </h2>
-          <p className="mt-1 max-w-xl text-[10px] leading-relaxed text-blue-100">
-            We work with trusted manufacturers and follow quality standards to ensure reliable
-            orthopedic implants and instruments for clinical use.
-          </p>
-          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-[8px] font-medium text-blue-100">
-            <span className="inline-flex items-center gap-1"><BadgeCheck className="h-3 w-3 text-cyan-300" />Quality assurance</span>
-            <span className="inline-flex items-center gap-1"><Building2 className="h-3 w-3 text-cyan-300" />Reliable partners</span>
-            <span className="inline-flex items-center gap-1"><PackageCheck className="h-3 w-3 text-cyan-300" />Consistent supply</span>
-            <span className="inline-flex items-center gap-1"><HeartHandshake className="h-3 w-3 text-cyan-300" />Patient care focus</span>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0c2642] via-[#0c2642]/95 to-[#123B66]/80" />
+
+        <div className="container-x relative z-10">
+          <div className="max-w-2xl">
+            <span className="section-eyebrow text-[#159A9C]">
+              Rigorous Quality Standards
+            </span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+              Reliable Supply for Demanding Surgical Care
+            </h2>
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#bcccdc]">
+              We collaborate closely with certified manufacturing facilities adhering strictly to medical implant metallurgy, dimensional precision, and sterile-ready finish requirements.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-4 text-xs sm:text-sm font-semibold text-[#d9e2ec]">
+              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
+                <BadgeCheck className="h-4 w-4 text-[#159A9C]" />
+                Quality Assurance
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
+                <Building2 className="h-4 w-4 text-[#159A9C]" />
+                Hospital &amp; College Supply
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
+                <PackageCheck className="h-4 w-4 text-[#159A9C]" />
+                Safe Transit Packaging
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
+                <HeartHandshake className="h-4 w-4 text-[#159A9C]" />
+                Dedicated Partner
+              </span>
+            </div>
+
+            <div className="mt-8">
+              <Link to="/services" className="btn-teal">
+                <span>Explore Sourcing &amp; Supply Services</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
-          <Link
-            to="/services"
-            className="mt-3 inline-flex items-center gap-1 rounded-md bg-blue-600 px-3.5 py-2 text-[9px] font-bold text-white transition-colors hover:bg-blue-500"
-          >
-            Our Services
-            <ArrowRight className="h-3 w-3" />
-          </Link>
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 py-5 text-white sm:py-6">
-        <img
-          src="/images/services-cta-doctor.jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-700/95 via-blue-700/90 to-blue-800/75" />
-        <div className="container-x relative flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-          <div>
-            <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-blue-200">
-              Let&apos;s Work Together
-            </span>
-            <h2 className="mt-1 font-display text-lg font-extrabold text-white sm:text-xl">
-              Need bulk supply or specific instruments?
-            </h2>
-            <p className="mt-1 text-[10px] text-blue-100">
-              Contact us for customized quotations and product recommendations.
-            </p>
-          </div>
-          <div className="flex shrink-0 gap-2">
-            <Link
-              to="/request-a-quote"
-              className="inline-flex items-center gap-1.5 rounded-md bg-white px-3.5 py-2.5 text-[9px] font-bold text-blue-700 transition-colors hover:bg-blue-50"
-            >
-              Request a Quote
-              <ArrowRight className="h-3 w-3" />
-            </Link>
-            <a
-              href={`tel:${businessConfig.phoneRaw}`}
-              className="inline-flex items-center gap-1.5 rounded-md border border-white/60 px-3.5 py-2.5 text-[9px] font-bold text-white transition-colors hover:bg-white/10"
-            >
-              <Phone className="h-3 w-3" />
-              Call Us
-            </a>
-          </div>
-        </div>
-      </section>
+      <BottomCTA
+        eyebrow="Let's Work Together"
+        title="Need bulk supply or specific orthopedic instruments?"
+        description="Contact our sales desk for customized quotations, product availability, and institutional pricing."
+        primaryButtonText="Request a Quote"
+        primaryButtonLink="/request-a-quote"
+        showPhoneSecondary={true}
+      />
     </>
   );
 }

@@ -1,65 +1,69 @@
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import PageHero from '@/components/PageHero';
+import { businessConfig } from '@/config/business';
 
 export default function ReturnsAndClaims() {
   return (
     <>
       <SEO
-        title="Returns & Claims Policy | Vinyanak Surgicals"
-        description="Returns and claims policy for surgical instruments and medical supply orders from Vinyanak Surgicals."
+        title="Returns & Claims Policy | Vinayak Surgicals"
+        description="Returns and claims policy for surgical instruments and medical supply orders from Vinayak Surgicals."
         canonical="https://vinyanaksurgicals.com/returns-and-claims"
       />
       <Breadcrumbs crumbs={[{ label: 'Returns & Claims' }]} />
 
-      <section className="bg-navy-50 py-14">
-        <div className="container-x">
-          <h1 className="text-3xl lg:text-4xl font-display font-bold">Returns &amp; Claims</h1>
-          <p className="mt-2 text-sm text-navy-400">Last updated: October 2026</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Quality Guarantee"
+        title="Returns & Claims"
+        subtitle="Last updated: October 2026"
+        backgroundImage="/images/hero-orthopedic-surgical.jpg"
+      />
 
       <section className="section-padding bg-white">
-        <div className="container-x max-w-3xl">
-          <div className="space-y-6 text-navy-600 leading-relaxed">
+        <div className="container-x max-w-4xl">
+          <div className="space-y-8 text-[#5E6F7D] leading-relaxed text-base">
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Reporting Damaged or Incorrect Products</h2>
-              <p>If you receive a damaged, defective or incorrect product, please contact us within 48 hours of receiving the delivery. Provide your order details, a description of the issue and photographs where possible.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">1. Reporting Discrepancies or Damaged Deliveries</h2>
+              <p>
+                If a consignment arrives with physical transit damage, seal compromise, or dimensional discrepancy, notification must be submitted within 48 hours of receipt. Please provide photographs, consignment airway bill, and itemized part numbers to our claims desk.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Replacement Process</h2>
-              <p>Once we verify the issue, we will arrange a replacement or appropriate resolution. Replacements are subject to product availability. We will inform you of the expected timeline for the replacement.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">2. Replacement Procedure</h2>
+              <p>
+                Upon verification of a manufacturing non-conformance or transit damage, a replacement unit is prioritized for immediate dispatch. If an identical product is out of stock, we offer an equivalent approved specification or an institutional credit adjustment.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Returns of Unused Products</h2>
-              <p>Returns of unused, unopened products in their original packaging may be accepted within 7 days of delivery, subject to prior approval. Please contact us before returning any product. Return shipping costs may apply.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">3. Non-Returnable Items</h2>
+              <p>
+                To maintain surgical asepsis standards, items that have had their protective factory sterile seals opened, items customized to patient-specific dimensions, or products showing signs of hospital processing/autoclaving cannot be accepted for return or restocking.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Non-Returnable Items</h2>
-              <p>The following items are not eligible for return due to hygiene and safety reasons:</p>
-              <ul className="list-disc pl-6 space-y-1 mt-2">
-                <li>Sterile single-use disposables and consumables</li>
-                <li>Products with broken seals or packaging</li>
-                <li>Custom-ordered or specially sourced items</li>
-                <li>Products that have been used or sterilized</li>
-              </ul>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">4. Cancellation Policy</h2>
+              <p>
+                Standard catalogue orders may be modified or cancelled prior to dispatch verification. Specialized instrument fabrications or custom titanium plate import orders cannot be cancelled once production has commenced.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Refunds</h2>
-              <p>Where a refund is applicable, it will be processed using the original payment method. Refund processing times may vary depending on your bank or payment provider.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">5. Claims Support Contact</h2>
+              <p>
+                For all returns, discrepancy notifications, and claims assistance, reach our logistics team at{' '}
+                <a href={`mailto:${businessConfig.email}`} className="font-semibold text-[#123B66] hover:underline">
+                  {businessConfig.email}
+                </a>{' '}
+                or telephone{' '}
+                <a href={`tel:${businessConfig.phoneRaw}`} className="font-semibold text-[#123B66] hover:underline">
+                  {businessConfig.phone}
+                </a>.
+              </p>
             </div>
-
-            <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Contact for Claims</h2>
-              <p>To report an issue or initiate a return, please contact us with your order number and details of the concern. Our team will guide you through the process.</p>
-            </div>
-
-            <p className="text-sm text-navy-400 mt-8 pt-4 border-t border-navy-100">
-              This is a draft returns and claims policy template. Review and customise it before publishing.
-            </p>
           </div>
         </div>
       </section>

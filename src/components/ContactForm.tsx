@@ -17,15 +17,6 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 type FieldName = 'name' | 'phone' | 'email' | 'message' | 'consent';
 type FieldErrors = Partial<Record<FieldName, string>>;
 
-const inputClassName =
-  'min-h-10 w-full rounded-md border border-slate-200 bg-white py-2 pl-14 pr-3 text-xs text-slate-800 placeholder:text-slate-400 transition-colors focus:border-[#0866f5] focus:outline-none focus:ring-1 focus:ring-[#0866f5]';
-
-const requiredMark = <span style={{ color: '#dc2626' }}>*</span>;
-
-const validationMessageClass = 'mt-1 text-xs font-medium';
-const fieldIconSlotClassName =
-  'pointer-events-none absolute inset-y-0 left-0 flex w-10 items-center justify-center text-slate-500';
-
 export default function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -76,18 +67,22 @@ export default function ContactForm() {
     }, 800);
   };
 
-  const fieldClass = (field: FieldName) =>
-    `${inputClassName} ${errors[field] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}`;
+  const inputClasses = (hasError?: boolean) =>
+    `w-full min-h-[46px] rounded-lg border bg-white py-2.5 pl-11 pr-3.5 text-sm text-[#172B3A] placeholder:text-[#9FB3C8] transition-colors focus:outline-none ${
+      hasError
+        ? 'border-[#dc2626] focus:border-[#dc2626] focus:ring-1 focus:ring-[#dc2626]'
+        : 'border-[#E0E8EF] focus:border-[#159A9C] focus:ring-2 focus:ring-[#159A9C]/20'
+    }`;
 
   return (
-    <form noValidate onSubmit={handleSubmit} onChange={handleChange} className="mt-5 space-y-4">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <form noValidate onSubmit={handleSubmit} onChange={handleChange} className="mt-6 space-y-5">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-xs font-semibold text-slate-700">
-            Name {requiredMark}
+          <label htmlFor="name" className="label-field">
+            Full Name <span className="text-[#dc2626]">*</span>
           </label>
           <div className="relative">
-            <span aria-hidden="true" className={fieldIconSlotClassName}>
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#5E6F7D]">
               <UserRound className="h-4 w-4" />
             </span>
             <input
@@ -97,18 +92,23 @@ export default function ContactForm() {
               autoComplete="name"
               aria-invalid={Boolean(errors.name)}
               aria-describedby={errors.name ? 'name-error' : undefined}
-              className={fieldClass('name')}
-              placeholder="Your full name"
+              className={inputClasses(Boolean(errors.name))}
+              placeholder="e.g. Dr. Rajesh Sharma"
             />
           </div>
-          {errors.name && <p id="name-error" role="alert" className={validationMessageClass} style={{ color: '#dc2626' }}>{errors.name}</p>}
+          {errors.name && (
+            <p id="name-error" role="alert" className="mt-1 text-xs font-medium text-[#dc2626]">
+              {errors.name}
+            </p>
+          )}
         </div>
+
         <div>
-          <label htmlFor="organisation" className="mb-1.5 block text-xs font-semibold text-slate-700">
-            Organisation
+          <label htmlFor="organisation" className="label-field">
+            Hospital / Organisation
           </label>
           <div className="relative">
-            <span aria-hidden="true" className={fieldIconSlotClassName}>
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#5E6F7D]">
               <Building2 className="h-4 w-4" />
             </span>
             <input
@@ -116,20 +116,20 @@ export default function ContactForm() {
               name="organisation"
               type="text"
               autoComplete="organization"
-              className={inputClassName}
-              placeholder="Hospital or clinic name"
+              className={inputClasses()}
+              placeholder="e.g. Apollo / City Ortho Clinic"
             />
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="phone" className="mb-1.5 block text-xs font-semibold text-slate-700">
-            Phone {requiredMark}
+          <label htmlFor="phone" className="label-field">
+            Phone Number <span className="text-[#dc2626]">*</span>
           </label>
           <div className="relative">
-            <span aria-hidden="true" className={fieldIconSlotClassName}>
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#5E6F7D]">
               <Phone className="h-4 w-4" />
             </span>
             <input
@@ -139,18 +139,23 @@ export default function ContactForm() {
               autoComplete="tel"
               aria-invalid={Boolean(errors.phone)}
               aria-describedby={errors.phone ? 'phone-error' : undefined}
-              className={fieldClass('phone')}
-              placeholder="Your phone number"
+              className={inputClasses(Boolean(errors.phone))}
+              placeholder="e.g. +91 98765 43210"
             />
           </div>
-          {errors.phone && <p id="phone-error" role="alert" className={validationMessageClass} style={{ color: '#dc2626' }}>{errors.phone}</p>}
+          {errors.phone && (
+            <p id="phone-error" role="alert" className="mt-1 text-xs font-medium text-[#dc2626]">
+              {errors.phone}
+            </p>
+          )}
         </div>
+
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-xs font-semibold text-slate-700">
-            Email {requiredMark}
+          <label htmlFor="email" className="label-field">
+            Email Address <span className="text-[#dc2626]">*</span>
           </label>
           <div className="relative">
-            <span aria-hidden="true" className={fieldIconSlotClassName}>
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#5E6F7D]">
               <Mail className="h-4 w-4" />
             </span>
             <input
@@ -160,48 +165,51 @@ export default function ContactForm() {
               autoComplete="email"
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? 'email-error' : undefined}
-              className={fieldClass('email')}
-              placeholder="Your email address"
+              className={inputClasses(Boolean(errors.email))}
+              placeholder="doctor@hospital.org"
             />
           </div>
-          {errors.email && <p id="email-error" role="alert" className={validationMessageClass} style={{ color: '#dc2626' }}>{errors.email}</p>}
+          {errors.email && (
+            <p id="email-error" role="alert" className="mt-1 text-xs font-medium text-[#dc2626]">
+              {errors.email}
+            </p>
+          )}
         </div>
       </div>
 
       <div>
-        <label htmlFor="enquiryType" className="mb-1.5 block text-xs font-semibold text-slate-700">
-          Enquiry Type
+        <label htmlFor="enquiryType" className="label-field">
+          Enquiry Purpose
         </label>
         <div className="relative">
-          <span aria-hidden="true" className={fieldIconSlotClassName}>
+          <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#5E6F7D]">
             <Tag className="h-4 w-4" />
           </span>
           <select
             id="enquiryType"
             name="enquiryType"
-            className={`${inputClassName} appearance-none`}
+            className={`${inputClasses()} appearance-none pr-8 cursor-pointer`}
           >
-            <option value="general">General Enquiry</option>
-            <option value="product">Product Availability</option>
-            <option value="quotation">Quotation Request</option>
-            <option value="institutional">Institutional Supply</option>
-            <option value="sourcing">Product Sourcing</option>
-            <option value="support">Support / After-Sales</option>
+            <option value="general">General Medical Supply Enquiry</option>
+            <option value="product">Product Availability &amp; Sizing</option>
+            <option value="quotation">Institutional Quotation Request</option>
+            <option value="sourcing">Specialized Implants Sourcing</option>
+            <option value="support">After-Sales &amp; Instrumentation Support</option>
           </select>
-          <span aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-600">
-            ▾
+          <span aria-hidden="true" className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#5E6F7D]">
+            ▼
           </span>
         </div>
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-1.5 block text-xs font-semibold text-slate-700">
-          Message {requiredMark}
+        <label htmlFor="message" className="label-field">
+          Message &amp; Requirements <span className="text-[#dc2626]">*</span>
         </label>
         <div className="relative">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-0 flex w-10 justify-center pt-3 text-slate-500"
+            className="pointer-events-none absolute left-0 top-0 flex w-11 justify-center pt-3 text-[#5E6F7D]"
           >
             <FileText className="h-4 w-4" />
           </span>
@@ -211,49 +219,56 @@ export default function ContactForm() {
             rows={4}
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? 'message-error' : undefined}
-            className={`${fieldClass('message')} min-h-0 resize-y py-2.5 pl-14`}
-            placeholder="Describe your requirements..."
+            className={`${inputClasses(Boolean(errors.message))} min-h-[110px] resize-y py-2.5 pl-11`}
+            placeholder="Please detail your required products, sizes, quantities, and delivery location..."
           />
         </div>
-        {errors.message && <p id="message-error" role="alert" className={validationMessageClass} style={{ color: '#dc2626' }}>{errors.message}</p>}
+        {errors.message && (
+          <p id="message-error" role="alert" className="mt-1 text-xs font-medium text-[#dc2626]">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       <div>
-        <div className="flex items-start gap-2.5">
+        <div className="flex items-start gap-3">
           <input
             id="consent"
             name="consent"
             type="checkbox"
             aria-invalid={Boolean(errors.consent)}
             aria-describedby={errors.consent ? 'consent-error' : undefined}
-            className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-[#0866f5] focus:ring-[#0866f5]"
+            className="mt-1 h-4 w-4 shrink-0 rounded border-[#E0E8EF] text-[#123B66] focus:ring-[#159A9C]"
           />
-          <label htmlFor="consent" className="text-xs leading-relaxed text-slate-600">
-            I consent to Vinyanak Surgicals contacting me regarding this enquiry, in accordance with
-            the{' '}
-            <Link to="/privacy-policy" className="font-medium text-[#0866f5] underline">
+          <label htmlFor="consent" className="text-xs sm:text-sm leading-relaxed text-[#5E6F7D]">
+            I consent to Vinayak Surgicals contacting me regarding this enquiry, in accordance with the{' '}
+            <Link to="/privacy-policy" className="font-semibold text-[#123B66] hover:underline">
               Privacy Policy
             </Link>
             .
           </label>
         </div>
-        {errors.consent && <p id="consent-error" role="alert" className={validationMessageClass} style={{ color: '#dc2626' }}>{errors.consent}</p>}
+        {errors.consent && (
+          <p id="consent-error" role="alert" className="mt-1 text-xs font-medium text-[#dc2626]">
+            {errors.consent}
+          </p>
+        )}
       </div>
 
       {status === 'error' && (
-        <div className="flex items-start gap-2.5 rounded-md border border-red-100 bg-red-50 p-3 text-xs text-red-700">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+        <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-xs sm:text-sm text-red-800">
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
           <div>
-            <p className="font-semibold">Form submission is not yet configured.</p>
-            <p className="mt-0.5">
-              Please use WhatsApp or call us directly for now. Our team will assist you.
+            <p className="font-semibold text-red-900">Form submission service note:</p>
+            <p className="mt-0.5 text-red-700">
+              For immediate assistance, please call us directly or click below to connect on WhatsApp. Our medical supply team is ready to help.
             </p>
             {businessConfig.whatsappConfigured && (
               <a
                 href={buildWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center rounded-md bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white"
+                className="btn-whatsapp mt-2.5 !py-2 !px-4 !text-xs"
               >
                 Chat on WhatsApp
               </a>
@@ -263,18 +278,18 @@ export default function ContactForm() {
       )}
 
       {status === 'success' && (
-        <div className="flex items-start gap-2.5 rounded-md border border-green-100 bg-green-50 p-3 text-xs text-green-700">
-          <CheckCircle2 className="h-4 w-4 shrink-0" />
-          <p>Thank you for your enquiry. We will respond within 1–2 business days.</p>
+        <div className="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-4 text-xs sm:text-sm text-green-800">
+          <CheckCircle2 className="h-5 w-5 shrink-0 text-[#16a34a]" />
+          <p>Thank you for your enquiry. Our team will review your requirements and respond within 1–2 business days.</p>
         </div>
       )}
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-[#0866f5] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
+        className="btn-primary w-full shadow-sm"
       >
-        {status === 'submitting' ? 'Sending...' : 'Send Enquiry'}
+        {status === 'submitting' ? 'Submitting Enquiry...' : 'Send Enquiry'}
         <Send className="h-4 w-4" />
       </button>
     </form>

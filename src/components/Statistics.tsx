@@ -27,7 +27,7 @@ export default function Statistics() {
     {
       icon: Package,
       value: 0,
-      displayValue: businessConfig.statistics.productCount,
+      displayValue: '500+ Implants',
       label: 'Products in Catalogue',
       isNumeric: false,
     },
@@ -41,19 +41,20 @@ export default function Statistics() {
     {
       icon: Globe2,
       value: 0,
-      displayValue: 'Pan-India Enquiries',
-      label: 'Service Coverage',
+      displayValue: 'Pan-India',
+      label: 'Service & Hospital Network',
       isNumeric: false,
     },
   ];
 
   useEffect(() => {
+    const timers: ReturnType<typeof setInterval>[] = [];
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animated) {
             setAnimated(true);
-            // Animate numeric counters
             stats.forEach((stat) => {
               if (stat.isNumeric && stat.value > 0) {
                 const duration = 1500;
@@ -73,6 +74,7 @@ export default function Statistics() {
                     [stat.label]: Math.round(current),
                   }));
                 }, duration / steps);
+                timers.push(timer);
               }
             });
           }
@@ -82,14 +84,17 @@ export default function Statistics() {
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      timers.forEach((t) => clearInterval(t));
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animated]);
 
   return (
-    <section ref={sectionRef} className="bg-navy-900 py-16">
+    <section ref={sectionRef} className="bg-[#0c2642] py-14 sm:py-18 text-white border-y border-[#123B66]">
       <div className="container-x">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {stats.map((stat) => {
             const display = stat.isNumeric
               ? counts[stat.label] !== undefined
@@ -98,17 +103,14 @@ export default function Statistics() {
               : stat.displayValue;
 
             return (
-              <div
-                key={stat.label}
-                className="text-center"
-              >
-                <div className="flex h-14 w-14 mx-auto items-center justify-center rounded-full bg-navy-800 mb-4">
-                  <stat.icon className="h-6 w-6 text-cyan-400" />
+              <div key={stat.label} className="text-center group">
+                <div className="flex h-14 w-14 mx-auto items-center justify-center rounded-2xl bg-[#123B66] text-[#159A9C] mb-4 shadow-sm group-hover:scale-105 transition-transform">
+                  <stat.icon className="h-7 w-7" />
                 </div>
-                <div className="text-3xl lg:text-4xl font-display font-bold text-white">
+                <div className="font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white leading-tight">
                   {display}
                 </div>
-                <div className="mt-1.5 text-sm text-navy-300">
+                <div className="mt-2 text-sm sm:text-base font-medium text-[#bcccdc]">
                   {stat.label}
                 </div>
               </div>

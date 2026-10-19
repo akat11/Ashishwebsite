@@ -1,59 +1,61 @@
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import PageHero from '@/components/PageHero';
 
 export default function ShippingPolicy() {
   return (
     <>
       <SEO
-        title="Shipping Policy | Vinyanak Surgicals"
-        description="Shipping and delivery policy for surgical instruments and medical supply orders from Vinyanak Surgicals."
+        title="Shipping Policy | Vinayak Surgicals"
+        description="Shipping and delivery policy for surgical instruments and medical supply orders from Vinayak Surgicals."
         canonical="https://vinyanaksurgicals.com/shipping-policy"
       />
       <Breadcrumbs crumbs={[{ label: 'Shipping Policy' }]} />
 
-      <section className="bg-navy-50 py-14">
-        <div className="container-x">
-          <h1 className="text-3xl lg:text-4xl font-display font-bold">Shipping Policy</h1>
-          <p className="mt-2 text-sm text-navy-400">Last updated: October 2026</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Logistics & Delivery"
+        title="Shipping Policy"
+        subtitle="Last updated: October 2026"
+        backgroundImage="/images/hero-orthopedic-surgical.jpg"
+      />
 
       <section className="section-padding bg-white">
-        <div className="container-x max-w-3xl">
-          <div className="space-y-6 text-navy-600 leading-relaxed">
+        <div className="container-x max-w-4xl">
+          <div className="space-y-8 text-[#5E6F7D] leading-relaxed text-base">
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Service Areas</h2>
-              <p>We deliver to Kanpur and across Uttar Pradesh. We also respond to pan-India enquiries and arrange delivery to other states where feasible. Please confirm delivery availability for your location when placing an order.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">1. Service Coverage &amp; Delivery Zones</h2>
+              <p>
+                From our central hub in Kanpur, we provide dedicated delivery across Kanpur and Uttar Pradesh, including Lucknow, Agra, Varanasi, Prayagraj, and Gorakhpur. Furthermore, we maintain active pan-India logistics networks to serve healthcare institutions across all states.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Delivery Timeline</h2>
-              <p>Delivery timelines depend on product availability, order volume and destination. In-stock items for local Kanpur delivery are typically delivered within 2–5 business days. Orders requiring sourcing or pan-India delivery may take longer. We will inform you of the expected timeline in your quotation.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">2. Processing &amp; Dispatch Schedules</h2>
+              <p>
+                In-stock orthopedic plates, screws, and external fixator components are typically processed and dispatched within 1–2 business days. For urgent trauma hospital deliveries or scheduled surgical procedures, expedited express courier transit can be coordinated upon request.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Packaging</h2>
-              <p>Surgical instruments are carefully packaged to prevent damage during transit. Fragile and precision instruments are packed with protective padding. Sterile and disposable products are shipped in their original sealed packaging. Medical equipment is crated appropriately for safe transport.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">3. Medical Grade Packaging</h2>
+              <p>
+                All items undergo strict visual inspection and are packaged in protective barrier materials to prevent transit damage to thread profiles, anatomical contours, and polished surfaces. Consignments are sealed with tamper-evident labeling.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Shipping Charges</h2>
-              <p>Shipping charges are determined based on order size, weight and delivery destination. Charges are included in your quotation unless stated otherwise.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">4. Tracking &amp; Delivery Confirmation</h2>
+              <p>
+                Consignment tracking numbers and courier partner details are shared via email and WhatsApp upon dispatch. Institutional orders include complete delivery challans and tax invoices for formal hospital inventory receiving.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Order Tracking</h2>
-              <p>For dispatched orders, we provide dispatch confirmation and relevant tracking information where available. Please contact us if you have not received your order within the expected timeline.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">5. Transit Insurance</h2>
+              <p>
+                High-value institutional consignments and bulk tender deliveries are covered under transit insurance protocols to protect against loss or structural compromise during long-distance transit.
+              </p>
             </div>
-
-            <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Delivery Issues</h2>
-              <p>If you experience any delivery issues, including delayed or damaged shipments, please contact us immediately. We will work to resolve the issue as quickly as possible.</p>
-            </div>
-
-            <p className="text-sm text-navy-400 mt-8 pt-4 border-t border-navy-100">
-              This is a draft shipping policy template. Review and customise it before publishing.
-            </p>
           </div>
         </div>
       </section>

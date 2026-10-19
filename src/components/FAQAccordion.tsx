@@ -6,24 +6,24 @@ export default function FAQAccordion({ faq }: { faq: FAQItem }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-navy-100">
+    <div className="border-b border-[#E0E8EF]">
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left"
+        className="flex w-full items-center justify-between gap-4 py-4 text-left transition-colors hover:text-[#123B66]"
         aria-expanded={open}
       >
-        <span className="text-sm lg:text-base font-semibold text-navy-800">
+        <span className="text-sm sm:text-base font-semibold text-[#172B3A]">
           {faq.question}
         </span>
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-medical-600 transition-transform duration-300 ${
+          className={`h-4 w-4 shrink-0 text-[#159A9C] transition-transform duration-200 ${
             open ? 'rotate-180' : ''
           }`}
         />
       </button>
       {open && (
-        <div className="pb-5 animate-slide-down">
-          <p className="text-sm text-navy-600 leading-relaxed">
+        <div className="pb-4 animate-slide-down">
+          <p className="text-sm text-[#5E6F7D] leading-relaxed">
             {faq.answer}
           </p>
         </div>

@@ -23,12 +23,12 @@ export default function ProductDetail() {
   return (
     <>
       <SEO
-        title={`${product.name} — Specifications & Catalogue Codes | Vinyanak Surgicals`}
+        title={`${product.name} — Specifications & Catalogue Codes | Vinayak Surgicals`}
         description={`${product.description} Verified catalogue specifications in implant-grade Stainless Steel 316L and Titanium Grade 5.`}
         canonical={`https://vinyanaksurgicals.com/products/${category.slug}/${product.slug}`}
         image={product.image}
         type="product"
-        keywords={`${product.name}, ${category.name}, orthopedic implants, catalogue codes, compatible screws, Vinyanak Surgicals, trauma implants Kanpur India`}
+        keywords={`${product.name}, ${category.name}, orthopedic implants, catalogue codes, compatible screws, Vinayak Surgicals, trauma implants Kanpur India`}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Product',
@@ -38,84 +38,103 @@ export default function ProductDetail() {
           category: category.name,
           brand: {
             '@type': 'Brand',
-            name: 'Vinyanak Surgicals'
-          }
+            name: 'Vinayak Surgicals',
+          },
         }}
       />
-      <Breadcrumbs crumbs={[
-        { label: 'Products', path: '/products' },
-        { label: category.shortName, path: `/products/${category.slug}` },
-        { label: product.name },
-      ]} />
 
-      {/* Product detail */}
+      <Breadcrumbs
+        crumbs={[
+          { label: 'Products', path: '/products' },
+          { label: category.shortName, path: `/products/${category.slug}` },
+          { label: product.name },
+        ]}
+      />
+
+      {/* Product Detail Section */}
       <section className="bg-white section-padding">
         <div className="container-x">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            {/* Image */}
-            <div>
-              <div className="rounded-lg overflow-hidden border border-navy-100">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            {/* Image Box */}
+            <div className="rounded-2xl border border-[#E0E8EF] bg-[#F4F8FB] p-6 sm:p-10 flex items-center justify-center overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full max-h-[420px] object-contain transition-transform duration-300 hover:scale-105 drop-shadow-md"
+              />
             </div>
 
-            {/* Info */}
+            {/* Product Information */}
             <div>
-              <span className="section-eyebrow">{category.shortName}</span>
-              <h1 className="mt-2 text-2xl lg:text-3xl font-display font-bold">
+              <span className="section-eyebrow">
+                {category.shortName}
+              </span>
+              <h1 className="mt-2 text-page-title text-[#172B3A]">
                 {product.name}
               </h1>
-              <p className="mt-4 text-navy-600 leading-relaxed">
+              <p className="mt-4 text-body-regular text-[#5E6F7D] leading-relaxed">
                 {product.description}
               </p>
 
-              {/* Specs */}
-              <div className="mt-6">
-                <h2 className="text-sm font-semibold text-navy-700 uppercase tracking-wider mb-3">
-                  Specifications
+              {/* Technical Specifications Table */}
+              <div className="mt-8">
+                <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#123B66] mb-3">
+                  Technical Specifications &amp; Material Options
                 </h2>
-                <div className="rounded-md border border-navy-100 divide-y divide-navy-100">
-                  {product.specs.map((spec) => (
-                    <div key={spec.label} className="flex items-center justify-between px-4 py-3">
-                      <span className="text-sm text-navy-500">{spec.label}</span>
-                      <span className="text-sm font-medium text-navy-800">{spec.value}</span>
+                <div className="rounded-xl border border-[#E0E8EF] divide-y divide-[#E0E8EF] overflow-hidden bg-white">
+                  {product.specs.map((spec, index) => (
+                    <div
+                      key={spec.label}
+                      className={`flex items-center justify-between px-4 sm:px-5 py-3 text-sm ${
+                        index % 2 === 0 ? 'bg-white' : 'bg-[#F4F8FB]'
+                      }`}
+                    >
+                      <span className="font-medium text-[#5E6F7D]">{spec.label}</span>
+                      <span className="font-semibold text-[#172B3A] text-right">{spec.value}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* CTAs */}
-              <div className="mt-8 space-y-3">
-                <Link to="/request-a-quote" className="btn-primary w-full">
-                  Request a Quote
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/request-a-quote"
+                  className="btn-primary flex-1 shadow-sm"
+                >
+                  <span>Request an Institutional Quote</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                {businessConfig.whatsappConfigured && (
+                {businessConfig.whatsappConfigured ? (
                   <a
                     href={buildProductWhatsAppLink(product.name)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-whatsapp w-full"
+                    className="btn-whatsapp flex-1"
                   >
-                    Enquire About This Product on WhatsApp
+                    Enquire on WhatsApp
+                  </a>
+                ) : (
+                  <a
+                    href={`tel:${businessConfig.phoneRaw}`}
+                    className="btn-secondary flex-1"
+                  >
+                    Call for Availability
                   </a>
                 )}
               </div>
 
-              {/* Trust indicators */}
-              <div className="mt-6 space-y-2">
+              {/* Trust Indicators */}
+              <div className="mt-8 space-y-2.5 border-t border-[#E0E8EF] pt-6">
                 {[
-                  'Implant-grade SS 316L & Titanium Grade 5 options',
-                  'Suitable for clinical and institutional orthopedic surgery',
-                  'Bulk supply and institutional enquiries welcome',
+                  'Manufactured in implant-grade Stainless Steel 316L and Titanium Grade 5',
+                  'Standardized screw threading and locking taper design',
+                  'Hospital tenders and institutional bulk procurement welcome',
+                  'Prompt dispatch with secure padded transit packaging',
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-navy-500">
-                    <Check className="h-4 w-4 text-success-500" />
-                    {item}
+                  <div key={item} className="flex items-center gap-2.5 text-xs sm:text-sm text-[#5E6F7D]">
+                    <Check className="h-4 w-4 text-[#16a34a] shrink-0" />
+                    <span>{item}</span>
                   </div>
                 ))}
               </div>
@@ -124,14 +143,26 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* Related products */}
+      {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="section-padding bg-navy-50">
+        <section className="section-padding bg-[#F4F8FB] border-t border-[#E0E8EF]">
           <div className="container-x">
-            <h2 className="text-xl font-display font-bold mb-6">
-              Related Products in {category.shortName}
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            <div className="mb-8 flex items-center justify-between">
+              <div>
+                <span className="section-eyebrow">Complementary Implants</span>
+                <h2 className="mt-1 text-section-title">
+                  Related Products in {category.shortName}
+                </h2>
+              </div>
+              <Link
+                to={`/products/${category.slug}`}
+                className="text-sm font-semibold text-[#123B66] hover:text-[#159A9C] inline-flex items-center gap-1"
+              >
+                <span>View All {category.shortName}</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               {relatedProducts.map((rp) => (
                 <ProductCard key={rp.slug} product={rp} />
               ))}

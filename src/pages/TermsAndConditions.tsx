@@ -1,70 +1,69 @@
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import PageHero from '@/components/PageHero';
 import { businessConfig } from '@/config/business';
 
 export default function TermsAndConditions() {
   return (
     <>
       <SEO
-        title="Terms & Conditions | Vinyanak Surgicals"
-        description="Terms and conditions for using the Vinyanak Surgicals website and engaging our medical supply services."
+        title="Terms & Conditions | Vinayak Surgicals"
+        description="Terms and conditions for using the Vinayak Surgicals website and engaging our medical supply services."
         canonical="https://vinyanaksurgicals.com/terms-and-conditions"
       />
       <Breadcrumbs crumbs={[{ label: 'Terms & Conditions' }]} />
 
-      <section className="bg-navy-50 py-14">
-        <div className="container-x">
-          <h1 className="text-3xl lg:text-4xl font-display font-bold">Terms &amp; Conditions</h1>
-          <p className="mt-2 text-sm text-navy-400">Last updated: October 2026</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Legal Terms"
+        title="Terms & Conditions"
+        subtitle="Last updated: October 2026"
+        backgroundImage="/images/hero-orthopedic-surgical.jpg"
+      />
 
       <section className="section-padding bg-white">
-        <div className="container-x max-w-3xl">
-          <div className="space-y-6 text-navy-600 leading-relaxed">
+        <div className="container-x max-w-4xl">
+          <div className="space-y-8 text-[#5E6F7D] leading-relaxed text-base">
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Acceptance of Terms</h2>
-              <p>By accessing and using the {businessConfig.legalName} website, you accept and agree to these terms and conditions. If you do not agree, please do not use this website.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">1. Acceptance of Terms</h2>
+              <p>
+                By accessing and utilizing the {businessConfig.legalName} website or submitting inquiries through our digital channels, you agree to comply with and be bound by the following terms and conditions. If you disagree with any portion of these terms, please refrain from using our services.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Product Information</h2>
-              <p>We strive to provide accurate product descriptions, specifications and images. However, actual products may vary in appearance, specifications or availability. We recommend confirming details with us before placing an order.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">2. Product Specifications &amp; Metallurgy</h2>
+              <p>
+                We strive to maintain exact accuracy regarding catalogue codes, screw thread sizing, hole configurations, and materials (Stainless Steel 316L and Titanium Grade 5). However, manufacturing revisions may occur. We encourage surgical teams and institutional buyers to verify technical specifications in writing prior to order confirmation.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Quotations and Pricing</h2>
-              <p>All quotations are provided in good faith based on current availability and supplier pricing. Quoted prices are valid for the period specified in the quotation and are subject to change without prior notice.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">3. Quotations &amp; Institutional Tenders</h2>
+              <p>
+                Quotations issued by Vinayak Surgicals remain valid for the period specified on the official estimate document (typically 30 calendar days). Pricing is subject to statutory tax revisions and market changes in raw medical-grade metallurgy.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Orders</h2>
-              <p>Orders are confirmed only after written or verbal acceptance by both parties. We reserve the right to decline or cancel orders due to product unavailability, pricing errors or other reasonable causes.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">4. Intellectual Property &amp; Trademarks</h2>
+              <p>
+                All product imagery, design tokens, schematics, and textual specifications published on this website are protected under copyright laws. Third-party brand names (such as Stryker, DePuy Synthes, Zimmer Biomet, etc.) remain the exclusive property of their respective trademark holders.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Delivery</h2>
-              <p>Delivery timelines are estimates and may vary based on product availability, location and logistics. We are not liable for delays beyond our reasonable control.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">5. Limitation of Liability</h2>
+              <p>
+                Surgical implants and fixation hardware must be selected and implanted solely by qualified orthopedic practitioners. Vinayak Surgicals shall not be liable for clinical complications or off-label surgical applications.
+              </p>
             </div>
 
             <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Returns and Claims</h2>
-              <p>Please refer to our Returns and Claims policy for information on reporting damaged or incorrect products and requesting replacements.</p>
+              <h2 className="text-xl font-display font-bold text-[#172B3A] mb-3">6. Governing Law &amp; Jurisdiction</h2>
+              <p>
+                These terms are governed by and construed in accordance with the laws of India. Any legal dispute or claim arising in connection with our services shall be subject to the exclusive jurisdiction of the courts of Kanpur, Uttar Pradesh.
+              </p>
             </div>
-
-            <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Limitation of Liability</h2>
-              <p>Our liability is limited to the value of the products supplied. We are not liable for indirect or consequential damages arising from the use of our products. Instruments should be used by qualified healthcare professionals in accordance with clinical guidelines.</p>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-display font-bold text-navy-800 mb-2">Governing Law</h2>
-              <p>These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in Kanpur, Uttar Pradesh.</p>
-            </div>
-
-            <p className="text-sm text-navy-400 mt-8 pt-4 border-t border-navy-100">
-              This is a draft terms and conditions template. Review and customise it with your legal advisor before publishing.
-            </p>
           </div>
         </div>
       </section>
