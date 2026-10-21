@@ -75,12 +75,15 @@ export default function ProductDetail() {
         <div className="container-x">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             {/* Image Box */}
-            <div className="rounded-2xl border border-[#E0E8EF] bg-[#F4F8FB] p-6 sm:p-10 flex items-center justify-center overflow-hidden sticky top-24">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full max-h-[420px] object-contain transition-transform duration-300 hover:scale-105 drop-shadow-md"
-              />
+            <div className="rounded-2xl border border-[#E0E8EF] bg-white p-6 sm:p-10 flex items-center justify-center overflow-hidden sticky top-24 shadow-xs">
+              <picture className="w-full flex justify-center">
+                <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full max-h-[420px] object-contain transition-transform duration-300 hover:scale-105"
+                />
+              </picture>
             </div>
 
             {/* Product Information */}

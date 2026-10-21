@@ -18,11 +18,14 @@ export default function VideoHero() {
   return (
     <section className="relative isolate flex min-h-[520px] items-center overflow-hidden bg-[#0c2642] py-14 sm:py-18 lg:py-24">
       {/* Background image with high quality medical imagery */}
-      <img
-        src="/images/hero-surgical-scene.jpg"
-        alt="Orthopedic implants and surgical team in an operating theatre"
-        className="absolute inset-0 h-full w-full object-cover object-[60%_center]"
-      />
+      <picture>
+        <source srcSet="/images/hero-orthopedic-surgical.webp" type="image/webp" />
+        <img
+          src="/images/hero-orthopedic-surgical.jpg"
+          alt="Precision orthopedic implants and external fixation surgical hardware"
+          className="absolute inset-0 h-full w-full object-cover object-[65%_center]"
+        />
+      </picture>
       {/* Gradients to guarantee high-contrast legibility */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0c2642]/98 via-[#0c2642]/90 to-[#0c2642]/40" />
       <div className="absolute inset-y-0 left-0 w-full bg-[linear-gradient(110deg,rgba(12,38,66,0.8),transparent_80%)]" />

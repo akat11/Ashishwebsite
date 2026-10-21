@@ -11,13 +11,16 @@ export default function ProductCard({ product }: { product: Product }) {
       to={`/products/${product.category}/${product.slug}`}
       className="card card-hover group flex flex-col h-full overflow-hidden bg-white"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF]/60">
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white border-b border-[#E0E8EF]/60">
+        <picture>
+          <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          />
+        </picture>
         {category && (
           <span className="absolute top-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#159A9C] shadow-xs backdrop-blur-xs">
             {category.shortName}

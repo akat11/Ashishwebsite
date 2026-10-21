@@ -39,13 +39,16 @@ export default function CategoryCard({ category }: { category: ProductCategory }
       to={`/products/${category.slug}`}
       className="card card-hover group relative flex flex-col h-full overflow-hidden bg-white"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F4F8FB]">
-        <img
-          src={category.image}
-          alt={category.name}
-          loading="lazy"
-          className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white">
+        <picture>
+          <source srcSet={category.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+          <img
+            src={category.image}
+            alt={category.name}
+            loading="lazy"
+            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c2642]/85 via-[#0c2642]/40 to-transparent" />
         <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm opacity-90 transition-all duration-300 group-hover:bg-[#159A9C] group-hover:scale-110">
           <ArrowRight className="h-4 w-4 text-white" />

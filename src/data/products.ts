@@ -14,7 +14,7 @@ export const products: Product[] = [
     "name": "Volar Distal Radius Locking Plate 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Anatomically pre-contoured volar locking plate designed for stable fixation of intra-articular and extra-articular distal radius fractures. Features low profile design with divergent subchondral locking screws.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/volar-distal-radius-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -52,7 +52,7 @@ export const products: Product[] = [
     "name": "L Distal Radius Locking Plate 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "L-shaped distal radius locking plate engineered for styloid process fixation and radial column stabilization with dedicated 3-hole head geometry.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/l-distal-radius-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -90,7 +90,7 @@ export const products: Product[] = [
     "name": "Volar Distal Radius Extra-articular Locking Plate 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Designed specifically for extra-articular distal radius fractures with 4-hole transverse head contour providing buttress support without joint penetration.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/volar-distal-radius-extra-articular-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -128,7 +128,7 @@ export const products: Product[] = [
     "name": "Volar V.A. Two-Column Distal Radius Locking Plate Wide 2.4-2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Variable-angle (V.A.) two-column locking plate offering ±15° screw angulation for targeted fragment capture across both radial and intermediate columns.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/volar-va-two-column-distal-radius-locking-plate-2-4-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -166,7 +166,7 @@ export const products: Product[] = [
     "name": "Volar Two-Column Distal Radius Locking Plate Wide 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Standard two-column plate design providing broad subchondral support with distinct radial and intermediate column screw trajectories.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/volar-two-column-distal-radius-locking-plate-wide-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -204,7 +204,7 @@ export const products: Product[] = [
     "name": "Volar Copies Distal Radius Locking Plate Standard 2.7-3.5mm",
     "category": "distal-radius-locking-plates",
     "description": "Hybrid locking plate utilizing 2.7mm locking screws distally in the 6-hole head and robust 3.5mm cortex/locking screws in the diaphysis for high purchase strength.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/volar-copies-distal-radius-locking-plate-2-7-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -242,7 +242,7 @@ export const products: Product[] = [
     "name": "Volar Rim Distal Radius Locking Plate Standard 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Distal rim contour plate specifically designed for marginal rim fractures and radiocarpal fracture-dislocations requiring extreme distal screw fixation.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/volar-rim-distal-radius-locking-plate-standard-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -280,7 +280,7 @@ export const products: Product[] = [
     "name": "V.A. Volar Rim Distal Radius Locking Plate Standard 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Variable-angle volar rim plate combining marginal buttress tabs with multi-axial locking trajectory to preserve joint anatomy and prevent extensor tendon irritation.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/va-volar-rim-distal-radius-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -318,7 +318,7 @@ export const products: Product[] = [
     "name": "Wrist Locking Plate Medium 2.5mm",
     "category": "distal-radius-locking-plates",
     "description": "Low-profile wrist fusion and periarticular fixation plate designed for carpal, radiocarpal, and distal radial reconstructive procedures.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/wrist-locking-plate-medium-2-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -352,7 +352,7 @@ export const products: Product[] = [
     "name": "Proximal Radius Neck Locking Plate 2.7mm",
     "category": "distal-radius-locking-plates",
     "description": "Anatomically curved plate tailored for fractures of the radial head and radial neck, designed to respect the safe zone of the radial head without impinging on the PRUJ.",
-    "image": "/images/products/distal-radius-volar.jpg",
+    "image": "/images/products/proximal-radius-neck-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -386,7 +386,7 @@ export const products: Product[] = [
     "name": "Proximal Lateral Tibia Locking Plate 5.0mm",
     "category": "tibia-locking-plates",
     "description": "Anatomically shaped plate for lateral stabilization of proximal tibial plateau fractures, metaphyseal fractures, and nonunions with raft screw support under the articular surface.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/proximal-lateral-tibia-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -424,7 +424,7 @@ export const products: Product[] = [
     "name": "Proximal Lateral Tibia Locking Plate 6.5-5.0mm",
     "category": "tibia-locking-plates",
     "description": "Heavy-duty proximal lateral tibial locking plate featuring dual proximal 6.5mm cancellous screw holes for massive condylar split depression fractures.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/proximal-lateral-tibia-locking-plate-6-5-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -458,7 +458,7 @@ export const products: Product[] = [
     "name": "Distal Medial Tibia Locking Plate With Tab 3.5mm",
     "category": "tibia-locking-plates",
     "description": "Low-profile anatomically contoured plate with distal tab providing dedicated medial malleolus buttressing and subchondral pilon fracture stabilization.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/distal-medial-tibia-locking-plate-with-tab-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -496,7 +496,7 @@ export const products: Product[] = [
     "name": "Distal Medial Tibia Low Bend Locking Plate 3.5mm",
     "category": "tibia-locking-plates",
     "description": "Pre-shaped with subtle low-bend contour to minimize soft tissue tension along the subcutaneous border of the distal anteromedial tibia.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/distal-medial-tibia-low-bend-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -530,7 +530,7 @@ export const products: Product[] = [
     "name": "Anterolateral Distal Tibia Locking Plate 3.5mm",
     "category": "tibia-locking-plates",
     "description": "Anterolateral distal tibia plate designed for pilon fractures with joint depression where a medial incision would compromise soft-tissue viability.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/anterolateral-distal-tibia-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -564,7 +564,7 @@ export const products: Product[] = [
     "name": "Metaphyseal Locking Plate For Distal Medial Tibia 3.5-5.0mm",
     "category": "tibia-locking-plates",
     "description": "Transition plate combining distal 3.5mm locking hole clusters with diaphyseal 5.0mm dynamic locking holes for extensive distal tibial meta-diaphyseal fractures.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/metaphyseal-locking-plate-distal-medial-tibia-3-5-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -598,7 +598,7 @@ export const products: Product[] = [
     "name": "Proximal Tibia Locking Plate 3.5mm",
     "category": "tibia-locking-plates",
     "description": "Low-profile 3.5mm proximal tibia plate providing multi-directional screw fixation in smaller bone morphology or complex comminuted tibial plateau injuries.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/proximal-tibia-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -632,7 +632,7 @@ export const products: Product[] = [
     "name": "Proximal Tibia Locking Plate 3.5mm (Raft Plate)",
     "category": "tibia-locking-plates",
     "description": "Equipped with parallel transverse subchondral screw holes forming a rigid horizontal raft to prevent articular subsidence in lateral tibial plateau fractures.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/proximal-tibia-raft-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -670,7 +670,7 @@ export const products: Product[] = [
     "name": "Proximal Medial Tibia Locking Plate 3.5mm",
     "category": "tibia-locking-plates",
     "description": "Anatomical medial tibial plateau plate engineered to resist varus collapse and support posteromedial shear fragments.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/proximal-medial-tibia-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -704,7 +704,7 @@ export const products: Product[] = [
     "name": "Posterior Medial Proximal Tibia Locking Plate 3.5mm",
     "category": "tibia-locking-plates",
     "description": "Compact posterior-medial buttress plate for direct posterior approach in Moore Type I/II and Schatzker IV/VI coronal split fractures.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/posterior-medial-proximal-tibia-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -738,7 +738,7 @@ export const products: Product[] = [
     "name": "Proximal Medial Tibia Locking Plate 5.0mm",
     "category": "tibia-locking-plates",
     "description": "Rigid 5.0mm medial plate providing robust load-sharing buttress stability in bicondylar tibial plateau fracture configurations.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/proximal-medial-tibia-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -772,7 +772,7 @@ export const products: Product[] = [
     "name": "Tomofix High Tibia Osteotomy Locking Plate 5.0mm",
     "category": "tibia-locking-plates",
     "description": "Specialized medial opening-wedge high tibial osteotomy (HTO) internal fixator plate providing rigid angle-stable fixation without bone graft collapse.",
-    "image": "/images/products/tibia-plate.jpg",
+    "image": "/images/products/tomofix-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -810,7 +810,7 @@ export const products: Product[] = [
     "name": "Distal Femur Locking Plate 5.0mm",
     "category": "femur-locking-plates",
     "description": "Anatomically contoured condylar locking plate for supracondylar, intra-articular, and periprosthetic distal femur fractures. Multi-hole distal cluster provides stable screw fixations above the knee joint.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/distal-femur-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -848,7 +848,7 @@ export const products: Product[] = [
     "name": "Distal Femur Locking Plate 6.5-5.0mm",
     "category": "femur-locking-plates",
     "description": "High-caliber distal femoral plate incorporating 6.5mm cancellous locking screws in the distal condyle for osteoporotic bone and complex comminution.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/distal-femur-locking-plate-6-5-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -882,7 +882,7 @@ export const products: Product[] = [
     "name": "Proximal Femur Locking Plate 7.3-5.0mm",
     "category": "femur-locking-plates",
     "description": "Comprehensive proximal femoral plate featuring converging 7.3mm cannulated locking screws across the femoral neck paired with a rigid 5.0mm diaphyseal shaft.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/proximal-femur-locking-plate-7-3-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -916,7 +916,7 @@ export const products: Product[] = [
     "name": "Proximal Femoral Locking Plate Type-I 5.0-6.5mm",
     "category": "femur-locking-plates",
     "description": "Type-I proximal femoral fixation plate utilizing 6.5mm cancellous locking screws for trochanteric and subtrochanteric fracture stability.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/proximal-femoral-locking-plate-type-1-5-0-6-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -950,7 +950,7 @@ export const products: Product[] = [
     "name": "Proximal Femoral Locking Plate Type-III 5.0-7.3mm",
     "category": "femur-locking-plates",
     "description": "Type-III proximal femoral system with reinforced lateral trochanteric profile designed to withstand peak axial and torsional forces.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/proximal-femoral-locking-plate-type-3-5-0-7-3mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -980,7 +980,7 @@ export const products: Product[] = [
     "name": "Proximal Femur Lateral Locking Plate 5.0mm",
     "category": "femur-locking-plates",
     "description": "Lateral contoured plate optimized for intertrochanteric, subtrochanteric, and combined proximal femoral shaft fractures.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/proximal-femur-lateral-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1014,7 +1014,7 @@ export const products: Product[] = [
     "name": "Proximal Femoral GT Locking Plate 5.0mm",
     "category": "femur-locking-plates",
     "description": "Specialized Greater Trochanter (GT) plate designed for isolated trochanteric avulsions and lateral wall reconstruction.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/proximal-femoral-gt-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -1044,7 +1044,7 @@ export const products: Product[] = [
     "name": "Trochanteric Buttress Locking Plate Combined with PFN Nail 3.5mm",
     "category": "femur-locking-plates",
     "description": "Designed for use alongside Proximal Femoral Nails (PFN) to provide lateral buttressing and prevent lateral wall blowout in unstable pertrochanteric fractures.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/trochanteric-buttress-locking-plate-combined.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1082,7 +1082,7 @@ export const products: Product[] = [
     "name": "Distal Medial Femur Locking Plate 5.0mm",
     "category": "femur-locking-plates",
     "description": "Medial femoral condylar plate used in dual-plating constructs for severe comminuted distal femoral fractures and nonunions.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/distal-medial-femur-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1116,7 +1116,7 @@ export const products: Product[] = [
     "name": "Condylar Buttress Locking Plate 5.0mm",
     "category": "femur-locking-plates",
     "description": "Buttress locking plate contoured for complex intra-articular femoral condyle fractures with sagittal split components.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/condylar-buttress-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1150,7 +1150,7 @@ export const products: Product[] = [
     "name": "DHS Locking Plate Short Barrel (130° / 135°)",
     "category": "femur-locking-plates",
     "description": "Dynamic Hip Screw (DHS) barrel plate with locking shaft holes, combining controlled dynamic impaction of the femoral neck with angle-stable diaphyseal locking.",
-    "image": "/images/products/femur-plate.jpg",
+    "image": "/images/products/dhs-locking-plate-short-barrel.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1188,7 +1188,7 @@ export const products: Product[] = [
     "name": "Proximal Humerus Locking Plate 3.5mm (PHILOS Type)",
     "category": "humerus-locking-plates",
     "description": "Anatomically pre-shaped internal fixation plate for 2-part, 3-part, and 4-part proximal humerus fractures. Features convergent/divergent locking screw configuration for secure purchase in cancellous humeral head bone.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/proximal-humerus-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1226,7 +1226,7 @@ export const products: Product[] = [
     "name": "Proximal Humerus GT Locking Plate 3.5mm",
     "category": "humerus-locking-plates",
     "description": "Contoured specifically for greater tuberosity avulsion and split fractures, preserving supraspinatus tendon insertions.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/proximal-humerus-gt-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -1256,7 +1256,7 @@ export const products: Product[] = [
     "name": "Proximal Lateral Humerus Locking Plate 3.5mm",
     "category": "humerus-locking-plates",
     "description": "Low-profile lateral plate extending from the humeral head down the proximal shaft for extended meta-diaphyseal fracture patterns.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/proximal-lateral-humerus-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1290,7 +1290,7 @@ export const products: Product[] = [
     "name": "Distal Humerus Locking Plate Right/Left 2.7-3.5mm",
     "category": "humerus-locking-plates",
     "description": "Dorsolateral distal humerus plate with distal extension wrapping around the lateral epicondyle, used in parallel or orthogonal dual-column fixation constructs.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/distal-humerus-locking-plate-2-7-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1324,7 +1324,7 @@ export const products: Product[] = [
     "name": "Distal Medial Humeral Locking Plate 2.7-3.5mm",
     "category": "humerus-locking-plates",
     "description": "Pre-shaped for the medial humeral column, providing distal locking screw trajectories that engage the medial epicondyle and trochlea.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/distal-medial-humeral-locking-plate-2-7-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1358,7 +1358,7 @@ export const products: Product[] = [
     "name": "Olecranon Locking Plate 3.5mm",
     "category": "humerus-locking-plates",
     "description": "Anatomical proximal ulna plate contoured to wrap over the olecranon tip, providing multi-planar subchondral locking purchase into the trochlear notch.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/olecranon-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1392,7 +1392,7 @@ export const products: Product[] = [
     "name": "Extra-articular Distal Humerus Locking Plate 3.5mm",
     "category": "humerus-locking-plates",
     "description": "Designed for extra-articular distal third humerus shaft fractures, avoiding the need for extensive joint dissection while locking the distal metaphysis.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/extra-articular-distal-humerus-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1426,7 +1426,7 @@ export const products: Product[] = [
     "name": "Distal Ulna Locking Plate 2.0mm",
     "category": "humerus-locking-plates",
     "description": "Micro-profile 2.0mm locking plate contoured to seat over the ulnar styloid and distal ulnar head without soft tissue impingement.",
-    "image": "/images/products/humerus-plate.jpg",
+    "image": "/images/products/distal-ulna-locking-plate-2-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -1456,7 +1456,7 @@ export const products: Product[] = [
     "name": "Small Locking Plate 3.5mm",
     "category": "reconstruction-locking-plates",
     "description": "Universal small fragment straight locking plate for diaphysis fractures of the radius, ulna, fibula, and pelvic reconstruction. Combines dynamic compression with locking stability.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/small-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1490,7 +1490,7 @@ export const products: Product[] = [
     "name": "Small Locking Plate 2.7mm",
     "category": "reconstruction-locking-plates",
     "description": "Precision small locking plate for forearm, pediatric bones, clavicle, and metacarpal diaphyseal stabilization.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/small-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1524,7 +1524,7 @@ export const products: Product[] = [
     "name": "Narrow Locking Plate 5.0mm",
     "category": "reconstruction-locking-plates",
     "description": "Large fragment straight locking plate for humeral and tibial diaphysis fractures requiring robust bending stiffness.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/narrow-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1558,7 +1558,7 @@ export const products: Product[] = [
     "name": "Broad Locking Plate 5.0mm",
     "category": "reconstruction-locking-plates",
     "description": "Heavy-duty broad plate engineered for femur shaft fractures, complex nonunions, and periprosthetic fractures requiring maximum torsional rigidity.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/broad-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1592,7 +1592,7 @@ export const products: Product[] = [
     "name": "One-third Tubular Locking Plate Round Hole 3.5mm",
     "category": "reconstruction-locking-plates",
     "description": "Thin semi-tubular locking plate ideal for lateral malleolus fibula fractures and non-load-bearing cortical bone fixation.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/one-third-tubular-locking-plate-round-hole-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1626,7 +1626,7 @@ export const products: Product[] = [
     "name": "One-third Tubular Locking Plate D.C Hole 3.5mm",
     "category": "reconstruction-locking-plates",
     "description": "One-third tubular profile incorporating combination dynamic compression (D.C) and threaded locking holes for flexible screw placement.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/one-third-tubular-locking-plate-dc-hole-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1660,7 +1660,7 @@ export const products: Product[] = [
     "name": "Reconstruction Locking Plate Straight DC Hole 2.7mm",
     "category": "reconstruction-locking-plates",
     "description": "Malleable 2.7mm reconstruction plate with scalloped edge geometry allowing 3-dimensional manual contouring for clavicle, pelvis, and mandible.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/reconstruction-locking-plate-straight-dc-hole-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1694,7 +1694,7 @@ export const products: Product[] = [
     "name": "Reconstruction Locking Plate Straight Round Hole 3.5mm",
     "category": "reconstruction-locking-plates",
     "description": "Straight 3.5mm reconstruction plate with round locking holes, easily bent in multiple planes for pelvic rim and periacetabular reconstruction.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/reconstruction-locking-plate-straight-round-hole-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1728,7 +1728,7 @@ export const products: Product[] = [
     "name": "Reconstruction Locking Plate Straight D.C Hole 3.5mm",
     "category": "reconstruction-locking-plates",
     "description": "Reconstruction plate combining 3.5mm dynamic compression slots and locking threads, accommodating both axial compression and angular stability.",
-    "image": "/images/products/reconstruction-plate.jpg",
+    "image": "/images/products/reconstruction-locking-plate-straight-dc-hole-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1762,7 +1762,7 @@ export const products: Product[] = [
     "name": "Pediatric Hip Locking Plate 2.7mm (100° / 110° / 130°)",
     "category": "pediatric-locking-plates",
     "description": "Designed specifically for infant and early pediatric proximal femoral varus, valgus, and rotational osteotomies, with dedicated neck screw trajectories.",
-    "image": "/images/products/pediatric-hip-plate.jpg",
+    "image": "/images/products/pediatric-hip-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Angles Available",
@@ -1796,7 +1796,7 @@ export const products: Product[] = [
     "name": "Pediatric Hip Locking Plate 3.5mm (100° / 110° / 120°)",
     "category": "pediatric-locking-plates",
     "description": "Intermediate pediatric hip plate providing rigid fixation in children aged 5–10 years undergoing femoral osteotomy or fracture stabilization.",
-    "image": "/images/products/pediatric-hip-plate.jpg",
+    "image": "/images/products/pediatric-hip-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Angles Available",
@@ -1826,7 +1826,7 @@ export const products: Product[] = [
     "name": "Pediatric Hip Locking Plate 5.0mm (100°–150°)",
     "category": "pediatric-locking-plates",
     "description": "Adolescent hip locking plate offering high load bearing capacity for corrective osteotomy in Perthes disease, SCFE, and hip dysplasia.",
-    "image": "/images/products/pediatric-hip-plate.jpg",
+    "image": "/images/products/pediatric-hip-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Angles Available",
@@ -1856,7 +1856,7 @@ export const products: Product[] = [
     "name": "Pediatric Condylar Locking Plate 3.5mm",
     "category": "pediatric-locking-plates",
     "description": "Distal femoral condylar locking plate designed for pediatric distal femur fractures and supracondylar extension/flexion osteotomies.",
-    "image": "/images/products/pediatric-hip-plate.jpg",
+    "image": "/images/products/pediatric-condylar-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Available Sizes",
@@ -1886,7 +1886,7 @@ export const products: Product[] = [
     "name": "Pediatric Condylar Locking Plate 5.0mm",
     "category": "pediatric-locking-plates",
     "description": "Robust adolescent distal femoral condylar plate with multi-planar distal screw holes respecting the distal femoral growth physis.",
-    "image": "/images/products/pediatric-hip-plate.jpg",
+    "image": "/images/products/pediatric-condylar-locking-plate-5-0mm.jpg",
     "specs": [
       {
         "label": "Available Sizes",
@@ -1912,7 +1912,7 @@ export const products: Product[] = [
     "name": "Calcaneal Locking F-Type Plate Right/Left 3.5mm",
     "category": "specialized-locking-plates",
     "description": "F-shaped low-profile plate for fixation of intra-articular calcaneus fractures, providing subtalar joint buttressing and tuberosity reduction.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/calcaneal-locking-f-type-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1946,7 +1946,7 @@ export const products: Product[] = [
     "name": "Calcaneal Locking Plate Right/Left 3.5mm",
     "category": "specialized-locking-plates",
     "description": "Anatomical perimeter calcaneal plate stabilizing the sustentaculum tali, anterior process, and posterior tuberosity with multiple locking points.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/calcaneal-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -1980,7 +1980,7 @@ export const products: Product[] = [
     "name": "Calcaneal Posterior Locking Plate 3.5mm",
     "category": "specialized-locking-plates",
     "description": "Designed for targeted fixation of the posterior tuberosity and beak fractures of the calcaneus through a minimal-incision approach.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/calcaneal-posterior-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2010,7 +2010,7 @@ export const products: Product[] = [
     "name": "Clavicle Hook Locking Plate 3.5mm (Hook Depth 12mm / 15mm)",
     "category": "specialized-locking-plates",
     "description": "Acromioclavicular (AC) joint stabilization plate featuring a smooth sub-acromial hook for Neer Type II distal clavicle fractures and Tossy III AC dislocations.",
-    "image": "/images/products/clavicle-hook-plate.jpg",
+    "image": "/images/products/clavicle-hook-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2048,7 +2048,7 @@ export const products: Product[] = [
     "name": "Superior Anterior Clavicle Locking Plate 3.5mm",
     "category": "specialized-locking-plates",
     "description": "S-shaped anatomical clavicle shaft plate pre-bent to match the natural curvature of the middle and lateral thirds of the clavicle.",
-    "image": "/images/products/clavicle-hook-plate.jpg",
+    "image": "/images/products/superior-anterior-clavicle-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2082,7 +2082,7 @@ export const products: Product[] = [
     "name": "Distal Fibula Locking Plate 2.7mm",
     "category": "specialized-locking-plates",
     "description": "Anatomically contoured lateral malleolar plate with distal 2.7mm locking screw cluster providing secure purchase in small distal fibula fragments.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/distal-fibula-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2116,7 +2116,7 @@ export const products: Product[] = [
     "name": "Lateral Distal Fibula Locking Plate 3.5mm",
     "category": "specialized-locking-plates",
     "description": "Contoured lateral fibula plate for Danis-Weber Type B and C ankle fractures, with dedicated syndesmotic screw slots.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/lateral-distal-fibula-locking-plate-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2146,7 +2146,7 @@ export const products: Product[] = [
     "name": "L Fusion Locking Plate 2.7mm",
     "category": "specialized-locking-plates",
     "description": "L-shaped low profile fusion plate for tarsometatarsal (Lisfranc) and midfoot arthrodesis procedures.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/l-fusion-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2176,7 +2176,7 @@ export const products: Product[] = [
     "name": "MTP Fusion Locking Plate 2.7mm",
     "category": "specialized-locking-plates",
     "description": "First metatarsophalangeal (MTP) arthrodesis plate with pre-set dorsiflexion and valgus angles for hallux rigidus treatment.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/mtp-fusion-locking-plate-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2210,7 +2210,7 @@ export const products: Product[] = [
     "name": "Microlock T Locking Plate 1.5mm (4 Holes Head)",
     "category": "specialized-locking-plates",
     "description": "Ultra-thin mini fragment titanium locking plate for phalangeal fractures and small bone osteotomies of the hand.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/microlock-t-locking-plate-1-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2244,7 +2244,7 @@ export const products: Product[] = [
     "name": "Microlock Condylar Locking Plate 2.4mm",
     "category": "specialized-locking-plates",
     "description": "Miniature condylar plate designed for metacarpal and proximal phalangeal base and head periarticular fractures.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/microlock-condylar-locking-plate-2-4mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2274,7 +2274,7 @@ export const products: Product[] = [
     "name": "V.A. First MTP Fusion Locking Plate 2.4-2.7mm",
     "category": "specialized-locking-plates",
     "description": "Variable-angle first MTP joint arthrodesis plate with compression slot allowing intra-operative joint compression and angle-stable fixation.",
-    "image": "/images/products/calcaneal-plate.jpg",
+    "image": "/images/products/va-first-mtp-fusion-locking-plate-2-4-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2304,7 +2304,7 @@ export const products: Product[] = [
     "name": "3.5mm Locking Screw (Standard & Star Hex)",
     "category": "locking-screws-accessories",
     "description": "Self-tapping locking screw designed for angular stable fixation in 3.5mm small fragment locking plates. Features precision threaded head matching plate eyelets.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/locking-screw-3-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2342,7 +2342,7 @@ export const products: Product[] = [
     "name": "3.5mm Cancellous Locking Screw Fully Threaded",
     "category": "locking-screws-accessories",
     "description": "Deep-profile thread optimized for maximum pullout strength in metaphyseal cancellous bone and osteopenic bone structures.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/cancellous-locking-screw-3-5mm-fully-threaded.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2376,7 +2376,7 @@ export const products: Product[] = [
     "name": "5.0mm Locking Screw (Standard & Star Hex)",
     "category": "locking-screws-accessories",
     "description": "High-strength large fragment locking screw for 5.0mm distal femur, proximal tibia, broad and narrow locking plates.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/locking-screw-5-0mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2414,7 +2414,7 @@ export const products: Product[] = [
     "name": "5.0mm Cancellous Locking Screw Fully Threaded",
     "category": "locking-screws-accessories",
     "description": "Designed for condylar and metaphyseal femoral and tibial plate fixation, offering expanded core-to-thread ratio in soft bone.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/cancellous-locking-screw-5-0mm-fully-threaded.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2448,7 +2448,7 @@ export const products: Product[] = [
     "name": "6.5mm Cannulated Cancellous Locking Screw",
     "category": "locking-screws-accessories",
     "description": "Cannulated locking screw for guidewire-assisted insertion into proximal lateral tibia and distal femur condylar holes.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/cannulated-cancellous-locking-screw-6-5mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2482,7 +2482,7 @@ export const products: Product[] = [
     "name": "7.3mm Cannulated Cancellous Locking Screw Fully Threaded",
     "category": "locking-screws-accessories",
     "description": "Heavy femoral neck cannulated locking screw providing rigid fixation across femoral neck fracture lines in proximal femur plates.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/cannulated-cancellous-locking-screw-7-3mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2516,7 +2516,7 @@ export const products: Product[] = [
     "name": "2.7mm Locking Screw (Standard & Star Hex)",
     "category": "locking-screws-accessories",
     "description": "Precision 2.7mm locking screw for distal radius, distal fibula, and mini fragment plates with low profile head.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/locking-screw-2-7mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2550,7 +2550,7 @@ export const products: Product[] = [
     "name": "2.4mm Variable Angle (V.A.) Locking Screw Star Hex",
     "category": "locking-screws-accessories",
     "description": "Engineered for variable-angle distal radius plates, allowing locked fixation up to 15 degrees off the central plate axis.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/variable-angle-locking-screw-2-4mm-star-hex.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2588,7 +2588,7 @@ export const products: Product[] = [
     "name": "Microlock Locking Screws (1.5mm / 2.0mm / 2.4mm)",
     "category": "locking-screws-accessories",
     "description": "Miniature titanium locking screws dedicated to hand, wrist, and cranio-maxillofacial reconstruction plates.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/microlock-locking-screws-1-5-2-0-2-4mm.jpg",
     "specs": [
       {
         "label": "Catalogue Code (TT Gr.5)",
@@ -2618,7 +2618,7 @@ export const products: Product[] = [
     "name": "Orthopedic Spacers & Wiremounts (3.5mm / 5.0mm)",
     "category": "locking-screws-accessories",
     "description": "Precision spacers and wiremount accessories designed to elevate plates off periosteum and provide cerclage cable anchoring.",
-    "image": "/images/products/locking-screws.jpg",
+    "image": "/images/products/orthopedic-spacer-wiremount.jpg",
     "specs": [
       {
         "label": "Catalogue Code (SS316L)",
@@ -2652,7 +2652,7 @@ export const products: Product[] = [
     "name": "A.O Clamp Single Pin",
     "category": "external-fixator-clamps",
     "description": "Standard A.O type external fixator clamp connecting an 11mm connecting rod to a 4.5mm or 5.0mm Schanz screw with secure single-bolt tightening.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/ao-clamp-single-pin.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2690,7 +2690,7 @@ export const products: Product[] = [
     "name": "A.O Clamp Double Pin",
     "category": "external-fixator-clamps",
     "description": "Dual-pin A.O clamp securing two parallel or convergent Schanz screws to a single 11mm connecting rod for enhanced fragment stability.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/ao-clamp-double-pin.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2724,7 +2724,7 @@ export const products: Product[] = [
     "name": "Open Clamp (A.O. Type)",
     "category": "external-fixator-clamps",
     "description": "Snap-on open clamp permitting direct lateral insertion onto existing 11mm connecting rods without disassembling the existing frame construct.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/open-clamp-ao-type.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2758,7 +2758,7 @@ export const products: Product[] = [
     "name": "Rod to Rod Clamp",
     "category": "external-fixator-clamps",
     "description": "Heavy-duty clamp coupling two 11mm connecting rods at arbitrary angles to build delta frames, bi-planar frames, and bridge constructs.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/rod-to-rod-clamp.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2788,7 +2788,7 @@ export const products: Product[] = [
     "name": "Transverse Clamp",
     "category": "external-fixator-clamps",
     "description": "Transverse clamping element providing cross-linking between parallel longitudinal connecting rods to substantially boost frame torsional rigidity.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/transverse-clamp.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2818,7 +2818,7 @@ export const products: Product[] = [
     "name": "Universal Joint For Two Rod",
     "category": "external-fixator-clamps",
     "description": "Multi-axial articulation joint connecting dual fixator rods with omnidirectional angular freedom before definitive lock-down.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/universal-joint-for-two-rod.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2848,7 +2848,7 @@ export const products: Product[] = [
     "name": "Compression Distraction Device Clamp",
     "category": "external-fixator-clamps",
     "description": "Precision mechanical device mounted on external fixator frames providing controlled, millimeter-scale distraction or compression of fracture fragments.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/compression-distraction-device-clamp.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2878,7 +2878,7 @@ export const products: Product[] = [
     "name": "Charnley Compression Clamp",
     "category": "external-fixator-clamps",
     "description": "Classic Charnley compression clamp designed for knee arthrodesis, ankle fusion, and rigid transverse bone apposition with high compressive force.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/charnley-compression-clamp.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -2908,7 +2908,7 @@ export const products: Product[] = [
     "name": "Aesculap Type Clamps (Multi-Size)",
     "category": "external-fixator-clamps",
     "description": "Compact round-body external fixator clamp system available in pin-to-rod and rod-to-rod configurations across 2.5mm to 8.0mm sizes.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/aesculap-type-clamp.jpg",
     "specs": [
       {
         "label": "Catalogue Codes",
@@ -2938,7 +2938,7 @@ export const products: Product[] = [
     "name": "Jess Type Clamps & Distractor System",
     "category": "external-fixator-clamps",
     "description": "Joshi's External Stabilization System (JESS) miniature clamps and distractors for hand, wrist, foot, pediatric trauma and contracture corrections.",
-    "image": "/images/products/external-fixator-clamp.jpg",
+    "image": "/images/products/jess-type-clamps-distractor.jpg",
     "specs": [
       {
         "label": "Catalogue Codes (Clamps)",
@@ -2972,7 +2972,7 @@ export const products: Product[] = [
     "name": "Ilizarov Full Ring",
     "category": "ilizarov-rings-instruments",
     "description": "Complete 360-degree circular Ilizarov ring providing closed ring structural rigidity for multi-ring circular frames in deformity correction and limb lengthening.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/ilizarov-full-ring.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -3006,7 +3006,7 @@ export const products: Product[] = [
     "name": "Ilizarov Half Ring",
     "category": "ilizarov-rings-instruments",
     "description": "Standard 180-degree half ring segment joined with connecting bolts to form full rings or used individually near joint flexion creases.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/ilizarov-half-ring.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -3036,7 +3036,7 @@ export const products: Product[] = [
     "name": "Ilizarov 5/8 Ring",
     "category": "ilizarov-rings-instruments",
     "description": "Open 5/8 ring segment engineered specifically for proximal tibia and distal femur rings, providing ample clearance for knee flexion without impinging popliteal structures.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/ilizarov-5-8-ring.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -3066,7 +3066,7 @@ export const products: Product[] = [
     "name": "Italian Femoral Arch (90° / 120°)",
     "category": "ilizarov-rings-instruments",
     "description": "Heavy reinforced femoral arch segment with curved slots for proximal femur fixation where a complete circular ring cannot be accommodated.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/italian-femoral-arch-90-120.jpg",
     "specs": [
       {
         "label": "Catalogue Code",
@@ -3096,7 +3096,7 @@ export const products: Product[] = [
     "name": "Fixator Connecting Rods (11mm / 8mm / 4mm)",
     "category": "ilizarov-rings-instruments",
     "description": "Rigid longitudinal connecting rods available in 11mm, 8mm, and 4mm diameters across extensive lengths for standard, medium, and mini external fixator frames.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/connecting-rod-11mm-8mm-4mm.jpg",
     "specs": [
       {
         "label": "Catalogue Codes",
@@ -3126,7 +3126,7 @@ export const products: Product[] = [
     "name": "Threaded Rods 6.0mm & Slotted Threaded Rods",
     "category": "ilizarov-rings-instruments",
     "description": "Precision continuous threaded rods and slotted threaded rods used for inter-ring connection, compression-distraction spanning, and hinge assembly.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/threaded-rod-6-0mm-slotted.jpg",
     "specs": [
       {
         "label": "Catalogue Codes",
@@ -3156,7 +3156,7 @@ export const products: Product[] = [
     "name": "Telescopic Rods, Hinges & Posts",
     "category": "ilizarov-rings-instruments",
     "description": "Dynamic frame components including telescopic rods for gradual limb lengthening, male/female/90° hinges for angular deformity correction, and male/female posts.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/telescopic-rod-hinges-supports.jpg",
     "specs": [
       {
         "label": "Catalogue Codes (Telescopic)",
@@ -3186,7 +3186,7 @@ export const products: Product[] = [
     "name": "Wire Fixation Bolts, Connecting Bolts, Nuts & Washers",
     "category": "ilizarov-rings-instruments",
     "description": "Complete assembly hardware for circular fixators including center-hole wire fixation bolts, side-slotted wire fixation bolts, connecting bolts, nuts, and specialized washers.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/wire-fixation-bolts-nuts-washers.jpg",
     "specs": [
       {
         "label": "Catalogue Codes (Bolts)",
@@ -3216,7 +3216,7 @@ export const products: Product[] = [
     "name": "Olive Wires & Tension Kirschner Wires 400mm",
     "category": "ilizarov-rings-instruments",
     "description": "High tensile transfixion wires for Ilizarov ring fixation. Olive wires provide bone fragment compression, while bayonet and trocar points ensure smooth cortical penetration.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/olive-wires-tension-kirschner-wires.jpg",
     "specs": [
       {
         "label": "Catalogue Codes (Olive)",
@@ -3254,7 +3254,7 @@ export const products: Product[] = [
     "name": "Wire Tensioner (Dynametric & Manual)",
     "category": "ilizarov-rings-instruments",
     "description": "Calibrated wire tensioners designed to impart uniform axial tension up to 130 kgf onto Ilizarov transfixion wires to prevent wire deflection under load.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/wire-tensioner-dynametric-manual.jpg",
     "specs": [
       {
         "label": "Catalogue Code (Dynametric)",
@@ -3288,7 +3288,7 @@ export const products: Product[] = [
     "name": "Fixator Spanners & Trocar Instrumentation System",
     "category": "ilizarov-rings-instruments",
     "description": "Complete instrumentation set for external fixator assembly and adjustment, including 7mm, 8mm, 10mm, 11mm T-handle and open spanners, ring spanners, and trocars.",
-    "image": "/images/products/ilizarov-ring-system.jpg",
+    "image": "/images/products/fixator-spanners-trocar-instruments.jpg",
     "specs": [
       {
         "label": "Spanner Codes",
@@ -3315,14 +3315,14 @@ export const products: Product[] = [
   }
 ];
 
-export function getFeaturedProducts(): Product[] {
-  return products.filter((p) => p.featured);
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
 }
 
 export function getProductsByCategory(categorySlug: string): Product[] {
   return products.filter((p) => p.category === categorySlug);
 }
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return products.find((p) => p.slug === slug);
+export function getFeaturedProducts(): Product[] {
+  return products.filter((p) => p.featured);
 }

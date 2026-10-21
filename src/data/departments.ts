@@ -58,7 +58,7 @@ export const departments: Department[] = [
     name: 'Foot & Ankle Surgery',
     description:
       'Anatomically contoured calcaneal plates, distal fibula plates, and MTP/L-fusion plates for complex hindfoot and forefoot reconstruction.',
-    image: '/images/products/calcaneal-plate.jpg',
+    image: '/images/categories/specialized-locking-plates.jpg',
     icon: 'Footprints',
     relatedCategories: ['specialized-locking-plates', 'tibia-locking-plates'],
   },
