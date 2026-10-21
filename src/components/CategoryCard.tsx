@@ -1,71 +1,42 @@
 import { Link } from 'react-router-dom';
-import {
-  Activity,
-  ArrowRight,
-  Baby,
-  Bone,
-  Circle,
-  CircleDot,
-  Crosshair,
-  Footprints,
-  Layers,
-  Maximize2,
-  Package,
-  Shield,
-  Wrench,
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { ProductCategory } from '@/types';
 
-const categoryIconMap: Record<string, LucideIcon> = {
-  Activity,
-  Baby,
-  Bone,
-  Circle,
-  CircleDot,
-  Crosshair,
-  Footprints,
-  Layers,
-  Maximize2,
-  Shield,
-  Wrench,
-};
-
 export default function CategoryCard({ category }: { category: ProductCategory }) {
-  const IconComponent = categoryIconMap[category.icon] || Package;
-
   return (
     <Link
       to={`/products/${category.slug}`}
-      className="card card-hover group relative flex flex-col h-full overflow-hidden bg-white"
+      className="group flex flex-col h-full rounded-2xl bg-white p-3.5 sm:p-4 border border-slate-100 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white">
+      {/* Image container */}
+      <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#F8FAFC] border border-slate-100/80 p-3 flex items-center justify-center">
         <picture>
           <source srcSet={category.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
           <img
             src={category.image}
             alt={category.name}
             loading="lazy"
-            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-108"
           />
         </picture>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0c2642]/85 via-[#0c2642]/40 to-transparent" />
-        <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm opacity-90 transition-all duration-300 group-hover:bg-[#159A9C] group-hover:scale-110">
-          <ArrowRight className="h-4 w-4 text-white" />
-        </div>
-        <div className="absolute bottom-3 left-3 right-3 text-white">
-          <div className="flex items-center gap-1.5 mb-1 text-[11px] font-bold uppercase tracking-wider text-[#159A9C]">
-            <IconComponent className="h-3.5 w-3.5" />
-            <span>{category.productCount} Products</span>
-          </div>
-          <h3 className="font-display text-base font-bold text-white leading-snug line-clamp-1 group-hover:text-[#e8f7f7] transition-colors">
+        <span className="absolute top-2.5 left-2.5 rounded-md bg-white/95 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0875D1] shadow-xs border border-slate-100">
+          {category.productCount} Items
+        </span>
+      </div>
+
+      {/* Content footer */}
+      <div className="mt-3.5 flex items-center justify-between gap-2 px-1">
+        <div className="min-w-0">
+          <h3 className="font-display text-sm sm:text-base font-bold text-[#062D56] leading-snug line-clamp-1 group-hover:text-[#0875D1] transition-colors">
             {category.shortName}
           </h3>
+          <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
+            Orthopaedic Fixation
+          </p>
         </div>
-      </div>
-      <div className="p-3.5 flex items-center justify-between bg-white text-xs font-semibold text-[#123B66] group-hover:text-[#159A9C] transition-colors border-t border-[#E0E8EF]/60">
-        <span>Explore Category</span>
-        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0875D1] text-white shadow-xs transition-all duration-300 group-hover:bg-[#12C8E8] group-hover:scale-110 group-hover:text-[#062D56]">
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </div>
       </div>
     </Link>
   );

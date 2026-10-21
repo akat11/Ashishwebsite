@@ -9,38 +9,42 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       to={`/products/${product.category}/${product.slug}`}
-      className="card card-hover group flex flex-col h-full overflow-hidden bg-white"
+      className="group flex flex-col h-full rounded-2xl bg-white p-3.5 sm:p-4 border border-slate-100 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white border-b border-[#E0E8EF]/60">
+      {/* Image container */}
+      <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#F8FAFC] border border-slate-100/80 p-3 flex items-center justify-center">
         <picture>
           <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-108"
           />
         </picture>
         {category && (
-          <span className="absolute top-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#159A9C] shadow-xs backdrop-blur-xs">
+          <span className="absolute top-2.5 left-2.5 rounded-md bg-white/95 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0875D1] shadow-xs border border-slate-100">
             {category.shortName}
           </span>
         )}
       </div>
 
-      <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">
+      {/* Body */}
+      <div className="flex flex-1 flex-col justify-between mt-3.5 px-1">
         <div>
-          <h3 className="font-display text-base font-bold text-[#172B3A] leading-snug line-clamp-2 group-hover:text-[#123B66] transition-colors">
+          <h3 className="font-display text-sm sm:text-base font-bold text-[#062D56] leading-snug line-clamp-1 group-hover:text-[#0875D1] transition-colors">
             {product.name}
           </h3>
-          <p className="mt-2 text-xs sm:text-sm text-[#5E6F7D] line-clamp-2 leading-relaxed">
+          <p className="mt-1 text-xs text-slate-500 line-clamp-2 leading-relaxed">
             {product.description}
           </p>
         </div>
 
-        <div className="mt-4 pt-3 border-t border-[#E0E8EF]/60 flex items-center justify-between text-xs sm:text-sm font-semibold text-[#123B66] group-hover:text-[#159A9C] transition-colors">
-          <span>View Details &amp; Specs</span>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0875D1] group-hover:text-[#12C8E8] transition-colors">
+          <span>View Details</span>
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0875D1] transition-all group-hover:bg-[#0875D1] group-hover:text-white">
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </div>
         </div>
       </div>
     </Link>

@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Mail, MapPin, Globe, ChevronDown, Stethoscope, ArrowRight } from 'lucide-react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Menu,
+  X,
+  Phone,
+  Mail,
+  ShieldCheck,
+  Search,
+  ChevronDown,
+  ArrowRight,
+} from 'lucide-react';
+import VinayakLogo from '@/components/VinayakLogo';
 import { productCategories } from '@/data/categories';
 import { businessConfig } from '@/config/business';
 
@@ -8,12 +18,16 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMobileOpen(false);
     setProductsOpen(false);
+    setSearchOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -22,51 +36,54 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/products?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+    }
+  };
+
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `text-[14.5px] font-medium transition-colors relative py-1.5 ${
       isActive
-        ? 'text-[#123B66] font-semibold after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-[2.5px] after:bg-[#159A9C] after:rounded-full'
-        : 'text-[#172B3A] hover:text-[#123B66]'
+        ? 'text-[#0875D1] font-semibold after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-[2.5px] after:bg-[#0875D1] after:rounded-full'
+        : 'text-[#062D56] hover:text-[#0875D1]'
     }`;
 
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/98 backdrop-blur-md shadow-sm border-b border-[#E0E8EF]'
-          : 'bg-white border-b border-[#E0E8EF]'
+          ? 'bg-white/98 backdrop-blur-md shadow-sm border-b border-[#E2E8F0]'
+          : 'bg-white border-b border-[#E2E8F0]'
       }`}
     >
-      {/* Top contact strip */}
-      <div className="hidden lg:block bg-[#0c2642] text-white/90">
+      {/* Top contact strip - Dark Navy */}
+      <div className="bg-[#062D56] text-white/90">
         <div className="container-x flex items-center justify-between py-2 text-xs font-normal tracking-wide">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 text-white/90">
+            <ShieldCheck className="h-3.5 w-3.5 text-[#12C8E8]" />
+            <span className="font-medium text-[11.5px] sm:text-xs">
+              Trusted Orthopaedic Partner Across India
+            </span>
+          </div>
+          <div className="flex items-center gap-4 text-[11.5px] sm:text-xs">
             <a
               href={`tel:${businessConfig.phoneRaw}`}
-              className="flex items-center gap-1.5 hover:text-[#159A9C] transition-colors"
+              className="flex items-center gap-1.5 hover:text-[#12C8E8] transition-colors"
             >
-              <Phone className="h-3.5 w-3.5 text-[#159A9C]" />
+              <Phone className="h-3.5 w-3.5 text-[#12C8E8]" />
               <span>{businessConfig.phone}</span>
             </a>
-            <span className="text-white/20">|</span>
+            <span className="text-white/20 hidden sm:inline">|</span>
             <a
               href={`mailto:${businessConfig.email}`}
-              className="flex items-center gap-1.5 hover:text-[#159A9C] transition-colors"
+              className="hidden sm:flex items-center gap-1.5 hover:text-[#12C8E8] transition-colors"
             >
-              <Mail className="h-3.5 w-3.5 text-[#159A9C]" />
+              <Mail className="h-3.5 w-3.5 text-[#12C8E8]" />
               <span>{businessConfig.email}</span>
             </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-white/80">
-              <MapPin className="h-3.5 w-3.5 text-[#159A9C]" />
-              <span>{businessConfig.address.city}, {businessConfig.address.state}, India</span>
-            </span>
-            <span className="text-white/20">|</span>
-            <span className="flex items-center gap-1.5 text-white/80">
-              <Globe className="h-3.5 w-3.5 text-[#159A9C]" />
-              <span>Pan-India Supply &amp; Enquiries</span>
-            </span>
           </div>
         </div>
       </div>
@@ -75,24 +92,15 @@ export default function Header() {
       <div className="container-x">
         <div className="flex h-18 py-2.5 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" aria-label="Vinayak Surgicals Home">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#123B66] transition-all group-hover:bg-[#0c2642] shadow-sm">
-              <Stethoscope className="h-6 w-6 text-[#159A9C]" />
-            </div>
-            <div>
-              <div className="font-display text-[22px] font-bold text-[#123B66] leading-none tracking-tight">
-                Vinayak
-              </div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#159A9C] leading-none mt-1">
-                SURGICALS
-              </div>
-            </div>
-          </Link>
+          <VinayakLogo />
 
           {/* Center navigation */}
           <nav className="hidden lg:flex items-center gap-7">
             <NavLink to="/" className={navLinkClass} end>
               Home
+            </NavLink>
+            <NavLink to="/about-us" className={navLinkClass}>
+              About
             </NavLink>
 
             {/* Products dropdown */}
@@ -103,12 +111,13 @@ export default function Header() {
             >
               <button
                 type="button"
-                className={`flex items-center gap-1 text-[14.5px] font-medium transition-colors py-1.5 ${
+                className={`flex items-center gap-1 text-[14.5px] font-medium transition-colors py-1.5 cursor-pointer ${
                   location.pathname.startsWith('/products')
-                    ? 'text-[#123B66] font-semibold after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-[2.5px] after:bg-[#159A9C] after:rounded-full'
-                    : 'text-[#172B3A] hover:text-[#123B66]'
+                    ? 'text-[#0875D1] font-semibold after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-[2.5px] after:bg-[#0875D1] after:rounded-full'
+                    : 'text-[#062D56] hover:text-[#0875D1]'
                 }`}
                 aria-expanded={productsOpen}
+                onClick={() => navigate('/products')}
               >
                 Products
                 <ChevronDown className="h-4 w-4 opacity-70 transition-transform duration-200" />
@@ -116,19 +125,19 @@ export default function Header() {
 
               {productsOpen && (
                 <div className="absolute left-0 top-full pt-3 w-[660px]">
-                  <div className="rounded-xl border border-[#E0E8EF] bg-white shadow-xl p-3.5 grid grid-cols-2 gap-1.5 animate-slide-down">
+                  <div className="rounded-2xl border border-[#E2E8F0] bg-white shadow-xl p-4 grid grid-cols-2 gap-2 animate-slide-down">
                     <Link
                       to="/products"
-                      className="col-span-2 mb-1 flex items-center justify-between rounded-lg bg-[#F4F8FB] px-4 py-2.5 text-sm font-semibold text-[#123B66] hover:bg-[#E8F1F8] transition-colors"
+                      className="col-span-2 mb-1 flex items-center justify-between rounded-xl bg-[#F8FAFC] px-4 py-2.5 text-sm font-semibold text-[#062D56] hover:bg-[#EBF0F5] transition-colors"
                     >
-                      <span>View Complete Catalogue</span>
-                      <ArrowRight className="h-4 w-4 text-[#159A9C]" />
+                      <span>View Complete Orthopaedic Catalogue</span>
+                      <ArrowRight className="h-4 w-4 text-[#0875D1]" />
                     </Link>
                     {productCategories.map((cat) => (
                       <Link
                         key={cat.slug}
                         to={`/products/${cat.slug}`}
-                        className="rounded-lg px-3.5 py-2 text-sm text-[#172B3A] hover:bg-[#F4F8FB] hover:text-[#123B66] font-medium transition-colors"
+                        className="rounded-lg px-3.5 py-2 text-sm text-[#062D56] hover:bg-[#F8FAFC] hover:text-[#0875D1] font-medium transition-colors"
                       >
                         {cat.shortName}
                       </Link>
@@ -139,34 +148,69 @@ export default function Header() {
             </div>
 
             <NavLink to="/departments" className={navLinkClass}>
-              Departments
-            </NavLink>
-            <NavLink to="/brands" className={navLinkClass}>
-              Brands
+              Solutions
             </NavLink>
             <NavLink to="/services" className={navLinkClass}>
               Services
             </NavLink>
-            <NavLink to="/about-us" className={navLinkClass}>
-              About Us
+            <NavLink to="/brands" className={navLinkClass}>
+              News
             </NavLink>
             <NavLink to="/contact-us" className={navLinkClass}>
-              Contact Us
+              Contact
             </NavLink>
           </nav>
 
-          {/* CTA + mobile toggle */}
+          {/* Right action controls */}
           <div className="flex items-center gap-3">
+            {/* Search trigger */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="p-2 text-[#062D56] hover:text-[#0875D1] hover:bg-[#F8FAFC] rounded-lg transition-colors"
+                aria-label="Search catalogue"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+
+              {searchOpen && (
+                <form
+                  onSubmit={handleSearchSubmit}
+                  className="absolute right-0 top-full mt-2 w-72 sm:w-80 rounded-xl bg-white border border-[#E2E8F0] shadow-xl p-2 z-50 flex items-center gap-2 animate-slide-down"
+                >
+                  <Search className="h-4 w-4 text-slate-400 ml-2 shrink-0" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search implant or code..."
+                    className="w-full text-xs sm:text-sm px-2 py-1.5 focus:outline-hidden text-slate-700"
+                    autoFocus
+                  />
+                  <button
+                    type="submit"
+                    className="btn-blue !px-3 !py-1 !text-xs !min-h-0 shrink-0 rounded-md"
+                  >
+                    Search
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Request a Quote Button */}
             <Link
               to="/request-a-quote"
-              className="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#123B66] hover:bg-[#0c2642] text-white text-sm font-semibold shadow-sm transition-all hover:shadow-md active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#0875D1] hover:bg-[#0668B8] text-white text-sm font-semibold shadow-xs transition-all hover:shadow-md active:scale-[0.98]"
             >
               <span>Request a Quote</span>
-              <ArrowRight className="h-4 w-4 text-[#159A9C]" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
+
+            {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2.5 rounded-lg text-[#172B3A] hover:bg-[#F4F8FB] transition-colors"
+              className="lg:hidden p-2 rounded-lg text-[#062D56] hover:bg-[#F8FAFC] transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileOpen}
@@ -179,31 +223,37 @@ export default function Header() {
 
       {/* Mobile nav drawer */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-[#E0E8EF] bg-white animate-slide-down shadow-lg">
+        <div className="lg:hidden border-t border-[#E2E8F0] bg-white animate-slide-down shadow-lg">
           <div className="container-x py-4 space-y-1.5 max-h-[calc(100vh-5rem)] overflow-y-auto">
             <NavLink
               to="/"
-              className="block px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
+              className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
               end
             >
               Home
+            </NavLink>
+            <NavLink
+              to="/about-us"
+              className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
+            >
+              About
             </NavLink>
 
             <div>
               <button
                 type="button"
                 onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
               >
                 <span>Products</span>
-                <ChevronDown className={`h-4 w-4 transition-transform ${mobileProductsOpen ? 'rotate-180 text-[#159A9C]' : ''}`} />
+                <ChevronDown className={`h-4 w-4 transition-transform ${mobileProductsOpen ? 'rotate-180 text-[#0875D1]' : ''}`} />
               </button>
 
               {mobileProductsOpen && (
-                <div className="pl-4 pr-1 py-1 space-y-1 bg-[#F4F8FB] rounded-lg my-1">
+                <div className="pl-4 pr-1 py-1 space-y-1 bg-[#F8FAFC] rounded-lg my-1">
                   <Link
                     to="/products"
-                    className="block px-3 py-2 text-sm font-semibold text-[#123B66] hover:underline"
+                    className="block px-3 py-2 text-sm font-semibold text-[#0875D1] hover:underline"
                   >
                     All Products Overview →
                   </Link>
@@ -211,7 +261,7 @@ export default function Header() {
                     <Link
                       key={cat.slug}
                       to={`/products/${cat.slug}`}
-                      className="block px-3 py-2 text-sm text-[#5E6F7D] hover:text-[#123B66] rounded-md"
+                      className="block px-3 py-2 text-sm text-[#5E6F7D] hover:text-[#0875D1] rounded-md"
                     >
                       {cat.shortName}
                     </Link>
@@ -222,39 +272,33 @@ export default function Header() {
 
             <NavLink
               to="/departments"
-              className="block px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
+              className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
             >
-              Departments
-            </NavLink>
-            <NavLink
-              to="/brands"
-              className="block px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
-            >
-              Brands
+              Solutions
             </NavLink>
             <NavLink
               to="/services"
-              className="block px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
+              className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
             >
               Services
             </NavLink>
             <NavLink
-              to="/about-us"
-              className="block px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
+              to="/brands"
+              className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
             >
-              About Us
+              News
             </NavLink>
             <NavLink
               to="/contact-us"
-              className="block px-3.5 py-2.5 text-base font-medium text-[#172B3A] hover:bg-[#F4F8FB] rounded-lg"
+              className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
             >
-              Contact Us
+              Contact
             </NavLink>
 
             <div className="pt-2">
-              <Link to="/request-a-quote" className="btn-primary w-full">
+              <Link to="/request-a-quote" className="btn-blue w-full">
                 <span>Request a Quote</span>
-                <ArrowRight className="h-4 w-4 text-[#159A9C]" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>

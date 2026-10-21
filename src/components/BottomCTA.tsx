@@ -15,45 +15,45 @@ export interface BottomCTAProps {
 }
 
 export default function BottomCTA({
-  eyebrow = "Let's Work Together",
-  title = 'Ready to Discuss Your Medical Supply Requirements?',
-  description = 'Our team is here to assist with product availability, sizing recommendations, and formal institutional quotations.',
-  primaryButtonText = 'Request a Quote',
-  primaryButtonLink = '/request-a-quote',
-  secondaryButtonText,
-  secondaryButtonLink,
+  eyebrow = 'PARTNER WITH US',
+  title = 'Ready to Elevate Your Surgical Solutions?',
+  description = 'Connect with our orthopaedic specialists to discuss bulk institutional supply, technical specifications, or custom product requirements.',
+  primaryButtonText = 'Get in Touch',
+  primaryButtonLink = '/contact-us',
+  secondaryButtonText = 'Request a Quote',
+  secondaryButtonLink = '/request-a-quote',
   showPhoneSecondary = false,
-  backgroundImage,
+  backgroundImage = '/images/hero-surgical-scene.jpg',
 }: BottomCTAProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#123B66] py-14 sm:py-18 text-white">
+    <section className="relative isolate overflow-hidden bg-[#062D56] py-16 sm:py-20 text-white">
       {backgroundImage && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-15"
+          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url('${backgroundImage}')` }}
         />
       )}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#123B66] via-[#123B66]/95 to-[#0c2642]/90"
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#032449] via-[#062D56]/95 to-[#0875D1]/80"
       />
 
-      <div className="container-x relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        <div className="max-w-xl">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#159A9C]">
+      <div className="container-x relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div className="max-w-2xl">
+          <span className="section-eyebrow text-[#12C8E8]">
             {eyebrow}
           </span>
-          <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-white leading-snug">
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
             {title}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-[#bcccdc]">
+          <p className="mt-3 text-sm sm:text-base text-slate-300 max-w-xl">
             {description}
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3.5 shrink-0">
-          <Link to={primaryButtonLink} className="btn-teal shadow-md">
+        <div className="flex flex-wrap justify-center md:justify-end gap-3.5 shrink-0">
+          <Link to={primaryButtonLink} className="btn-cyan">
             <span>{primaryButtonText}</span>
             <ArrowRight className="h-4 w-4" />
           </Link>
@@ -61,15 +61,15 @@ export default function BottomCTA({
           {showPhoneSecondary ? (
             <a
               href={`tel:${businessConfig.phoneRaw}`}
-              className="btn-secondary !bg-white/10 !text-white !border-white/30 hover:!bg-white hover:!text-[#123B66]"
+              className="btn-pill !border-white/30 !bg-white/10 !text-white hover:!bg-white hover:!text-[#062D56]"
             >
-              <Phone className="h-4 w-4 text-[#159A9C]" />
+              <Phone className="h-4 w-4 text-[#12C8E8]" />
               <span>{secondaryButtonText || businessConfig.phone}</span>
             </a>
           ) : secondaryButtonText && secondaryButtonLink ? (
             <Link
               to={secondaryButtonLink}
-              className="btn-secondary !bg-white/10 !text-white !border-white/30 hover:!bg-white hover:!text-[#123B66]"
+              className="btn-pill !border-white/30 !bg-white/10 !text-white hover:!bg-white hover:!text-[#062D56]"
             >
               <span>{secondaryButtonText}</span>
             </Link>
