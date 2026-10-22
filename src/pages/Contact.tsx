@@ -30,7 +30,10 @@ export default function Contact() {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-cover bg-right md:bg-[center_top]"
-          style={{ backgroundImage: "url('/images/contact-hero-composite.jpg')" }}
+          style={{
+            backgroundImage: "url('/images/contact-hero-composite.jpg')",
+            imageRendering: '-webkit-optimize-contrast',
+          }}
         />
 
         {/* Ambient mobile/tablet soft gradient overlay to guarantee text legibility */}
