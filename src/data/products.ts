@@ -1,3 +1,5 @@
+import { nailingProducts } from './nailingProducts.ts';
+
 export interface Product {
   slug: string;
   name: string;
@@ -8,7 +10,7 @@ export interface Product {
   featured: boolean;
 }
 
-export const products: Product[] = [
+const baseProducts: Product[] = [
   {
     "slug": "volar-distal-radius-locking-plate-2-7mm",
     "name": "Volar Distal Radius Locking Plate 2.7mm",
@@ -3314,6 +3316,8 @@ export const products: Product[] = [
     "featured": false
   }
 ];
+
+export const products: Product[] = [...baseProducts, ...nailingProducts];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);

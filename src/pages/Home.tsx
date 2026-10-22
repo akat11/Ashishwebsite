@@ -146,7 +146,8 @@ const industries = [
 ];
 
 export default function Home() {
-  const featuredProducts = products.filter((product) => product.featured).slice(0, 8);
+  const featuredProducts = products.filter((product) => product.featured && product.category !== 'nailing-systems').slice(0, 8);
+  const featuredNailingProducts = products.filter((product) => product.category === 'nailing-systems' && product.featured).slice(0, 8);
   const homeCategories = [
     ...productCategories.slice(0, 7),
     productCategories.find((category) => category.slug === 'locking-screws-accessories'),
@@ -266,6 +267,38 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {featuredProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Intramedullary Nailing Solutions Section */}
+      <section className="bg-[#F8FAFC] py-16 sm:py-20 border-t border-slate-200/60">
+        <div className="container-x">
+          <div className="mb-10 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <span className="text-xs sm:text-[13px] font-extrabold uppercase tracking-[0.18em] text-[#0fb2ce]">
+                NAILING SYSTEM
+              </span>
+              <h2 className="mt-2 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#062D56] tracking-tight">
+                Intramedullary Nailing Solutions
+              </h2>
+              <p className="mt-2.5 max-w-2xl text-sm sm:text-base text-slate-600 leading-relaxed">
+                Explore our range of tibia, femur, humerus and specialised intramedullary nailing systems, with product options and specifications available from the catalogue.
+              </p>
+            </div>
+            <Link
+              to="/products/nailing-systems"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#0875D1] bg-white px-5 py-2.5 text-sm font-bold text-[#0875D1] shadow-xs transition-all hover:bg-[#0875D1] hover:text-white shrink-0"
+            >
+              <span>View All Nailing Products</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {featuredNailingProducts.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}
           </div>

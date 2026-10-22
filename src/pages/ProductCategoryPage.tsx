@@ -35,6 +35,7 @@ const categoryIcons = {
   'locking-screws-accessories': SlidersHorizontal,
   'external-fixator-clamps': Wrench,
   'ilizarov-rings-instruments': Stethoscope,
+  'nailing-systems': ShieldCheck,
 } as const;
 
 export default function ProductCategoryPage() {
@@ -107,7 +108,7 @@ export default function ProductCategoryPage() {
       />
 
       {/* Category Hero Banner */}
-      <section className="relative isolate overflow-hidden bg-[#0c2642] py-12 sm:py-16 text-white border-b border-[#123B66]">
+      <section className="hero-standard bg-[#0c2642] text-white border-b border-[#123B66]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-10 blur-xs scale-105"
@@ -117,7 +118,9 @@ export default function ProductCategoryPage() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#0c2642] via-[#0c2642]/95 to-[#123B66]/85"
         />
-        <div className="container-x relative z-10 grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="container-x relative z-10 w-full">
+          <div className="hero-standard-inner">
+            <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="max-w-2xl">
             <span className="section-eyebrow text-[#159A9C]">
               {category.shortName} System
@@ -170,7 +173,9 @@ export default function ProductCategoryPage() {
             />
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
       {/* Search and Products Section */}
       <section className="section-padding bg-white">
@@ -271,14 +276,19 @@ export default function ProductCategoryPage() {
       </section>
 
       <BottomCTA
-        eyebrow="Institutional Quotations"
-        title={`Need bulk supply or specialized sizing in ${category.shortName}?`}
-        description="Contact our sales desk with your specific sizing chart and required screw variations."
-        primaryButtonText="Request a Quote"
-        primaryButtonLink="/request-a-quote"
-        showPhoneSecondary={true}
-        secondaryButtonText="Call Us Directly"
-        backgroundImage={category.image}
+        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+        title={
+          <>
+            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
+            <br className="hidden sm:inline" /> Surgical Care
+          </>
+        }
+        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
+        primaryButtonText="Get in Touch"
+        primaryButtonLink="/contact-us"
+        secondaryButtonText="Request a Quote"
+        secondaryButtonLink="/request-a-quote"
+        backgroundImage="/images/about-cta-background.png"
       />
     </>
   );

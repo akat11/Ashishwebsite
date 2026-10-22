@@ -102,7 +102,7 @@ export default function Services() {
       <Breadcrumbs crumbs={[{ label: 'Services' }]} />
 
       {/* Hero Banner */}
-      <section className="relative isolate overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF] py-12 sm:py-16">
+      <section className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-cover bg-[center_48%] opacity-25 sm:opacity-30 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-40 lg:opacity-50"
@@ -112,8 +112,8 @@ export default function Services() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#F4F8FB]/90 via-[#F4F8FB]/95 to-[#F4F8FB] md:bg-gradient-to-r md:from-[#F4F8FB] md:via-[#F4F8FB]/95 md:via-55% md:to-transparent"
         />
-        <div className="container-x relative z-10">
-          <div className="max-w-3xl">
+        <div className="container-x relative z-10 w-full">
+          <div className="hero-standard-inner max-w-3xl">
             <span className="section-eyebrow">Our Services</span>
             <h1 className="mt-2 text-page-title">
               Complete Medical Supply Solutions{' '}
@@ -292,14 +292,19 @@ export default function Services() {
       </section>
 
       <BottomCTA
-        eyebrow="Let's Work Together"
-        title="Ready to Discuss Your Medical Supply Requirements?"
-        description="Our team is here to assist with product availability, sizing recommendations, and formal institutional quotations."
-        primaryButtonText="Request a Quote"
-        primaryButtonLink="/request-a-quote"
-        secondaryButtonText="Contact Us"
-        secondaryButtonLink="/contact-us"
-        backgroundImage="/images/services-cta-doctor.jpg"
+        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+        title={
+          <>
+            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
+            <br className="hidden sm:inline" /> Surgical Care
+          </>
+        }
+        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
+        primaryButtonText="Get in Touch"
+        primaryButtonLink="/contact-us"
+        secondaryButtonText="Request a Quote"
+        secondaryButtonLink="/request-a-quote"
+        backgroundImage="/images/about-cta-background.png"
       />
     </>
   );

@@ -130,7 +130,7 @@ export default function Products() {
       <PageHero
         eyebrow="Product Catalogue"
         title="Orthopedic Implants & Fixation Systems"
-        subtitle="Our catalogue spans ten comprehensive product categories covering anatomically contoured locking plates, modular external fixator systems, Ilizarov circular frames, locking screws, and specialized surgical instrumentation."
+        subtitle="Our catalogue spans eleven comprehensive product categories covering intramedullary nailing systems, anatomically contoured locking plates, modular external fixator systems, Ilizarov circular frames, locking screws, and specialized surgical instrumentation."
         backgroundImage="/images/hero-orthopedic-surgical.jpg"
       />
 
@@ -365,11 +365,19 @@ export default function Products() {
       </section>
 
       <BottomCTA
-        eyebrow="Custom Surgical Sourcing"
-        title="Need a product or custom plate size not listed here?"
-        description="We offer comprehensive product sourcing assistance for hospital tenders, trauma centers, and specialized procedures."
-        primaryButtonText="Request a Quote"
-        primaryButtonLink="/request-a-quote"
+        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+        title={
+          <>
+            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
+            <br className="hidden sm:inline" /> Surgical Care
+          </>
+        }
+        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
+        primaryButtonText="Get in Touch"
+        primaryButtonLink="/contact-us"
+        secondaryButtonText="Request a Quote"
+        secondaryButtonLink="/request-a-quote"
+        backgroundImage="/images/about-cta-background.png"
       />
     </>
   );

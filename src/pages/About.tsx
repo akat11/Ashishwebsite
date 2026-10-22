@@ -78,7 +78,7 @@ export default function About() {
       <Breadcrumbs crumbs={[{ label: 'About Us' }]} />
 
       {/* Hero Section with Restored Surgical Image Backdrop */}
-      <section aria-label="About Vinayak Surgicals" className="relative isolate overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF] py-12 sm:py-16 lg:py-20">
+      <section aria-label="About Vinayak Surgicals" className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-25 sm:opacity-30 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-40 lg:opacity-50"
@@ -89,8 +89,9 @@ export default function About() {
           className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#F4F8FB]/90 via-[#F4F8FB]/95 to-[#F4F8FB] md:bg-gradient-to-r md:from-[#F4F8FB] md:via-[#F4F8FB]/95 md:via-55% md:to-transparent"
         />
 
-        <div className="container-x relative z-10">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="container-x relative z-10 w-full">
+          <div className="hero-standard-inner">
+            <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
               <span className="section-eyebrow">
                 About Vinayak Surgicals
@@ -171,7 +172,8 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Business Overview */}
       <section className="bg-white section-padding">
@@ -348,13 +350,18 @@ export default function About() {
       </section>
 
       <BottomCTA
-        eyebrow="Let's Connect"
-        title="Support for Your Medical Supply Requirements"
-        description="Whether you need standard catalogue products or customized sourcing assistance, our team is ready to prepare your quotation."
-        primaryButtonText="Request a Quote"
-        primaryButtonLink="/request-a-quote"
-        secondaryButtonText="Contact Us"
-        secondaryButtonLink="/contact-us"
+        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+        title={
+          <>
+            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
+            <br className="hidden sm:inline" /> Surgical Care
+          </>
+        }
+        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
+        primaryButtonText="Get in Touch"
+        primaryButtonLink="/contact-us"
+        secondaryButtonText="Request a Quote"
+        secondaryButtonLink="/request-a-quote"
         backgroundImage="/images/about-cta-background.png"
       />
     </>

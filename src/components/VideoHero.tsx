@@ -3,9 +3,34 @@ import { ArrowRight, FileText } from 'lucide-react';
 
 export default function VideoHero() {
   return (
-    <section className="relative isolate flex min-h-[380px] sm:min-h-[420px] lg:min-h-[450px] items-center overflow-hidden bg-[#032449] pt-8 pb-16 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-20">
-      {/* Background ambient radial glow */}
-      <div className="absolute inset-y-0 left-0 w-full lg:w-1/2 bg-[radial-gradient(ellipse_at_top_left,rgba(18,200,232,0.12),transparent_70%)] pointer-events-none" />
+    <section className="relative isolate flex min-h-[380px] sm:min-h-[420px] lg:min-h-[450px] items-center overflow-hidden bg-[#18344e] pt-8 pb-16 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-20">
+      {/* Unified, subtle multi-stop clinical slate gradient without harsh transitions */}
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,#224362_0%,#1c3751_38%,#162f46_72%,#112538_100%)] pointer-events-none" />
+
+      {/* Gentle, balanced ambient light in the top-left for airy clinical depth without washing out */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_25%,rgba(95,138,172,0.18)_0%,transparent_60%)] pointer-events-none" />
+
+      {/* Instrument container with a gradual CSS alpha mask for a completely seamless, patch-free transition */}
+      <div
+        className="absolute inset-y-0 right-0 w-full sm:w-[68%] lg:w-[58%] xl:w-[54%] pointer-events-none overflow-hidden flex items-center justify-end z-0"
+        style={{
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 14%, rgba(0,0,0,0.85) 30%, black 45%, black 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 14%, rgba(0,0,0,0.85) 30%, black 45%, black 100%)',
+        }}
+      >
+        <picture className="h-full w-full flex items-center justify-end pr-3 sm:pr-6 lg:pr-10 xl:pr-14 pt-2 sm:pt-4 pb-12 sm:pb-16 lg:pb-18">
+          <source srcSet="/images/hero-orthopedic-surgical.webp" type="image/webp" />
+          <img
+            src="/images/hero-orthopedic-surgical.jpg"
+            alt="Precision orthopedic implants and external fixation surgical hardware"
+            className="h-full w-auto max-w-none object-contain object-right drop-shadow-md select-none transform-gpu"
+            style={{ imageRendering: '-webkit-optimize-contrast' }}
+          />
+        </picture>
+      </div>
+
+      {/* Mobile overlay for text contrast on small mobile viewports */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1c3751]/95 via-[#1c3751]/80 to-transparent sm:hidden z-15 pointer-events-none" />
 
       {/* Main Content Container matching Header container-x exactly */}
       <div className="container-x relative z-10 w-full">
@@ -46,24 +71,6 @@ export default function VideoHero() {
               </Link>
             </div>
           </div>
-
-          {/* Right Column: Hero Image Container showing complete, unclipped instruments matching the reference */}
-          <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[68%] lg:w-[60%] xl:w-[56%] pointer-events-none overflow-hidden flex items-center justify-end z-10">
-            <picture className="h-full w-full flex items-center justify-end">
-              <source srcSet="/images/hero-orthopedic-surgical.webp" type="image/webp" />
-              <img
-                src="/images/hero-orthopedic-surgical.jpg"
-                alt="Precision orthopedic implants and external fixation surgical hardware"
-                className="h-full w-auto max-w-none object-contain object-right"
-              />
-            </picture>
-
-            {/* Smooth transition from dark navy into bright surgical table without darkening the instruments */}
-            <div className="absolute inset-y-0 left-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-[#032449] via-[#032449]/70 to-transparent pointer-events-none" />
-          </div>
-
-          {/* Mobile overlay for text contrast on small mobile viewports */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#032449] via-[#032449]/95 to-[#032449]/60 sm:hidden z-15 pointer-events-none" />
         </div>
       </div>
     </section>

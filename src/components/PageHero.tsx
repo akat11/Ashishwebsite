@@ -30,7 +30,7 @@ export default function PageHero({
   ctaSecondary,
 }: PageHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF] py-12 sm:py-16">
+    <section className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
       {backgroundImage && (
         <>
           <div
@@ -45,8 +45,8 @@ export default function PageHero({
         </>
       )}
 
-      <div className="container-x relative z-10">
-        <div className="max-w-3xl">
+      <div className="container-x relative z-10 w-full">
+        <div className="hero-standard-inner max-w-3xl">
           {eyebrow && <span className="section-eyebrow">{eyebrow}</span>}
           <h1 className="mt-2 text-page-title">{title}</h1>
           {subtitle && (

@@ -39,7 +39,7 @@ export default function Contact() {
       <Breadcrumbs crumbs={[{ label: 'Contact Us' }]} />
 
       {/* Hero Banner */}
-      <section className="relative isolate overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF] py-12 sm:py-16">
+      <section className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-cover bg-[center_38%] opacity-25 sm:opacity-30 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-40 lg:opacity-50"
@@ -49,8 +49,9 @@ export default function Contact() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#F4F8FB]/90 via-[#F4F8FB]/95 to-[#F4F8FB] md:bg-gradient-to-r md:from-[#F4F8FB] md:via-[#F4F8FB]/95 md:via-55% md:to-transparent"
         />
-        <div className="container-x relative z-10">
-          <div className="max-w-3xl">
+        <div className="container-x relative z-10 w-full">
+          <div className="hero-standard-inner">
+            <div className="max-w-3xl">
             <span className="section-eyebrow">Get in Touch</span>
             <h1 className="mt-2 text-page-title">
               Discuss Your Medical{' '}
@@ -136,7 +137,8 @@ export default function Contact() {
             </a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Main Form + Sidebar Section */}
       <section className="section-padding bg-white">

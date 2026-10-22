@@ -11,6 +11,7 @@ import {
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import DepartmentCard from '@/components/DepartmentCard';
+import BottomCTA from '@/components/BottomCTA';
 import { departments } from '@/data/departments';
 
 const serviceHighlights = [
@@ -40,7 +41,7 @@ export default function Departments() {
       <Breadcrumbs crumbs={[{ label: 'Departments' }]} />
 
       {/* Hero Banner with Restored Surgical Image Backdrop */}
-      <section className="relative isolate overflow-hidden bg-[#F4F8FB] border-b border-[#E0E8EF] py-12 sm:py-16">
+      <section className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
         <img
           src="/images/hero-surgical-scene.jpg"
           alt=""
@@ -52,8 +53,8 @@ export default function Departments() {
           className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#F4F8FB] via-[#F4F8FB]/95 to-transparent"
         />
 
-        <div className="container-x relative z-10">
-          <div className="max-w-3xl">
+        <div className="container-x relative z-10 w-full">
+          <div className="hero-standard-inner max-w-3xl">
             <span className="section-eyebrow">
               Clinical Specialties
             </span>
@@ -142,6 +143,22 @@ export default function Departments() {
           </div>
         </div>
       </section>
+
+      <BottomCTA
+        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+        title={
+          <>
+            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
+            <br className="hidden sm:inline" /> Surgical Care
+          </>
+        }
+        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
+        primaryButtonText="Get in Touch"
+        primaryButtonLink="/contact-us"
+        secondaryButtonText="Request a Quote"
+        secondaryButtonLink="/request-a-quote"
+        backgroundImage="/images/about-cta-background.png"
+      />
     </>
   );
 }

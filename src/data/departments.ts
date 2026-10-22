@@ -15,16 +15,16 @@ export const departments: Department[] = [
       'Implant systems, anatomical locking plates, bone screws and external fixation frames for trauma and elective cases.',
     image: '/images/categories/tibia-locking-plates.jpg',
     icon: 'Bone',
-    relatedCategories: ['tibia-locking-plates', 'femur-locking-plates', 'distal-radius-locking-plates', 'external-fixator-clamps'],
+    relatedCategories: ['nailing-systems', 'tibia-locking-plates', 'femur-locking-plates', 'distal-radius-locking-plates', 'external-fixator-clamps'],
   },
   {
     slug: 'trauma-surgery',
     name: 'Trauma & Emergency Care',
     description:
-      'Emergency stabilization and acute fracture management implants including modular fixation systems.',
+      'Emergency stabilization and acute fracture management implants including modular fixation systems and intramedullary nails.',
     image: '/images/categories/external-fixator-clamps.jpg',
     icon: 'Ambulance',
-    relatedCategories: ['external-fixator-clamps', 'ilizarov-rings-instruments', 'femur-locking-plates', 'tibia-locking-plates'],
+    relatedCategories: ['nailing-systems', 'external-fixator-clamps', 'ilizarov-rings-instruments', 'femur-locking-plates', 'tibia-locking-plates'],
   },
   {
     slug: 'deformity-correction',
@@ -39,10 +39,10 @@ export const departments: Department[] = [
     slug: 'pediatric-orthopaedics',
     name: 'Pediatric Orthopaedics',
     description:
-      'Specially sized hip and condylar locking plates engineered for pediatric fractures, osteotomies, and congenital deformity corrections.',
+      'Specially sized hip and condylar locking plates engineered for pediatric fractures, osteotomies, and flexible intramedullary titanium elastic nails (TEN).',
     image: '/images/categories/pediatric-locking-plates.jpg',
     icon: 'Baby',
-    relatedCategories: ['pediatric-locking-plates'],
+    relatedCategories: ['pediatric-locking-plates', 'nailing-systems'],
   },
   {
     slug: 'hand-wrist-surgery',

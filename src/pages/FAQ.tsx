@@ -57,12 +57,19 @@ export default function FAQ() {
       </section>
 
       <BottomCTA
-        eyebrow="Still Have Questions?"
-        title="Our Technical & Commercial Desk is Ready to Assist"
-        description="Speak with our team regarding catalogue codes, custom sizing, hospital formulary procurement, or quotation requests."
-        primaryButtonText="Contact Us"
+        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+        title={
+          <>
+            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
+            <br className="hidden sm:inline" /> Surgical Care
+          </>
+        }
+        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
+        primaryButtonText="Get in Touch"
         primaryButtonLink="/contact-us"
-        showPhoneSecondary={true}
+        secondaryButtonText="Request a Quote"
+        secondaryButtonLink="/request-a-quote"
+        backgroundImage="/images/about-cta-background.png"
       />
     </>
   );

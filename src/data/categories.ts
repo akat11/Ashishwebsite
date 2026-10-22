@@ -109,4 +109,14 @@ export const productCategories: ProductCategory[] = [
     icon: 'Circle',
     productCount: 11,
   },
+  {
+    slug: 'nailing-systems',
+    name: 'Intramedullary Nailing Systems',
+    shortName: 'Nailing Systems',
+    description:
+      'Complete range of antegrade and retrograde intramedullary nails for tibia, femur, humerus, hip fracture management (PFN, PFNA, Supracondylar), pediatric elastic pins (TEN), and classic intramedullary rods in SS 316L and Titanium Grade 5.',
+    image: '/images/categories/nailing-systems.jpg',
+    icon: 'ShieldCheck',
+    productCount: 32,
+  },
 ];
