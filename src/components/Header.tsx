@@ -154,7 +154,7 @@ export default function Header() {
               Services
             </NavLink>
             <NavLink to="/brands" className={navLinkClass}>
-              News
+              Brands
             </NavLink>
             <NavLink to="/contact-us" className={navLinkClass}>
               Contact
@@ -286,7 +286,7 @@ export default function Header() {
               to="/brands"
               className="block px-3.5 py-2.5 text-base font-medium text-[#062D56] hover:bg-[#F8FAFC] rounded-lg"
             >
-              News
+              Brands
             </NavLink>
             <NavLink
               to="/contact-us"

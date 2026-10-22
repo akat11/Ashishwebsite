@@ -1,263 +1,218 @@
+import { Link } from 'react-router-dom';
 import {
-  ArrowRight,
-  Clock3,
+  Phone,
   Mail,
   MapPin,
+  Clock,
   MessageCircle,
-  Package,
-  Phone,
-  ShieldCheck,
-  Truck,
-  Zap,
+  ArrowRight,
+  UsersRound,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ContactForm from '@/components/ContactForm';
 import { businessConfig, buildWhatsAppLink } from '@/config/business';
 
-const mapAddress = encodeURIComponent(
-  `${businessConfig.address.line1}, ${businessConfig.address.city}, ${businessConfig.address.state} ${businessConfig.address.pincode}, ${businessConfig.address.country}`,
-);
-
-const benefits = [
-  { icon: Zap, title: 'Quick Turnaround', detail: 'Formal quotations provided within 1–2 business days' },
-  { icon: ShieldCheck, title: 'Dedicated Support', detail: 'Technical guidance on implant sizing and screw compatibility' },
-  { icon: Package, title: 'Complete Catalogue', detail: 'Trauma locking plates, circular frames, and cortical screws' },
-  { icon: Truck, title: 'Pan-India Distribution', detail: 'Prompt logistics serving hospitals and surgical clinics' },
-];
-
 export default function Contact() {
   return (
     <>
       <SEO
-        title="Contact Vinayak Surgicals — Kanpur Office & Pan-India Inquiries"
-        description="Contact Vinayak Surgicals for orthopedic locking plate systems, external fixators, and fixation components. Phone, WhatsApp, email, and enquiry form available."
+        title="Contact Us — Vinayak Orthopaedic Solutions | Kanpur Office & Pan-India Inquiries"
+        description="Contact Vinayak Orthopaedic Solutions for orthopedic implants, locking plate systems, intramedullary nails, and external fixators. Phone, WhatsApp, email, and enquiry form available."
         canonical="https://vinyanaksurgicals.com/contact-us"
-        keywords="contact vinayak surgicals, orthopedic supplier phone Kanpur, medical equipment inquiries Kanpur, trauma implant quote India"
+        keywords="contact vinayak surgicals, orthopedic supplier Kanpur, medical equipment inquiries Kanpur, trauma implant quote India"
       />
-
       <Breadcrumbs crumbs={[{ label: 'Contact Us' }]} />
 
-      {/* Hero Banner */}
-      <section className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
+      {/* Hero Section matching Reference Screenshot */}
+      <section className="relative isolate overflow-hidden bg-[#eef6fc] min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] pt-7 sm:pt-9 lg:pt-11 pb-8 sm:pb-10 border-b border-slate-200/80">
+        {/* Background Image: sharp surgical scene + metal instruments */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-[center_38%] opacity-25 sm:opacity-30 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-40 lg:opacity-50"
-          style={{ backgroundImage: "url('/images/contact-hero-surgery-4k.jpg')" }}
+          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-right md:bg-[center_top]"
+          style={{ backgroundImage: "url('/images/contact-hero-composite.jpg')" }}
         />
+
+        {/* Ambient mobile/tablet soft gradient overlay to guarantee text legibility */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#F4F8FB]/90 via-[#F4F8FB]/95 to-[#F4F8FB] md:bg-gradient-to-r md:from-[#F4F8FB] md:via-[#F4F8FB]/95 md:via-55% md:to-transparent"
+          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/85 to-white/20 sm:hidden"
         />
-        <div className="container-x relative z-10 w-full">
-          <div className="hero-standard-inner">
-            <div className="max-w-3xl">
-            <span className="section-eyebrow">Get in Touch</span>
-            <h1 className="mt-2 text-page-title">
-              Discuss Your Medical{' '}
-              <span className="text-[#159A9C]">Supply Requirements</span>
-            </h1>
-            <p className="mt-4 text-body-large">
-              Whether you need specific trauma plates, a hospital tender quotation, or specialized implant sourcing assistance, our team is ready to help. Reach us by telephone, WhatsApp, email, or via the enquiry form below.
-            </p>
+
+        <div className="container-x relative z-10 w-full flex flex-col justify-between h-full">
+          {/* Top Row: Headline + Info Card */}
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+            <div className="max-w-[540px]">
+              <span className="inline-block text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.2em] text-[#062D56] bg-white/90 backdrop-blur-xs px-3 py-1 rounded-full border border-slate-200/90 shadow-2xs">
+                GET IN TOUCH
+              </span>
+              <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold leading-[1.12] tracking-tight text-[#062D56]">
+                Discuss Your Medical <br />
+                <span className="text-[#0875D1]">Supply Requirements</span>
+              </h1>
+              <p className="mt-3.5 max-w-[500px] text-xs sm:text-sm leading-relaxed text-slate-700 font-medium">
+                Whether you need a specific instrument, a bulk quotation or product sourcing assistance, our team is here to help. Reach us by phone, WhatsApp, email or use the enquiry form below.
+              </p>
+            </div>
+
+            {/* Translucent Blue Information Panel in Upper-Right */}
+            <div className="hidden md:flex items-start gap-4 rounded-2xl border border-white/25 bg-[#0a4d8c]/80 p-5 sm:p-6 text-white shadow-xl backdrop-blur-md max-w-sm lg:mr-2 shrink-0">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/20 text-white shadow-xs">
+                <UsersRound className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <p className="text-xs sm:text-[13px] font-medium leading-relaxed text-white/95">
+                  Our team is ready to assist you with product information, availability, pricing and institutional supply requirements.
+                </p>
+                <span className="mt-3.5 block h-[2px] w-12 rounded-full bg-white/70" />
+              </div>
+            </div>
           </div>
 
-          {/* Quick Contact Cards */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {/* Phone Card */}
+          {/* Bottom Row: 3 Contact Cards */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl lg:max-w-[760px]">
+            {/* Call Us */}
             <a
               href={`tel:${businessConfig.phoneRaw}`}
-              className="card card-hover p-6 bg-white flex flex-col justify-between"
+              className="group rounded-2xl border border-slate-200/90 bg-white/95 hover:bg-white p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
             >
               <div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] mb-4 border border-[#E0E8EF]">
-                  <Phone className="h-6 w-6 text-[#159A9C]" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0875D1] text-white shadow-2xs mb-3 group-hover:scale-105 transition-transform">
+                  <Phone className="h-5 w-5" />
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#5E6F7D]">Telephone</div>
-                <div className="font-display text-lg font-bold text-[#172B3A] mt-1">
+                <div className="text-xs font-bold text-slate-900">Call Us</div>
+                <div className="font-display text-base font-extrabold text-[#062D56] mt-0.5">
                   {businessConfig.phone}
                 </div>
               </div>
-              <p className="mt-3 text-xs text-[#5E6F7D]">
-                Mon–Fri: {businessConfig.businessHours[0]?.hours}
-              </p>
+              <div className="mt-3 text-[11px] font-medium text-slate-500">
+                Mon-Sat: 9:30 AM – 7:00 PM
+              </div>
             </a>
 
-            {/* WhatsApp Card */}
-            <div className="card card-hover p-6 bg-white flex flex-col justify-between">
+            {/* WhatsApp */}
+            <div className="group rounded-2xl border border-slate-200/90 bg-white/95 hover:bg-white p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
               <div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-[#25D366] mb-4 border border-green-100">
-                  <MessageCircle className="h-6 w-6" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xs mb-3 group-hover:scale-105 transition-transform">
+                  <MessageCircle className="h-5 w-5" />
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#5E6F7D]">WhatsApp Enquiry</div>
-                <div className="font-display text-lg font-bold text-[#172B3A] mt-1">
-                  Instant Clinical Chat
+                <div className="text-xs font-bold text-slate-900">WhatsApp</div>
+                <div className="text-xs text-slate-600 mt-0.5 leading-snug">
+                  Chat with our team for quick support
                 </div>
               </div>
               <div className="mt-3">
-                {businessConfig.whatsappConfigured ? (
-                  <a
-                    href={buildWhatsAppLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#25D366] hover:underline"
-                  >
-                    <span>Connect on WhatsApp</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
-                ) : (
-                  <a
-                    href={`mailto:${businessConfig.email}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123B66] hover:underline"
-                  >
-                    <span>Email our Sales Team</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
-                )}
+                <a
+                  href={businessConfig.whatsappConfigured ? buildWhatsAppLink() : `tel:${businessConfig.phoneRaw}`}
+                  target={businessConfig.whatsappConfigured ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0875D1] hover:underline"
+                >
+                  <span>Chat on WhatsApp</span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </a>
               </div>
             </div>
 
-            {/* Email Card */}
+            {/* Email Us */}
             <a
               href={`mailto:${businessConfig.email}`}
-              className="card card-hover p-6 bg-white flex flex-col justify-between"
+              className="group rounded-2xl border border-slate-200/90 bg-white/95 hover:bg-white p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
             >
               <div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] mb-4 border border-[#E0E8EF]">
-                  <Mail className="h-6 w-6 text-[#159A9C]" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0875D1] text-white shadow-2xs mb-3 group-hover:scale-105 transition-transform">
+                  <Mail className="h-5 w-5" />
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#5E6F7D]">Email Inquiries</div>
-                <div className="font-display text-base sm:text-lg font-bold text-[#172B3A] mt-1 break-all">
+                <div className="text-xs font-bold text-slate-900">Email Us</div>
+                <div className="text-xs sm:text-[13px] font-semibold text-slate-800 mt-0.5 break-all">
                   {businessConfig.email}
                 </div>
               </div>
-              <p className="mt-3 text-xs text-[#5E6F7D]">
-                Itemized quotes within 1 business day
-              </p>
+              <div className="mt-3 text-[11px] font-medium text-slate-500">
+                We usually respond within 1 business day.
+              </div>
             </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Main Form + Sidebar Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-slate-50 border-t border-slate-200/80">
         <div className="container-x">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-12 items-start">
-            {/* Form Column */}
-            <div className="card p-6 sm:p-8 bg-white border border-[#E0E8EF]">
-              <span className="section-eyebrow">Send a Direct Message</span>
-              <h2 className="mt-2 text-section-title">General Enquiry Form</h2>
-              <p className="mt-2 text-body-regular">
-                Complete the details below and our medical procurement specialist will respond promptly.
-              </p>
-              <ContactForm />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Form */}
+            <div className="lg:col-span-2">
+              <div className="card p-6 lg:p-8 bg-white border border-[#E0E8EF]">
+                <h2 className="text-xl font-display font-bold text-[#062D56] mb-1">General Enquiry Form</h2>
+                <p className="text-sm text-slate-600 mb-6">
+                  Fill in the form below and our team will respond within 1–2 business days.
+                </p>
+                <ContactForm />
+              </div>
             </div>
 
-            {/* Sidebar Column */}
+            {/* Sidebar */}
             <div className="space-y-6">
-              {/* WhatsApp / Chat Banner */}
-              <div className="rounded-2xl border border-green-200 bg-green-50/70 p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#25D366] text-white shadow-xs">
-                    <MessageCircle className="h-5 w-5" />
-                  </div>
-                  <h3 className="font-display text-lg font-bold text-[#172B3A]">
-                    Prefer Direct Chat?
-                  </h3>
-                </div>
-                <p className="text-sm text-[#5E6F7D] leading-relaxed">
-                  Connect with our technical desk directly for rapid answers regarding implant availability, sizing specifications, and quotations.
+              {/* WhatsApp CTA */}
+              <div className="card p-6 bg-[#25D366]/5 border-[#25D366]/20">
+                <h3 className="text-base font-display font-bold text-[#062D56] mb-2">Prefer to chat?</h3>
+                <p className="text-sm text-slate-600 mb-4">
+                  Reach out directly on WhatsApp for quick responses about product availability and quotations.
                 </p>
-                <div className="mt-4">
-                  {businessConfig.whatsappConfigured ? (
-                    <a
-                      href={buildWhatsAppLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-whatsapp w-full !text-sm"
-                    >
-                      <span>Chat on WhatsApp</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  ) : (
-                    <a
-                      href={`tel:${businessConfig.phoneRaw}`}
-                      className="btn-primary w-full !text-sm"
-                    >
-                      <Phone className="h-4 w-4" />
-                      <span>Call Sales Desk Directly</span>
-                    </a>
-                  )}
-                </div>
+                {businessConfig.whatsappConfigured ? (
+                  <a href={buildWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="btn-whatsapp w-full">
+                    Chat on WhatsApp
+                  </a>
+                ) : (
+                  <p className="text-xs text-slate-500">
+                    WhatsApp number is pending configuration. Please call or email us instead.
+                  </p>
+                )}
               </div>
 
-              {/* Business Hours */}
+              {/* Business hours */}
               <div className="card p-6 bg-white border border-[#E0E8EF]">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                    <Clock3 className="h-5 w-5 text-[#159A9C]" />
-                  </div>
-                  <h3 className="font-display text-lg font-bold text-[#172B3A]">
-                    Business Working Hours
-                  </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <Clock className="h-5 w-5 text-[#0875D1]" />
+                  <h3 className="text-base font-display font-bold text-[#062D56]">Business Hours</h3>
                 </div>
-                <ul className="space-y-2.5 text-sm">
-                  {businessConfig.businessHours.map(({ day, hours }) => (
-                    <li key={day} className="flex justify-between border-b border-[#E0E8EF]/60 pb-2 last:border-0 last:pb-0">
-                      <span className="text-[#5E6F7D] font-medium">{day}</span>
-                      <span className="font-semibold text-[#172B3A]">{hours}</span>
+                <ul className="space-y-2">
+                  {businessConfig.businessHours.map((bh) => (
+                    <li key={bh.day} className="flex items-center justify-between text-sm">
+                      <span className="text-slate-600">{bh.day}</span>
+                      <span className="font-semibold text-slate-900">{bh.hours}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Physical Address */}
+              {/* Service area */}
               <div className="card p-6 bg-white border border-[#E0E8EF]">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                    <MapPin className="h-5 w-5 text-[#159A9C]" />
-                  </div>
-                  <h3 className="font-display text-lg font-bold text-[#172B3A]">
-                    Kanpur Facility Location
-                  </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <MapPin className="h-5 w-5 text-[#0875D1]" />
+                  <h3 className="text-base font-display font-bold text-[#062D56]">Service Area</h3>
                 </div>
-                <p className="text-sm leading-relaxed text-[#5E6F7D]">
-                  {businessConfig.address.line1}, {businessConfig.address.city},
-                  <br />
-                  {businessConfig.address.state} {businessConfig.address.pincode}, India
+                <p className="text-sm text-slate-600 mb-3">
+                  Based in Kanpur, we serve healthcare institutions across Uttar Pradesh and respond to pan-India enquiries.
                 </p>
-                <div className="mt-4">
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${mapAddress}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#123B66] hover:text-[#159A9C] transition-colors"
-                  >
-                    <span>Open in Google Maps</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </div>
+                <Link to="/request-a-quote" className="text-sm font-semibold text-[#0875D1] hover:text-[#062D56] inline-flex items-center gap-1 transition-colors">
+                  Request a Quote
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              {/* Quotation CTA */}
+              <div className="card p-6 bg-[#062D56] text-white border-none shadow-md">
+                <h3 className="text-base font-display font-bold text-white mb-2">Institutional Quotation</h3>
+                <p className="text-sm text-slate-300 mb-4">
+                  Need a multi-product quotation for your hospital or clinic? Use our dedicated quotation form.
+                </p>
+                <Link to="/request-a-quote" className="btn-cyan w-full justify-center">
+                  Quotation Form
+                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Trust Benefits Bar */}
-      <section className="border-t border-[#E0E8EF] bg-[#F4F8FB] py-12 sm:py-16">
-        <div className="container-x grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map(({ icon: Icon, title, detail }) => (
-            <div key={title} className="card p-5 bg-white border border-[#E0E8EF] flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                <Icon className="h-6 w-6 text-[#159A9C]" />
-              </div>
-              <div>
-                <h4 className="font-display text-base font-bold text-[#172B3A]">{title}</h4>
-                <p className="mt-1 text-xs sm:text-sm text-[#5E6F7D] leading-relaxed">{detail}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
     </>
