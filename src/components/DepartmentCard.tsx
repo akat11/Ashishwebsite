@@ -10,7 +10,8 @@ import {
   Stethoscope,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import type { Department } from '@/types';
+import type { Department } from '@/data/departments';
+import { productCategories } from '@/data/categories';
 
 const departmentIconMap: Record<string, LucideIcon> = {
   Ambulance,
@@ -23,38 +24,73 @@ const departmentIconMap: Record<string, LucideIcon> = {
 
 export default function DepartmentCard({ department }: { department: Department }) {
   const IconComponent = departmentIconMap[department.icon] || Stethoscope;
-  const productPath = department.relatedCategories[0]
+  const primaryPath = department.relatedCategories[0]
     ? `/products/${department.relatedCategories[0]}`
     : '/products';
 
+  const relatedCats = productCategories.filter((c) =>
+    department.relatedCategories.includes(c.slug)
+  );
+
   return (
-    <Link
-      to={productPath}
-      className="card card-hover group relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#E0E8EF] bg-white p-5 sm:p-6 transition-all"
-    >
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF] transition-colors group-hover:bg-[#123B66] group-hover:text-white">
-            <IconComponent className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          </div>
-          <span className="text-xs font-semibold text-[#159A9C] bg-[#e8f7f7] px-2.5 py-1 rounded-full">
-            Specialty
-          </span>
+    <div className="group rounded-3xl bg-white border border-slate-200 hover:border-[#0875D1] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between">
+      {/* Visual Header */}
+      <div className="relative aspect-[16/9] w-full bg-slate-100 overflow-hidden">
+        <img
+          src={department.image}
+          alt={department.name}
+          loading="lazy"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#062D56]/85 via-[#062D56]/30 to-transparent" />
+
+        <div className="absolute top-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white/95 text-[#062D56] shadow-sm">
+          <IconComponent className="h-5 w-5" />
         </div>
 
-        <h3 className="font-display text-lg font-bold text-[#172B3A] group-hover:text-[#123B66] transition-colors leading-snug">
-          {department.name}
-        </h3>
+        <div className="absolute bottom-3 left-4 right-4">
+          <h3 className="font-display text-lg font-bold text-white drop-shadow-sm leading-snug">
+            {department.name}
+          </h3>
+        </div>
+      </div>
 
-        <p className="mt-2 text-sm text-[#5E6F7D] leading-relaxed line-clamp-3">
+      {/* Body Content */}
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
           {department.description}
         </p>
-      </div>
 
-      <div className="mt-5 pt-3.5 border-t border-[#E0E8EF] flex items-center justify-between text-sm font-semibold text-[#123B66] group-hover:text-[#159A9C] transition-colors">
-        <span>Explore Related Implants</span>
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        {/* Linked Fixation Categories */}
+        {relatedCats.length > 0 && (
+          <div>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+              Target Fixation Systems:
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {relatedCats.slice(0, 3).map((cat) => (
+                <Link
+                  key={cat.slug}
+                  to={`/products/${cat.slug}`}
+                  className="text-[11px] font-semibold text-[#0875D1] bg-[#0875D1]/10 hover:bg-[#0875D1] hover:text-white px-2.5 py-0.5 rounded-md transition-colors"
+                >
+                  {cat.shortName}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Action Link */}
+        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0875D1] group-hover:text-[#062D56] transition-colors">
+          <Link to={primaryPath} className="inline-flex items-center gap-1 font-semibold">
+            <span>Explore Department Hardware</span>
+          </Link>
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0875D1]/10 text-[#0875D1] group-hover:bg-[#0875D1] group-hover:text-white transition-all">
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </div>
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }

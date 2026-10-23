@@ -1,18 +1,13 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import {
-  ArrowDownWideNarrow,
   ArrowRight,
-  Bone,
-  Baby,
-  FileText,
-  Footprints,
-  Layers3,
   Search,
-  ShieldCheck,
   SlidersHorizontal,
-  Stethoscope,
-  Wrench,
+  RotateCcw,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -20,23 +15,8 @@ import BottomCTA from '@/components/BottomCTA';
 import ProductCard from '@/components/ProductCard';
 import { productCategories } from '@/data/categories';
 import { getProductsByCategory } from '@/data/products';
-import { businessConfig } from '@/config/business';
 
 type SortOrder = 'featured' | 'name-ascending' | 'name-descending';
-
-const categoryIcons = {
-  'distal-radius-locking-plates': Bone,
-  'tibia-locking-plates': Bone,
-  'femur-locking-plates': Layers3,
-  'humerus-locking-plates': Bone,
-  'reconstruction-locking-plates': Layers3,
-  'pediatric-locking-plates': Baby,
-  'specialized-locking-plates': Footprints,
-  'locking-screws-accessories': SlidersHorizontal,
-  'external-fixator-clamps': Wrench,
-  'ilizarov-rings-instruments': Stethoscope,
-  'nailing-systems': ShieldCheck,
-} as const;
 
 export default function ProductCategoryPage() {
   const { category: slug } = useParams<{ category: string }>();
@@ -73,7 +53,7 @@ export default function ProductCategoryPage() {
   return (
     <>
       <SEO
-        title={`${category.name} — Orthopedic Locking Implants & Fixation | Vinayak Surgicals`}
+        title={`${category.name} — Orthopaedic Implants & Fixation Systems | Vinayak Surgicals`}
         description={category.description}
         canonical={`https://vinyanaksurgicals.com/products/${category.slug}`}
         image={category.image}
@@ -107,188 +87,189 @@ export default function ProductCategoryPage() {
         ]}
       />
 
-      {/* Category Hero Banner */}
-      <section className="hero-standard bg-[#0c2642] text-white border-b border-[#123B66]">
+      {/* Cinematic Category Hero Section */}
+      <section className="relative isolate overflow-hidden bg-[#020F1C] text-white py-16 sm:py-20 lg:py-24 border-b border-white/10">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-10 blur-xs scale-105"
+          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-[center_35%] opacity-25 sm:opacity-35 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-45"
           style={{ backgroundImage: `url('${category.image}')` }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#0c2642] via-[#0c2642]/95 to-[#123B66]/85"
+          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#020F1C] via-[#020F1C]/95 via-45% to-transparent"
         />
+
         <div className="container-x relative z-10 w-full">
-          <div className="hero-standard-inner">
-            <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="max-w-2xl">
-            <span className="section-eyebrow text-[#159A9C]">
-              {category.shortName} System
-            </span>
-            <h1 className="mt-2 text-page-title text-white">
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider text-[#12C8E8] backdrop-blur-md border border-white/15">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>ANATOMICAL SPECIALTY PORTFOLIO</span>
+            </div>
+
+            <h1 className="font-display text-[clamp(2.1rem,3.4vw+0.6rem,3.5rem)] font-extrabold leading-[1.12] tracking-tight text-white">
               {category.name}
             </h1>
-            <p className="mt-4 text-base sm:text-lg leading-relaxed text-[#d9e2ec]">
+
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
               {category.description}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-4 text-xs sm:text-sm font-semibold text-[#bcccdc]">
-              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
-                <ShieldCheck className="h-4 w-4 text-[#159A9C]" />
-                Anatomical Profile
+            {/* Quick Proof Badges */}
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-300">
+              <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-lg border border-white/10">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#12C8E8]" />
+                {categoryProducts.length} Verified Systems
               </span>
-              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
-                <Layers3 className="h-4 w-4 text-[#159A9C]" />
-                Multiple Hole Variants
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3.5 py-2">
-                <ArrowDownWideNarrow className="h-4 w-4 text-[#159A9C]" />
-                SS 316L &amp; Titanium
+              <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-lg border border-white/10">
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                ASTM F138 &amp; ASTM F136
               </span>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3.5">
+            {/* Hero CTAs */}
+            <div className="pt-4 flex flex-wrap gap-3.5">
               <Link
-                to="/request-a-quote"
-                className="btn-teal"
+                to={`/request-a-quote?category=${encodeURIComponent(category.name)}`}
+                className="btn-cyan text-xs sm:text-sm py-2.5 px-5 shadow-md"
               >
-                <span>Request Quotation</span>
+                <span>Request Category Quotation</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href={`mailto:${businessConfig.email}?subject=${encodeURIComponent(`Request for ${category.shortName} catalogue`)}`}
-                className="btn-secondary !bg-white/10 !text-white !border-white/30 hover:!bg-white hover:!text-[#123B66]"
+              <Link
+                to="/products"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-sm transition-all"
               >
-                <FileText className="h-4 w-4 text-[#159A9C]" />
-                <span>Request Catalogue PDF</span>
-              </a>
+                <span>Browse All Categories</span>
+              </Link>
             </div>
-          </div>
-
-          <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-xs flex items-center justify-center">
-            <img
-              src={category.image}
-              alt={category.name}
-              className="max-h-72 w-auto object-contain drop-shadow-xl"
-            />
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-      {/* Search and Products Section */}
-      <section className="section-padding bg-white">
+      {/* Main Category Inventory Grid */}
+      <section className="bg-[#F8FAFC] py-14 sm:py-20 border-b border-slate-200">
         <div className="container-x">
-          {/* Controls Bar */}
-          <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E0E8EF] pb-6">
-            <div>
-              <h2 className="text-section-title">
-                Products in {category.shortName}
-              </h2>
-              <p className="mt-1 text-sm text-[#5E6F7D]">
-                Showing {visibleProducts.length} of {categoryProducts.length} certified products
-              </p>
+          {/* Category Filter Toolbar */}
+          <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="relative w-full sm:w-96">
+              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+              <input
+                type="text"
+                placeholder={`Search within ${category.shortName}...`}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="input-field pl-10 text-sm w-full bg-slate-50 border-slate-200 focus:bg-white"
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery('')}
+                  className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-600"
+                >
+                  Clear
+                </button>
+              )}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <div className="relative min-w-[220px]">
-                <Search className="h-4 w-4 text-[#5E6F7D] absolute left-3 top-1/2 -translate-y-1/2" />
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search products..."
-                  className="input-field pl-9 !min-h-[42px] text-sm"
-                />
-              </div>
-
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-                className="input-field !min-h-[42px] text-sm !w-auto cursor-pointer"
+                className="input-field text-sm bg-slate-50 border-slate-200"
+                aria-label="Sort category products"
               >
-                <option value="featured">Sort by: Default</option>
+                <option value="featured">Featured Implants</option>
                 <option value="name-ascending">Name: A to Z</option>
                 <option value="name-descending">Name: Z to A</option>
               </select>
+
+              <span className="text-xs font-mono font-bold text-slate-500 bg-slate-100 px-3 py-2 rounded-xl whitespace-nowrap">
+                {visibleProducts.length} Systems
+              </span>
             </div>
           </div>
 
           {/* Product Grid */}
-          {visibleProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {visibleProducts.length === 0 ? (
+            <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-sm max-w-md mx-auto">
+              <SlidersHorizontal className="h-10 w-10 text-slate-300 mx-auto mb-3" />
+              <h3 className="font-display text-lg font-bold text-[#062D56]">
+                No Systems Match Your Filter
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 mt-2">
+                We couldn't find any implants in {category.shortName} matching "{query}".
+              </p>
+              <button
+                onClick={() => setQuery('')}
+                className="btn-cyan text-xs mt-4 inline-flex items-center gap-1.5"
+              >
+                <RotateCcw className="h-3.5 w-3.5" />
+                <span>Reset Search</span>
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {visibleProducts.map((product) => (
                 <ProductCard key={product.slug} product={product} />
               ))}
             </div>
-          ) : (
-            <div className="rounded-xl border border-dashed border-[#E0E8EF] py-16 text-center bg-[#F4F8FB]">
-              <p className="text-base font-semibold text-[#172B3A]">No matching products found.</p>
-              <p className="mt-1 text-sm text-[#5E6F7D]">Try a different search term or clear the filter.</p>
-              <button
-                type="button"
-                onClick={() => setQuery('')}
-                className="btn-secondary mt-4 !py-2 !px-4 !text-xs"
-              >
-                Clear Search
-              </button>
-            </div>
           )}
-        </div>
-      </section>
 
-      {/* Related Categories */}
-      <section className="bg-[#F4F8FB] section-padding border-t border-[#E0E8EF]">
-        <div className="container-x">
-          <div className="mb-6 sm:mb-8 flex items-center justify-between">
-            <div>
-              <span className="section-eyebrow">Explore More</span>
-              <h2 className="mt-1 text-subsection-title">Related Categories</h2>
+          {/* Related Categories Navigation Strip */}
+          <div className="mt-16 pt-12 border-t border-slate-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 className="font-display text-lg font-bold text-[#062D56]">
+                  Related Fixation Categories
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Explore complementary trauma hardware and modular systems.
+                </p>
+              </div>
+              <Link
+                to="/products"
+                className="text-xs font-bold text-[#0875D1] hover:text-[#062D56] inline-flex items-center gap-1 transition-colors"
+              >
+                <span>View Full Catalog</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
-            <Link
-              to="/products"
-              className="text-sm font-semibold text-[#123B66] hover:text-[#159A9C] inline-flex items-center gap-1"
-            >
-              <span>All Categories</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-            {relatedCategories.map((item) => {
-              const Icon = categoryIcons[item.slug as keyof typeof categoryIcons] ?? Bone;
-              return (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+              {relatedCategories.map((rel) => (
                 <Link
-                  key={item.slug}
-                  to={`/products/${item.slug}`}
-                  className="card p-3.5 flex flex-col items-center text-center justify-center gap-2 hover:border-[#159A9C] hover:shadow-sm transition-all bg-white"
+                  key={rel.slug}
+                  to={`/products/${rel.slug}`}
+                  className="group rounded-2xl bg-white p-3 border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#0875D1] transition-all text-center flex flex-col items-center justify-between"
                 >
-                  <Icon className="h-5 w-5 text-[#159A9C]" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#172B3A] line-clamp-1">
-                    {item.shortName}
+                  <div className="w-12 h-12 rounded-xl bg-slate-50 p-1 flex items-center justify-center overflow-hidden mb-2">
+                    <img
+                      src={rel.image}
+                      alt={rel.name}
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="font-display text-xs font-bold text-[#062D56] group-hover:text-[#0875D1] transition-colors line-clamp-1">
+                    {rel.shortName}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono mt-0.5">
+                    {rel.productCount} Implants
                   </span>
                 </Link>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Bottom CTA */}
       <BottomCTA
-        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
-        title={
-          <>
-            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
-            <br className="hidden sm:inline" /> Surgical Care
-          </>
-        }
-        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
-        primaryButtonText="Get in Touch"
-        primaryButtonLink="/contact-us"
-        secondaryButtonText="Request a Quote"
-        secondaryButtonLink="/request-a-quote"
-        backgroundImage="/images/about-cta-background.png"
+        eyebrow={`${category.shortName.toUpperCase()} ENQUIRIES`}
+        title={`Equip Your Hospital with Certified ${category.shortName}`}
+        description="Connect with our technical desk in Kanpur for sizing availability, bulk order contracts, and emergency case dispatch."
+        primaryButtonText="Request Formal Quotation"
+        primaryButtonLink={`/request-a-quote?category=${encodeURIComponent(category.name)}`}
+        secondaryButtonText="Contact Surgical Desk"
+        secondaryButtonLink="/contact-us"
       />
     </>
   );
