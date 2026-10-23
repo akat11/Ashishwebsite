@@ -1,16 +1,28 @@
 import { useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { ArrowRight, Check, Copy, CheckCheck, FileSpreadsheet } from 'lucide-react';
+import {
+  ArrowRight,
+  Copy,
+  CheckCheck,
+  ShieldCheck,
+  FileText,
+  MessageCircle,
+  Sparkles,
+  Layers,
+} from 'lucide-react';
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductCard from '@/components/ProductCard';
+import BottomCTA from '@/components/BottomCTA';
+import CatalogueRequestModal from '@/components/home/CatalogueRequestModal';
 import { productCategories } from '@/data/categories';
 import { getProductBySlug, getProductsByCategory } from '@/data/products';
-import { businessConfig, buildProductWhatsAppLink } from '@/config/business';
+import { buildProductWhatsAppLink } from '@/config/business';
 
 export default function ProductDetail() {
   const { category: catSlug, product: prodSlug } = useParams<{ category: string; product: string }>();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [isCatalogueModalOpen, setIsCatalogueModalOpen] = useState(false);
 
   const category = productCategories.find((c) => c.slug === catSlug);
   const product = getProductBySlug(prodSlug ?? '');
@@ -35,11 +47,12 @@ export default function ProductDetail() {
   };
 
   const quoteUrl = `/request-a-quote?product=${encodeURIComponent(product.name)}&code=${encodeURIComponent(primaryCode)}&category=${encodeURIComponent(category.name)}`;
+  const whatsappUrl = buildProductWhatsAppLink(product.name);
 
   return (
     <>
       <SEO
-        title={`${product.name} — Specifications & Catalogue Codes | Vinayak Surgicals`}
+        title={`${product.name} — Technical Monograph & Specifications | Vinayak Surgicals`}
         description={`${product.description} Verified catalogue specifications in implant-grade Stainless Steel 316L and Titanium Grade 5.`}
         canonical={`https://vinyanaksurgicals.com/products/${category.slug}/${product.slug}`}
         image={product.image}
@@ -70,76 +83,126 @@ export default function ProductDetail() {
         ]}
       />
 
-      {/* Product Detail Section */}
-      <section className="bg-white section-padding">
+      {/* Main Product Showcase Viewport */}
+      <section className="bg-white py-12 sm:py-16 border-b border-slate-200">
         <div className="container-x">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-            {/* Image Box */}
-            <div className="rounded-2xl border border-[#E0E8EF] bg-white p-6 sm:p-10 flex items-center justify-center overflow-hidden sticky top-24 shadow-xs">
-              <picture className="w-full flex justify-center">
-                <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full max-h-[420px] object-contain transition-transform duration-300 hover:scale-105"
-                />
-              </picture>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            {/* Left Column: Studio Product Image Stage (5.5 cols) */}
+            <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
+              <div className="relative rounded-3xl border border-slate-200 bg-gradient-to-b from-[#F8FAFC] to-[#EDF5FA] p-8 sm:p-12 flex items-center justify-center overflow-hidden shadow-sm group">
+                <picture className="w-full flex justify-center">
+                  <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full max-h-[420px] object-contain transition-transform duration-500 group-hover:scale-105 filter drop-shadow-md"
+                  />
+                </picture>
+
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#062D56] text-white text-[11px] font-mono font-bold">
+                  {category.shortName}
+                </div>
+
+                <div className="absolute bottom-4 right-4 flex items-center gap-1.5 text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60 shadow-2xs">
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  <span>ISO 13485 Certified</span>
+                </div>
+              </div>
+
+              {/* Quick Actions Under Image */}
+              <div className="grid grid-cols-2 gap-3">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 p-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-bold shadow-xs transition-colors"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  <span>WhatsApp Inquiry</span>
+                </a>
+                <button
+                  onClick={() => setIsCatalogueModalOpen(true)}
+                  className="inline-flex items-center justify-center gap-2 p-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-bold shadow-xs transition-colors"
+                >
+                  <FileText className="h-4 w-4 text-[#0875D1]" />
+                  <span>Request Monograph</span>
+                </button>
+              </div>
             </div>
 
-            {/* Product Information */}
-            <div>
-              <span className="section-eyebrow">
-                {category.shortName}
-              </span>
-              <h1 className="mt-2 text-page-title text-[#172B3A]">
-                {product.name}
-              </h1>
-              <p className="mt-4 text-body-regular text-[#5E6F7D] leading-relaxed">
-                {product.description}
-              </p>
+            {/* Right Column: Engineering Information & Specs (6.5 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#0875D1]/10 px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider text-[#0875D1] mb-2.5">
+                  <Sparkles className="h-3 w-3" />
+                  <span>{category.name}</span>
+                </div>
 
-              {/* Technical Specifications Table */}
-              <div className="mt-8">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#123B66]">
-                    Technical Specifications &amp; Material Options
-                  </h2>
-                  <span className="text-xs text-[#5E6F7D]">
-                    Verified Catalogue Data
+                <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#062D56] tracking-tight leading-tight">
+                  {product.name}
+                </h1>
+
+                <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  {product.description}
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <Link
+                  to={quoteUrl}
+                  className="btn-cyan text-xs sm:text-sm py-3 px-6 shadow-md"
+                >
+                  <span>Request Formal Hospital Quote</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/contact-us"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 px-5 py-3 text-xs sm:text-sm font-semibold text-slate-700 transition-colors shadow-2xs"
+                >
+                  <span>Consult Technical Desk</span>
+                </Link>
+              </div>
+
+              {/* Technical Specifications Matrix */}
+              <div className="pt-4 border-t border-slate-200">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-display text-base font-bold text-[#062D56] flex items-center gap-2">
+                    <Layers className="h-4 w-4 text-[#0875D1]" />
+                    <span>Verified Engineering Specifications</span>
+                  </h3>
+                  <span className="text-[11px] font-mono text-slate-400">
+                    Source: Manufacturer Monograph
                   </span>
                 </div>
-                <div className="rounded-xl border border-[#E0E8EF] divide-y divide-[#E0E8EF] overflow-hidden bg-white shadow-xs">
-                  {product.specs.map((spec, index) => {
-                    const isCodeRow = spec.label.toLowerCase().includes('catalogue code');
+
+                <div className="rounded-2xl border border-slate-200 overflow-hidden divide-y divide-slate-100 text-xs sm:text-sm shadow-2xs">
+                  {product.specs.map((spec, i) => {
+                    const isCode = spec.label.toLowerCase().includes('code');
                     return (
                       <div
                         key={spec.label}
-                        className={`flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-5 py-3 text-sm gap-2 ${
-                          index % 2 === 0 ? 'bg-white' : 'bg-[#F4F8FB]'
+                        className={`grid grid-cols-1 sm:grid-cols-[200px_1fr] p-3.5 gap-1.5 sm:gap-4 items-center ${
+                          i % 2 === 0 ? 'bg-white' : 'bg-slate-50/70'
                         }`}
                       >
-                        <span className="font-medium text-[#5E6F7D] shrink-0 sm:max-w-[200px]">
+                        <span className="font-semibold text-slate-600 sm:text-slate-700">
                           {spec.label}
                         </span>
-                        <div className="flex items-center gap-2 sm:text-right justify-between sm:justify-end flex-1">
-                          <span className="font-semibold text-[#172B3A] font-mono text-xs sm:text-sm">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono text-slate-900 font-medium break-words">
                             {spec.value}
                           </span>
-                          {isCodeRow && (
+                          {isCode && (
                             <button
-                              type="button"
                               onClick={() => copyToClipboard(spec.value)}
-                              className="p-1 rounded text-[#5E6F7D] hover:text-[#159A9C] hover:bg-[#E0E8EF]/50 transition-colors shrink-0"
+                              className="p-1 rounded-md text-slate-400 hover:text-[#0875D1] transition-colors shrink-0"
                               title="Copy catalogue code"
-                              aria-label={`Copy ${spec.label}`}
                             >
                               {copiedCode === spec.value ? (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600">
-                                  <CheckCheck className="h-3.5 w-3.5" />
-                                  Copied
-                                </span>
+                                <CheckCheck className="h-4 w-4 text-emerald-600" />
                               ) : (
-                                <Copy className="h-3.5 w-3.5" />
+                                <Copy className="h-4 w-4" />
                               )}
                             </button>
                           )}
@@ -150,81 +213,67 @@ export default function ProductDetail() {
                 </div>
               </div>
 
-              {/* CTAs */}
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              {/* Compliance Note */}
+              <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200 text-xs text-slate-600 space-y-1">
+                <div className="font-bold text-[#062D56] flex items-center gap-1.5">
+                  <ShieldCheck className="h-4 w-4 text-[#0875D1]" />
+                  <span>Quality &amp; Traceability Assurance</span>
+                </div>
+                <p className="leading-relaxed">
+                  Every implant is laser marked with lot identifiers and heat codes. Dimensional inspection conforms strictly to ISO 13485 standards. Itemized Material Test Certificates (MTC) are provided with hospital tender dispatches.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Related Products Section */}
+          {relatedProducts.length > 0 && (
+            <div className="mt-18 pt-14 border-t border-slate-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div>
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-[#062D56]">
+                    Related Implants in {category.shortName}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                    Complementary anatomical configurations and alternative screw hole patterns.
+                  </p>
+                </div>
                 <Link
-                  to={quoteUrl}
-                  className="btn-primary flex-1 shadow-sm text-center justify-center"
+                  to={`/products/${category.slug}`}
+                  className="btn-cyan text-xs py-2 px-4 shrink-0"
                 >
-                  <FileSpreadsheet className="h-4 w-4" />
-                  <span>Request an Institutional Quote</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <span>View All in {category.shortName}</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
-                {businessConfig.whatsappConfigured ? (
-                  <a
-                    href={buildProductWhatsAppLink(product.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-whatsapp flex-1 text-center justify-center"
-                  >
-                    Enquire on WhatsApp
-                  </a>
-                ) : (
-                  <a
-                    href={`tel:${businessConfig.phoneRaw}`}
-                    className="btn-secondary flex-1 text-center justify-center"
-                  >
-                    Call for Availability
-                  </a>
-                )}
               </div>
 
-              {/* Trust Indicators */}
-              <div className="mt-8 space-y-2.5 border-t border-[#E0E8EF] pt-6">
-                {[
-                  'Manufactured in implant-grade Stainless Steel 316L and Titanium Grade 5',
-                  'Standardized screw threading and locking taper design',
-                  'Hospital tenders and institutional bulk procurement welcome',
-                  'Prompt dispatch with secure padded transit packaging',
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2.5 text-xs sm:text-sm text-[#5E6F7D]">
-                    <Check className="h-4 w-4 text-[#16a34a] shrink-0" />
-                    <span>{item}</span>
-                  </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedProducts.map((p) => (
+                  <ProductCard key={p.slug} product={p} />
                 ))}
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Related Products */}
-      {relatedProducts.length > 0 && (
-        <section className="section-padding bg-[#F4F8FB] border-t border-[#E0E8EF]">
-          <div className="container-x">
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <span className="section-eyebrow">Complementary Implants</span>
-                <h2 className="mt-1 text-section-title">
-                  Related Products in {category.shortName}
-                </h2>
-              </div>
-              <Link
-                to={`/products/${category.slug}`}
-                className="text-sm font-semibold text-[#123B66] hover:text-[#159A9C] inline-flex items-center gap-1"
-              >
-                <span>View All {category.shortName}</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {relatedProducts.map((rp) => (
-                <ProductCard key={rp.slug} product={rp} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Technical Monograph Request Modal */}
+      <CatalogueRequestModal
+        product={product}
+        isOpen={isCatalogueModalOpen}
+        onClose={() => setIsCatalogueModalOpen(false)}
+      />
+
+      {/* Bottom CTA */}
+      <BottomCTA
+        eyebrow="PRODUCT REQUISITION"
+        title={`Request a Hospital Quote for ${product.name}`}
+        description="Our sales and logistics desk prepares official proposals with itemized batch pricing and delivery timelines within 1 business day."
+        primaryButtonText="Request Quotation"
+        primaryButtonLink={quoteUrl}
+        secondaryButtonText="WhatsApp Inquiry"
+        secondaryButtonLink={whatsappUrl}
+      />
     </>
   );
 }

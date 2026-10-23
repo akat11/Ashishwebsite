@@ -1,368 +1,329 @@
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  Building2,
   CheckCircle2,
   ClipboardList,
-  Eye,
   GraduationCap,
-  Headset,
   Hospital,
-  Map,
-  MapPin,
   PackageCheck,
-  Search,
   ShieldCheck,
-  Target,
   Truck,
   UsersRound,
+  Award,
+  Cpu,
+  Microscope,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import BottomCTA from '@/components/BottomCTA';
+import PageHero from '@/components/PageHero';
 
-const coverage = [
+const strategicPillars = [
   {
-    icon: MapPin,
-    title: 'Kanpur & Uttar Pradesh',
-    detail: 'Primary regional supply hub with direct local hospital delivery capability.',
+    icon: Microscope,
+    title: 'Certified Surgical Metallurgy',
+    description:
+      'Raw biomaterials strictly compliant with ASTM F138 (Stainless Steel 316L) and ASTM F136 (Titanium Ti-6Al-4V ELI), verified via chemical composition and biocompatibility testing.',
   },
   {
-    icon: Search,
-    title: 'Pan-India Distribution',
-    detail: 'We actively cater to institutional orders across all Indian states and union territories.',
+    icon: Cpu,
+    title: 'Precision 5-Axis CNC Tolerances',
+    description:
+      'High-precision continuous Swiss-type turning delivering tolerances down to ±0.01mm across anatomical contours, thread pitches, and variable angle screw holes.',
   },
   {
-    icon: Building2,
-    title: 'Healthcare Institutions',
-    detail: 'Supplying hospitals, orthopedic trauma centers, nursing homes, and medical colleges.',
-  },
-];
-
-const procurement = [
-  {
-    icon: ClipboardList,
-    title: 'Understand Requirements',
-    detail: 'We start by evaluating your specific clinical implant needs, sizing, and procedural schedule.',
-  },
-  {
-    icon: PackageCheck,
-    title: 'Source Certified Products',
-    detail: 'We supply high-grade implant materials conforming strictly to clinical metallurgy standards.',
+    icon: Award,
+    title: '100% Batch Inspection & MTC',
+    description:
+      'Optical coordinate measuring (CMM) verification on 100% of manufactured implants, accompanied by verifiable Material Test Certificates and laser-marked lot codes.',
   },
   {
     icon: Truck,
-    title: 'Quote & Deliver',
-    detail: 'We provide itemized institutional quotations and coordinate dispatch with protective transit packaging.',
+    title: 'Rapid Hospital Logistics',
+    description:
+      'Centrally headquartered in Kanpur, Uttar Pradesh, dispatching emergency trauma fixation hardware and hospital replenishment within 24–48 hours nationwide.',
   },
 ];
 
-const servedBy = [
-  { icon: Hospital, text: 'Hospitals & Trauma Centers' },
-  { icon: GraduationCap, text: 'Medical Colleges & Institutes' },
-  { icon: UsersRound, text: 'Orthopedic Surgeons' },
-  { icon: Map, text: 'Pan-India Enquiries' },
+
+const procurementSteps = [
+  {
+    step: '01',
+    icon: ClipboardList,
+    title: 'Clinical Requirement Audit',
+    detail: 'We evaluate surgical schedules, anatomical trauma requirements, plate profiles, and screw diameter demands.',
+  },
+  {
+    step: '02',
+    icon: PackageCheck,
+    title: 'Certified Implant Sourcing',
+    detail: 'We assemble precision implants in SS 316L or Titanium Grade 5 adhering to strict quality assurance protocols.',
+  },
+  {
+    step: '03',
+    icon: Truck,
+    title: 'Protective Packaging & Dispatch',
+    detail: 'We prepare itemized institutional proposals and coordinate expedited dispatch in sterile-compatible protective transit containers.',
+  },
+];
+
+const servedSectors = [
+  { icon: Hospital, text: 'Tertiary Hospitals & Trauma Units' },
+  { icon: GraduationCap, text: 'Government Medical Colleges & Tenders' },
+  { icon: UsersRound, text: 'Orthopaedic Surgeons & OT Teams' },
+  { icon: Truck, text: 'Regional Medical Distributors' },
 ];
 
 export default function About() {
   return (
     <>
       <SEO
-        title="About Us — Vinayak Surgicals | Orthopedic Implants & Fixation Partner in Kanpur"
-        description="Learn about Vinayak Surgicals, supplying orthopedic locking plates, external fixator systems, Ilizarov circular rings, and fixation components to hospitals and surgeons across Uttar Pradesh and India."
+        title="About Us — Vinayak Surgicals | Precision Orthopaedic Implants & Healthcare Supply"
+        description="Discover Vinayak Surgicals: Kanpur-based supplier of high-precision orthopaedic locking plates, intramedullary nails, external fixator systems, and surgical screws across India."
         canonical="https://vinyanaksurgicals.com/about-us"
-        keywords="about vinayak surgicals, orthopedic implant supplier, external fixator supplier, locking plate distributor, trauma implants Kanpur, Uttar Pradesh, medical supply India"
+        keywords="about vinayak surgicals, orthopedic implant supplier Kanpur, locking plate manufacturer India, trauma hardware supplier, orthopedic distributor Uttar Pradesh"
         image="/images/business-overview-surgery.png"
       />
 
       <Breadcrumbs crumbs={[{ label: 'About Us' }]} />
 
-      {/* Hero Section with Restored Surgical Image Backdrop */}
-      <section aria-label="About Vinayak Surgicals" className="hero-standard bg-[#F4F8FB] border-b border-[#E0E8EF]">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-25 sm:opacity-30 md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:opacity-40 lg:opacity-50"
-          style={{ backgroundImage: "url('/images/business-overview-surgery.png')" }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#F4F8FB]/90 via-[#F4F8FB]/95 to-[#F4F8FB] md:bg-gradient-to-r md:from-[#F4F8FB] md:via-[#F4F8FB]/95 md:via-55% md:to-transparent"
-        />
-
-        <div className="container-x relative z-10 w-full">
-          <div className="hero-standard-inner">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <span className="section-eyebrow">
-                About Vinayak Surgicals
-              </span>
-              <h1 className="mt-3 text-page-title">
-                Kanpur-Based Surgical Implants &amp;{' '}
-                <span className="text-[#159A9C]">Medical Supply Company</span>
-              </h1>
-              <p className="mt-4 text-body-large max-w-2xl">
-                Vinayak Surgicals is a dedicated medical equipment supplier based in Kanpur, Uttar Pradesh, supplying precision orthopedic locking plates, external fixators, circular rings, and trauma fixation instruments to hospitals, surgical clinics, and healthcare institutions across India.
-              </p>
-
-              <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs sm:text-sm font-semibold text-[#172B3A]">
-                {[
-                  { icon: ShieldCheck, text: 'Trusted by Surgeons' },
-                  { icon: PackageCheck, text: '10 Product Categories' },
-                  { icon: Map, text: 'Pan-India Distribution' },
-                  { icon: Truck, text: 'Timely Dispatch' },
-                ].map(({ icon: Icon, text }) => (
-                  <div key={text} className="flex items-center gap-2.5">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white border border-[#E0E8EF] text-[#123B66] shadow-xs">
-                      <Icon className="h-5 w-5 text-[#159A9C]" />
-                    </span>
-                    <span className="leading-snug">{text}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  to="/request-a-quote"
-                  className="btn-primary"
-                >
-                  <span>Request a Quote</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/products"
-                  className="btn-secondary"
-                >
-                  <span>Explore Catalogue</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* At a glance highlight card */}
-            <div className="card p-6 sm:p-8 bg-white/95 backdrop-blur-md border border-[#E0E8EF] shadow-lg">
-              <h3 className="font-display text-lg font-bold text-[#123B66] mb-5 border-b border-[#E0E8EF] pb-3">
-                Vinayak Surgicals at a Glance
-              </h3>
-              <div className="space-y-4">
-                {[
-                  { icon: PackageCheck, value: '500+', label: 'Implants & Instruments in Catalogue' },
-                  { icon: Hospital, value: '50+', label: 'Hospitals & Clinics Supplied' },
-                  { icon: MapPin, value: 'Kanpur Hub', label: 'Primary Uttar Pradesh Presence' },
-                  { icon: CheckCircle2, value: 'Pan-India', label: 'Dispatch & Sourcing Network' },
-                ].map(({ icon: Icon, value, label }, index) => (
-                  <div
-                    key={label}
-                    className={`flex items-center gap-3.5 pb-3.5 ${
-                      index < 3 ? 'border-b border-[#E0E8EF]/60' : ''
-                    }`}
-                  >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                      <Icon className="h-5 w-5 text-[#159A9C]" />
-                    </span>
-                    <div>
-                      <div className="font-display text-lg font-bold text-[#172B3A] leading-tight">
-                        {value}
-                      </div>
-                      <div className="text-xs sm:text-sm text-[#5E6F7D] mt-0.5">
-                        {label}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-      {/* Business Overview */}
-      <section className="bg-white section-padding">
-        <div className="container-x grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="overflow-hidden rounded-2xl border border-[#E0E8EF] shadow-md relative">
-            <img
-              src="/images/business-overview-surgery.png"
-              alt="Surgeons working together in an operating room"
-              loading="lazy"
-              className="aspect-[4/3] w-full object-cover"
-            />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-xl bg-[#0c2642]/90 backdrop-blur-md px-4 py-3 text-white border border-white/20">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#159A9C] text-white">
-                <Headset className="h-5 w-5" />
-              </span>
-              <span className="text-xs sm:text-sm font-semibold leading-tight">
-                Supporting Orthopedic Healthcare Professionals with High-Grade Trauma Fixation
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <span className="section-eyebrow">Business Overview</span>
-            <h2 className="mt-2 text-section-title">
-              Reliable Orthopedic Solutions for Better Patient Recovery
-            </h2>
-            <p className="mt-4 text-body-regular">
-              We supply a comprehensive range of orthopedic implants, locking plate systems, external fixators, and cortical/cancellous screws across ten specialized product categories, manufactured from implant-grade Stainless Steel 316L and Titanium Grade 5.
-            </p>
-            <p className="mt-3 text-body-regular">
-              Our focus is on serving the institutional procurement needs of healthcare facilities — from individual sterile instruments for specialized trauma procedures to bulk requirements for medical colleges and teaching hospitals.
-            </p>
-            <p className="mt-3 text-body-regular">
-              Headquartered in Kanpur, we actively serve Uttar Pradesh and fulfill pan-India orders with dedicated logistics and technical consultation.
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-4 border-t border-[#E0E8EF] pt-5">
-              {servedBy.map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                    <Icon className="h-4 w-4 text-[#159A9C]" />
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-[#172B3A]">
-                    {text}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision with Restored Imagery */}
-      <section className="bg-[#F4F8FB] section-padding">
-        <div className="container-x grid gap-6 md:grid-cols-2">
-          <div className="card relative isolate overflow-hidden p-6 sm:p-8 bg-white border border-[#E0E8EF] flex flex-col justify-between">
-            <img
-              src="/images/about-mission.png"
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 right-0 z-0 h-full w-[35%] object-cover object-right opacity-15"
-            />
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                  <Target className="h-7 w-7 text-[#159A9C]" />
-                </div>
-                <div>
-                  <span className="section-eyebrow">Our Mission</span>
-                  <h3 className="font-display text-xl font-bold text-[#172B3A] mt-1">
-                    Excellence in Surgical Sourcing
-                  </h3>
-                </div>
-              </div>
-              <p className="text-body-regular">
-                To be a reliable and responsive medical supply partner for hospitals, clinics, and orthopedic surgeons — providing access to high-grade surgical instruments, implants, and consumables with dependable service, verified quality, and competitive institutional pricing.
-              </p>
-            </div>
-          </div>
-
-          <div className="card relative isolate overflow-hidden p-6 sm:p-8 bg-white border border-[#E0E8EF] flex flex-col justify-between">
-            <img
-              src="/images/about-vision.png"
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 right-0 z-0 h-full w-[35%] object-cover object-right opacity-15"
-            />
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF]">
-                  <Eye className="h-7 w-7 text-[#159A9C]" />
-                </div>
-                <div>
-                  <span className="section-eyebrow">Our Vision</span>
-                  <h3 className="font-display text-xl font-bold text-[#172B3A] mt-1">
-                    Trusted Healthcare Partner
-                  </h3>
-                </div>
-              </div>
-              <p className="text-body-regular">
-                To become the most dependable partner in orthopedic and trauma supply across Uttar Pradesh and India, recognized for our comprehensive product catalogue, ethical business practices, and dedication to supporting patient healthcare outcomes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Coverage & Approach with Restored India Map & Background */}
-      <section className="relative overflow-hidden bg-[#0c2642] py-16 sm:py-20 lg:py-24 text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: "url('/images/hero-orthopedic-surgical.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c2642] via-[#0c2642]/95 to-[#123B66]/85" />
-
-        <div className="container-x relative z-10 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
-          <div>
-            <span className="section-eyebrow text-[#159A9C]">Our Distribution Reach</span>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-display font-extrabold text-white leading-tight">
-              Service <span className="text-[#159A9C]">Coverage Network</span>
-            </h2>
-            <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#bcccdc]">
-              From our Kanpur hub, we deliver surgical implants and medical equipment across Uttar Pradesh and coordinate pan-India dispatches.
-            </p>
-
-            <div className="mt-6 space-y-4">
-              {coverage.map(({ icon: Icon, title, detail }) => (
-                <div key={title} className="flex items-start gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-[#159A9C] mt-0.5">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-base font-bold text-white">{title}</div>
-                    <div className="text-sm text-[#bcccdc] mt-0.5 leading-relaxed">{detail}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 overflow-hidden rounded-xl border border-white/20 bg-white/5 p-2">
-              <img
-                src="/images/india-service-coverage-map.png"
-                alt="Map showing Vinayak Surgicals Kanpur hub and service coverage across India"
-                loading="lazy"
-                className="aspect-[1.6] w-full object-cover rounded-lg"
-              />
-            </div>
-          </div>
-
-          <div className="card p-6 sm:p-8 bg-white text-[#172B3A] border-none shadow-xl">
-            <span className="section-eyebrow">Procurement Approach</span>
-            <h2 className="mt-2 font-display text-2xl font-bold text-[#123B66]">
-              Structured Procurement in 3 Steps
-            </h2>
-
-            <div className="mt-6 space-y-5">
-              {procurement.map(({ icon: Icon, title, detail }, index) => (
-                <div key={title} className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F4F8FB] text-[#123B66] border border-[#E0E8EF] mt-0.5">
-                    <Icon className="h-5 w-5 text-[#159A9C]" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-[#159A9C] uppercase tracking-wider">Step 0{index + 1} &bull;</span>
-                      <span className="text-base font-bold text-[#172B3A]">{title}</span>
-                    </div>
-                    <div className="text-sm text-[#5E6F7D] mt-1 leading-relaxed">{detail}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <BottomCTA
-        eyebrow="ORTHOPAEDIC SUPPLY PARTNER"
+      {/* Cinematic MedTech Hero */}
+      <PageHero
+        eyebrow="ABOUT VINAYAK SURGICALS"
         title={
           <>
-            <span className="text-[#38BDF8]">Reliable</span> Supply for Demanding
-            <br className="hidden sm:inline" /> Surgical Care
+            Engineering Surgical Reliability &amp;{' '}
+            <span className="bg-gradient-to-r from-[#12C8E8] via-[#38BDF8] to-[#93C5FD] bg-clip-text text-transparent">
+              Healthcare Supply Across India
+            </span>
           </>
         }
-        description="High-quality orthopaedic implants, fixation systems and reliable healthcare supply across India."
-        primaryButtonText="Get in Touch"
-        primaryButtonLink="/contact-us"
-        secondaryButtonText="Request a Quote"
-        secondaryButtonLink="/request-a-quote"
-        backgroundImage="/images/about-cta-background.png"
+        subtitle="Headquartered in Kanpur, Uttar Pradesh, Vinayak Surgicals supplies certified orthopaedic implants, locking compression plates, intramedullary nails, and modular external fixation hardware to hospitals, trauma centers, and orthopaedic surgeons nationwide."
+        backgroundImage="/images/business-overview-surgery.png"
+        ctaPrimary={{
+          text: 'Explore Implant Catalogue',
+          to: '/products',
+          icon: <ArrowRight className="h-4 w-4" />,
+        }}
+        ctaSecondary={{
+          text: 'Request Institutional Rate Card',
+          to: '/request-a-quote',
+        }}
+      />
+
+      {/* Corporate Overview & Surgical Theatre Presentation */}
+      <section className="bg-white py-18 sm:py-24">
+        <div className="container-x">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-5">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#0fb2ce] block">
+                OUR CLINICAL MISSION
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#062D56] tracking-tight leading-tight">
+                Empowering Surgeons with Uncompromising Fixation Integrity
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                Founded with a steadfast commitment to clinical metallurgy and dependable healthcare logistics, Vinayak Surgicals bridges the gap between high-precision implant engineering and frontline operating rooms.
+              </p>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                From emergency open-trauma fracture stabilization with circular Ilizarov frames to delicate intra-articular distal radius reconstructions, our products undergo rigorous dimensional verification to ensure seamless intraoperative fit, stable biological fixation, and rapid patient recovery.
+              </p>
+
+              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700 font-medium">
+                {[
+                  'ASTM F138 SS 316L & ASTM F136 Titanium Gr. 5',
+                  'Full Material Test Certificates (MTC) on demand',
+                  'Dedicated instrument sets with drill guides & taps',
+                  'Emergency trauma hospital dispatch within 24–48h',
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0875D1]" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 relative">
+              <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-2xl relative group">
+                <img
+                  src="/images/business-overview-surgery.png"
+                  alt="Orthopaedic surgeons performing precision bone fixation"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062D56]/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#12C8E8] text-[#031525] text-[11px] font-mono font-bold mb-1 shadow-xs">
+                    <ShieldCheck className="h-3.5 w-3.5" />
+                    <span>HOSPITAL TENDER TESTED</span>
+                  </div>
+                  <p className="text-xs text-slate-200">
+                    Trusted across premier medical colleges, trauma emergency centers, and corporate hospitals.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4 Strategic Engineering Pillars */}
+      <section className="bg-[#020F1C] text-white py-20 sm:py-24 border-y border-white/10 relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-[#12C8E8]/10 blur-[130px]"
+          aria-hidden="true"
+        />
+        <div className="container-x relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#12C8E8] block mb-2">
+              MANUFACTURING &amp; QUALITY ASSURANCE
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              Built on Unyielding Engineering Standards
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+              Every locking plate, intramedullary nail, and external clamp is manufactured to tight international tolerances to support optimal clinical outcomes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {strategicPillars.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
+                <div
+                  key={pillar.title}
+                  className="rounded-3xl p-6 bg-white/[0.05] border border-white/10 hover:border-[#12C8E8]/50 transition-all duration-300 backdrop-blur-md flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#12C8E8]/15 border border-[#12C8E8]/30 text-[#12C8E8] mb-5">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="font-display text-base font-bold text-white mb-2 leading-snug">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Procurement & Delivery Process Lifecycle */}
+      <section className="bg-white py-18 sm:py-24 border-b border-slate-200">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#0fb2ce] block mb-2">
+              HOSPITAL PROCUREMENT PIPELINE
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#062D56] tracking-tight">
+              Streamlined Surgical Sourcing
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
+              From requirement review to sterile-compatible protective delivery, our process ensures prompt, error-free fulfillment.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {procurementSteps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={step.step}
+                  className="rounded-3xl p-7 bg-[#F8FAFC] border border-slate-200 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between relative"
+                >
+                  <span className="absolute top-6 right-6 font-mono text-3xl font-extrabold text-slate-200">
+                    {step.step}
+                  </span>
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0875D1]/10 text-[#0875D1] mb-5">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="font-display text-base sm:text-lg font-bold text-[#062D56] mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {step.detail}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Distribution Network & Coverage */}
+      <section className="bg-[#F8FAFC] py-18 sm:py-24">
+        <div className="container-x">
+          <div className="rounded-3xl bg-gradient-to-r from-[#062D56] via-[#093d73] to-[#0875D1] text-white p-8 sm:p-12 shadow-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7 space-y-4">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#12C8E8]">
+                  PAN-INDIA LOGISTICS NETWORK
+                </span>
+                <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                  Rapid Fulfillment From Our Central Kanpur Hub
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-xl">
+                  Strategic transit connectivity allows us to ship scheduled hospital stock and emergency trauma inventory with full batch certificates to healthcare facilities in all major Indian cities within 24 to 48 hours.
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                  {servedSectors.map((sector) => {
+                    const Icon = sector.icon;
+                    return (
+                      <div
+                        key={sector.text}
+                        className="p-3 rounded-xl bg-white/10 border border-white/15 text-center flex flex-col items-center justify-center gap-1.5"
+                      >
+                        <Icon className="h-5 w-5 text-[#12C8E8]" />
+                        <span className="text-[11px] font-medium text-slate-200 leading-tight">
+                          {sector.text}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
+                <div className="p-6 rounded-2xl bg-black/30 border border-white/20 backdrop-blur-md text-center max-w-sm w-full">
+                  <span className="text-xs font-mono text-[#12C8E8] block mb-1">
+                    CENTRAL CONTACT DESK
+                  </span>
+                  <span className="font-display text-xl sm:text-2xl font-bold text-white block">
+                    +91 99355 55555
+                  </span>
+                  <p className="text-xs text-slate-300 mt-2">
+                    Available for institutional tender inquiries, surgeon consultations, and urgent case replenishment.
+                  </p>
+                  <Link
+                    to="/contact-us"
+                    className="btn-cyan text-xs mt-4 w-full justify-center"
+                  >
+                    <span>Contact Sourcing Coordinator</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <BottomCTA
+        eyebrow="READY TO PARTNER?"
+        title="Equip Your Surgical Suites with Certified Fixation Hardware"
+        description="Connect with our Kanpur headquarters team for hospital rate contracts, itemized quotations, or customized instrument set allocations."
+        primaryButtonText="Request Institutional Quote"
+        primaryButtonLink="/request-a-quote"
+        secondaryButtonText="Explore Products"
+        secondaryButtonLink="/products"
       />
     </>
   );
