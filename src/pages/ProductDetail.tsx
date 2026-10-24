@@ -18,6 +18,8 @@ import CatalogueRequestModal from '@/components/home/CatalogueRequestModal';
 import { productCategories } from '@/data/categories';
 import { getProductBySlug, getProductsByCategory } from '@/data/products';
 import { buildProductWhatsAppLink } from '@/config/business';
+import InteractiveProductViewer from '@/components/product/InteractiveProductViewer';
+import { getProductAnatomy } from '@/data/productAnatomy';
 
 export default function ProductDetail() {
   const { category: catSlug, product: prodSlug } = useParams<{ category: string; product: string }>();
@@ -31,6 +33,7 @@ export default function ProductDetail() {
     return <Navigate to="/products" replace />;
   }
 
+  const anatomyDef = getProductAnatomy(product.slug);
   const relatedProducts = getProductsByCategory(category.slug)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 4);
@@ -62,7 +65,7 @@ export default function ProductDetail() {
           '@context': 'https://schema.org',
           '@type': 'Product',
           name: product.name,
-          image: product.image.startsWith('http') ? product.image : `https://vinyanaksurgicals.com${product.image}`,
+          image: product.image.startsWith('http') ? product.image : `https://vinayaksurgicals.vercel.app${product.image}`,
           description: product.description,
           category: category.name,
           sku: primaryCode || product.slug,
@@ -87,27 +90,14 @@ export default function ProductDetail() {
       <section className="bg-white py-12 sm:py-16 border-b border-slate-200">
         <div className="container-x">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            {/* Left Column: Studio Product Image Stage (5.5 cols) */}
+            {/* Left Column: Interactive Product Anatomy Viewer (5.5 cols) */}
             <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
-              <div className="relative rounded-3xl border border-slate-200 bg-gradient-to-b from-[#F8FAFC] to-[#EDF5FA] p-8 sm:p-12 flex items-center justify-center overflow-hidden shadow-sm group">
-                <picture className="w-full flex justify-center">
-                  <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full max-h-[420px] object-contain transition-transform duration-500 group-hover:scale-105 filter drop-shadow-md"
-                  />
-                </picture>
-
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#062D56] text-white text-[11px] font-mono font-bold">
-                  {category.shortName}
-                </div>
-
-                <div className="absolute bottom-4 right-4 flex items-center gap-1.5 text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60 shadow-2xs">
-                  <ShieldCheck className="h-3.5 w-3.5" />
-                  <span>ISO 13485 Certified</span>
-                </div>
-              </div>
+              <InteractiveProductViewer
+                product={product}
+                categoryShortName={category.shortName}
+                onRequestMonograph={() => setIsCatalogueModalOpen(true)}
+                whatsappInquiryUrl={whatsappUrl}
+              />
 
               {/* Quick Actions Under Image */}
               <div className="grid grid-cols-2 gap-3">
@@ -225,6 +215,64 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
+
+          {/* Biomechanical Engineering Analysis (Only rendered when verified anatomy definitions exist) */}
+          {anatomyDef && (
+            <div className="mt-16 pt-12 border-t border-slate-200">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0875D1]/10 text-[#0875D1] text-[11px] font-mono font-bold uppercase tracking-wider mb-2 border border-[#0875D1]/20">
+                    <Sparkles className="h-3.5 w-3.5 text-[#12C8E8]" />
+                    <span>Clinical Anatomy &amp; Engineering Profile</span>
+                  </div>
+                  <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#062D56] tracking-tight">
+                    {anatomyDef.headline}
+                  </h2>
+                  <p className="mt-2 text-sm text-slate-600 max-w-2xl leading-relaxed">
+                    {anatomyDef.summary}
+                  </p>
+                </div>
+                <div className="text-xs font-mono text-slate-600 bg-[#F8FAFC] px-3.5 py-2 rounded-xl border border-slate-200/90 shrink-0 shadow-2xs">
+                  Anatomical Complex: <span className="font-bold text-[#062D56]">{anatomyDef.anatomicalRegion}</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {anatomyDef.verifiedHotspots.map((hotspot) => (
+                  <div
+                    key={hotspot.id}
+                    className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-2xs hover:border-[#0875D1]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                  >
+                    <div className="space-y-2.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#062D56] text-white font-mono text-xs font-bold shadow-2xs">
+                          {hotspot.number}
+                        </span>
+                        <span className="text-[10.5px] font-mono font-bold text-[#0875D1] uppercase tracking-wider bg-[#0875D1]/10 px-2.5 py-0.5 rounded-md">
+                          {hotspot.featureName}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-base font-bold text-[#062D56]">
+                        {hotspot.title}
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {hotspot.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-[11px] font-mono">
+                      {hotspot.verifiedSpecs.slice(0, 2).map((s) => (
+                        <div key={s.label} className="flex items-center justify-between gap-2 text-slate-500">
+                          <span className="text-slate-400">{s.label}:</span>
+                          <span className="font-semibold text-slate-800 truncate">{s.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Related Products Section */}
           {relatedProducts.length > 0 && (
