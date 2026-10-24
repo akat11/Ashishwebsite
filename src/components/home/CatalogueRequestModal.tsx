@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { X, Send, CheckCircle2, ShieldCheck, Mail, Phone, Building, User } from 'lucide-react';
 import type { Product } from '@/data/products';
+import { useModalA11y } from '@/hooks/useModalA11y';
 
 interface CatalogueRequestModalProps {
   product: Product | null;
@@ -22,6 +23,13 @@ export default function CatalogueRequestModal({
     requirementType: 'Hospital Procurement',
   });
 
+  const handleResetAndClose = useCallback(() => {
+    setSubmitted(false);
+    onClose();
+  }, [onClose]);
+
+  useModalA11y(isOpen, handleResetAndClose);
+
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,41 +38,55 @@ export default function CatalogueRequestModal({
     setSubmitted(true);
   };
 
-  const handleResetAndClose = () => {
-    setSubmitted(false);
-    onClose();
-  };
-
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#031525]/80 backdrop-blur-md transition-all animate-fade-in"
       onClick={handleResetAndClose}
       role="dialog"
       aria-modal="true"
+      aria-labelledby="catalogue-modal-title"
     >
       <div
         className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-slate-800 animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-gradient-to-r from-[#062D56] to-[#0875D1] text-white p-6 relative">
+        <div className="bg-gradient-to-r from-[#062D56] to-[#0875D1] text-white p-5 sm:p-6 relative border-b border-white/10">
           <button
+            type="button"
             onClick={handleResetAndClose}
-            className="absolute top-4 right-4 p-1 rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-colors"
+            className="absolute top-4 right-4 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white/90 hover:text-white transition-colors cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#12C8E8]"
+            aria-label="Close dialogue"
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5 pointer-events-none" />
           </button>
-          <div className="flex items-center gap-2 text-[#12C8E8] text-xs font-bold uppercase tracking-wider mb-1.5">
-            <ShieldCheck className="h-4 w-4" />
+          <div className="flex items-center gap-2 text-[#12C8E8] text-xs font-bold uppercase tracking-wider mb-2">
+            <ShieldCheck className="h-4 w-4 shrink-0" />
             <span>Orthopaedic Technical Documentation Desk</span>
           </div>
-          <h3 className="font-display text-xl font-extrabold text-white">
+          <h3
+            id="catalogue-modal-title"
+            className="font-display text-xl sm:text-2xl font-extrabold text-white !text-white leading-snug tracking-tight"
+            style={{ color: '#ffffff' }}
+          >
             Request Technical Monograph &amp; Catalogue
           </h3>
-          <p className="mt-1 text-xs text-slate-200">
-            {product
-              ? `Specific to: ${product.name}`
-              : 'Complete Vinayak Surgicals Trauma & Fixation Systems Catalogue'}
-          </p>
+          {product ? (
+            <div className="mt-3 p-2.5 rounded-lg bg-white/10 border border-white/15">
+              <span className="text-[11px] font-mono font-bold text-[#12C8E8] block uppercase tracking-wider">
+                Requested Implant System:
+              </span>
+              <p
+                className="text-sm font-bold text-white !text-white mt-0.5 break-words"
+                style={{ color: '#ffffff' }}
+              >
+                {product.name}
+              </p>
+            </div>
+          ) : (
+            <p className="mt-1.5 text-xs text-slate-200">
+              Complete Vinayak Surgicals Trauma &amp; Fixation Systems Catalogue
+            </p>
+          )}
         </div>
 
         {submitted ? (

@@ -80,7 +80,7 @@ export default function About() {
       <SEO
         title="About Us — Vinayak Surgicals | Precision Orthopaedic Implants & Healthcare Supply"
         description="Discover Vinayak Surgicals: Kanpur-based supplier of high-precision orthopaedic locking plates, intramedullary nails, external fixator systems, and surgical screws across India."
-        canonical="https://vinyanaksurgicals.com/about-us"
+        canonical="https://vinayaksurgicals.vercel.app/about-us"
         keywords="about vinayak surgicals, orthopedic implant supplier Kanpur, locking plate manufacturer India, trauma hardware supplier, orthopedic distributor Uttar Pradesh"
         image="/images/business-overview-surgery.png"
       />

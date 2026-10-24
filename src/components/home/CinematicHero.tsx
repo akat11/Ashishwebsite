@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -11,6 +11,77 @@ import {
   Sparkles,
   Activity,
 } from 'lucide-react';
+import { businessConfig } from '@/config/business';
+
+interface HeroStatConfig {
+  readonly id: string;
+  readonly displayValue: string;
+  readonly label: string;
+  readonly highlight?: boolean;
+  readonly numericTarget?: number;
+  readonly suffix?: string;
+}
+
+function HeroStatCounterItem({
+  stat,
+  startAnimation,
+}: {
+  stat: HeroStatConfig;
+  startAnimation: boolean;
+}) {
+  const [display, setDisplay] = useState(stat.displayValue);
+
+  useEffect(() => {
+    if (!stat.numericTarget || !startAnimation) {
+      setDisplay(stat.displayValue);
+      return;
+    }
+
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(stat.displayValue);
+      return;
+    }
+
+    const duration = 1200;
+    const target = stat.numericTarget;
+    const suffix = stat.suffix || '';
+    let startTimestamp: number | null = null;
+    let frameId: number;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      // Cubic ease-out
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      const currentVal = Math.round(easedProgress * target);
+
+      if (progress < 1) {
+        setDisplay(`${currentVal}${suffix}`);
+        frameId = requestAnimationFrame(step);
+      } else {
+        setDisplay(stat.displayValue);
+      }
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [stat, startAnimation]);
+
+  return (
+    <div>
+      <span
+        className={`font-display text-xl sm:text-2xl font-extrabold block ${
+          stat.highlight ? 'text-[#12C8E8]' : 'text-white'
+        }`}
+      >
+        {display}
+      </span>
+      <span className="text-[11px] sm:text-xs text-slate-400">
+        {stat.label}
+      </span>
+    </div>
+  );
+}
 
 // 3 flagship genuine orthopaedic implants featured in the cinematic hero studio
 const heroImplants = [
@@ -102,6 +173,33 @@ export default function CinematicHero() {
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Stats viewport observer for subtle count-up trigger
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsVisible, setStatsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = statsRef.current;
+    if (!node) return;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setStatsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -120,7 +218,7 @@ export default function CinematicHero() {
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#020F1C] text-white pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-16 lg:pb-28">
+    <section className="relative isolate overflow-hidden bg-[#020F1C] text-white pb-16 sm:pb-24 lg:pb-28">
       {/* 1. Cinematic Studio Background: Multi-point lighting & Vignette */}
       <div
         className="absolute inset-0 pointer-events-none opacity-25 select-none"
@@ -146,11 +244,11 @@ export default function CinematicHero() {
         aria-hidden="true"
       />
 
-      <div className="container-x relative z-10">
-        {/* Live Surgical Telemetry Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-white/10 text-xs text-slate-300">
+      {/* Live Surgical Telemetry Bar - Compact Strip (48-52px) */}
+      <div className="relative z-20 border-b border-white/10 bg-[#020F1C]/60 backdrop-blur-xs">
+        <div className="container-x min-h-[48px] sm:min-h-[50px] py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 text-xs text-slate-300">
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#12C8E8] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#12C8E8]" />
             </span>
@@ -159,18 +257,20 @@ export default function CinematicHero() {
             </span>
           </div>
 
-          <div className="hidden md:flex items-center gap-6 font-mono text-[11px] text-slate-400">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 font-mono text-[11px] text-slate-400">
             <span className="flex items-center gap-1.5 text-slate-300">
-              <ShieldCheck className="h-3.5 w-3.5 text-[#12C8E8]" />
+              <ShieldCheck className="h-3.5 w-3.5 text-[#12C8E8] shrink-0" />
               ISO 13485 CERTIFIED
             </span>
             <span>TOLERANCE: ±0.01MM CNC</span>
             <span>HOSPITAL DISPATCH: 24–48H</span>
           </div>
         </div>
+      </div>
 
+      <div className="container-x relative z-10 pt-8 sm:pt-12 lg:pt-14">
         {/* Main Grid: Left Storytelling Headline & Right 3D Cinematic Studio */}
-        <div className="mt-8 sm:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column (6.5 cols) */}
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-[#12C8E8] backdrop-blur-md border border-white/15 shadow-inner">
@@ -208,31 +308,17 @@ export default function CinematicHero() {
             </div>
 
             {/* Mini Proof Counters */}
-            <div className="pt-4 grid grid-cols-3 gap-4 border-t border-white/10 max-w-lg">
-              <div>
-                <span className="font-display text-xl sm:text-2xl font-extrabold text-white block">
-                  110+
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-400">
-                  Fixation Systems
-                </span>
-              </div>
-              <div>
-                <span className="font-display text-xl sm:text-2xl font-extrabold text-[#12C8E8] block">
-                  316L / Gr.5
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-400">
-                  Implant Biomaterials
-                </span>
-              </div>
-              <div>
-                <span className="font-display text-xl sm:text-2xl font-extrabold text-white block">
-                  28+ States
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-400">
-                  Pan-India Distribution
-                </span>
-              </div>
+            <div
+              ref={statsRef}
+              className="pt-4 grid grid-cols-3 gap-4 border-t border-white/10 max-w-lg"
+            >
+              {businessConfig.heroStatistics.map((stat) => (
+                <HeroStatCounterItem
+                  key={stat.id}
+                  stat={stat}
+                  startAnimation={statsVisible}
+                />
+              ))}
             </div>
           </div>
 
@@ -289,11 +375,18 @@ export default function CinematicHero() {
                 <div className="absolute inset-x-12 top-1/2 -translate-y-1/2 h-44 rounded-full bg-gradient-to-r from-[#0875D1]/35 via-[#12C8E8]/25 to-[#0875D1]/35 blur-3xl pointer-events-none" />
 
                 <div className="relative z-10 w-full aspect-[4/3] max-h-68 flex items-center justify-center p-3">
-                  <img
-                    src={activeImplant.image}
-                    alt={activeImplant.name}
-                    className="max-h-full max-w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transform transition-transform duration-500 hover:scale-105"
-                  />
+                  <picture className="h-full w-full flex items-center justify-center">
+                    {activeImplant.image?.endsWith('.jpg') && (
+                      <source srcSet={activeImplant.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                    )}
+                    <img
+                      src={activeImplant.image}
+                      alt={activeImplant.name}
+                      fetchPriority="high"
+                      decoding="async"
+                      className="max-h-full max-w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transform transition-transform duration-500 hover:scale-105"
+                    />
+                  </picture>
                 </div>
 
                 {/* Implant Title & Biomechanical Overview */}

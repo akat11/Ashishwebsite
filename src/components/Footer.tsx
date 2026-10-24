@@ -141,7 +141,7 @@ export default function Footer() {
                 <a
                   href="https://facebook.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-[#0875D1] hover:text-white transition-colors"
                   aria-label="Facebook"
                 >
@@ -150,7 +150,7 @@ export default function Footer() {
                 <a
                   href="https://twitter.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-[#0875D1] hover:text-white transition-colors"
                   aria-label="Twitter"
                 >
@@ -159,7 +159,7 @@ export default function Footer() {
                 <a
                   href="https://linkedin.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-[#0875D1] hover:text-white transition-colors"
                   aria-label="LinkedIn"
                 >
@@ -168,7 +168,7 @@ export default function Footer() {
                 <a
                   href="https://instagram.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-[#0875D1] hover:text-white transition-colors"
                   aria-label="Instagram"
                 >

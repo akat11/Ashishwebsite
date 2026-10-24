@@ -19,7 +19,7 @@ export default function Contact() {
       <SEO
         title="Contact Us — Vinayak Surgicals | Kanpur Headquarters & Pan-India Inquiries"
         description="Contact Vinayak Surgicals for orthopaedic implants, locking compression plate systems, intramedullary nails, and external fixators. Telephone, WhatsApp, and procurement desk available."
-        canonical="https://vinyanaksurgicals.com/contact-us"
+        canonical="https://vinayaksurgicals.vercel.app/contact-us"
         keywords="contact vinayak surgicals, orthopedic supplier Kanpur, medical equipment inquiries Kanpur, trauma implant quote India"
       />
 

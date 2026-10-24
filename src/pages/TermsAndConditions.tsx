@@ -9,7 +9,7 @@ export default function TermsAndConditions() {
       <SEO
         title="Terms & Conditions | Vinayak Surgicals"
         description="Terms and conditions for using the Vinayak Surgicals website and engaging our medical supply services."
-        canonical="https://vinyanaksurgicals.com/terms-and-conditions"
+        canonical="https://vinayaksurgicals.vercel.app/terms-and-conditions"
       />
       <Breadcrumbs crumbs={[{ label: 'Terms & Conditions' }]} />
 

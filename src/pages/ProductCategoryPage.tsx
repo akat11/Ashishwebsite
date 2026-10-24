@@ -15,8 +15,9 @@ import BottomCTA from '@/components/BottomCTA';
 import ProductCard from '@/components/ProductCard';
 import { productCategories } from '@/data/categories';
 import { getProductsByCategory } from '@/data/products';
+import { filterProducts, type ProductSortOption } from '@/utils/productFilters';
 
-type SortOrder = 'featured' | 'name-ascending' | 'name-descending';
+type SortOrder = Extract<ProductSortOption, 'featured' | 'name-ascending' | 'name-descending'>;
 
 export default function ProductCategoryPage() {
   const { category: slug } = useParams<{ category: string }>();
@@ -30,18 +31,11 @@ export default function ProductCategoryPage() {
   );
 
   const visibleProducts = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    const filtered = categoryProducts.filter((product) =>
-      `${product.name} ${product.description}`.toLowerCase().includes(normalizedQuery)
-    );
-
-    if (sortOrder === 'name-ascending') {
-      return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
-    }
-    if (sortOrder === 'name-descending') {
-      return [...filtered].sort((a, b) => b.name.localeCompare(a.name));
-    }
-    return filtered;
+    return filterProducts({
+      products: categoryProducts,
+      searchQuery: query,
+      sortBy: sortOrder,
+    });
   }, [categoryProducts, query, sortOrder]);
 
   if (!category) return <Navigate to="/products" replace />;
@@ -55,7 +49,7 @@ export default function ProductCategoryPage() {
       <SEO
         title={`${category.name} — Orthopaedic Implants & Fixation Systems | Vinayak Surgicals`}
         description={category.description}
-        canonical={`https://vinyanaksurgicals.com/products/${category.slug}`}
+        canonical={`https://vinayaksurgicals.vercel.app/products/${category.slug}`}
         image={category.image}
         keywords={`${category.name}, ${category.shortName}, orthopedic locking plates, trauma fixation, orthopedic implants India, Vinayak Surgicals Kanpur`}
         jsonLd={{
@@ -63,17 +57,17 @@ export default function ProductCategoryPage() {
           '@type': 'CollectionPage',
           name: category.name,
           description: category.description,
-          url: `https://vinyanaksurgicals.com/products/${category.slug}`,
+          url: `https://vinayaksurgicals.vercel.app/products/${category.slug}`,
           breadcrumb: {
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vinyanaksurgicals.com/' },
-              { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://vinyanaksurgicals.com/products' },
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vinayaksurgicals.vercel.app/' },
+              { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://vinayaksurgicals.vercel.app/products' },
               {
                 '@type': 'ListItem',
                 position: 3,
                 name: category.name,
-                item: `https://vinyanaksurgicals.com/products/${category.slug}`,
+                item: `https://vinayaksurgicals.vercel.app/products/${category.slug}`,
               },
             ],
           },

@@ -73,7 +73,7 @@ export const faqs: FAQItem[] = [
   },
   {
     category: 'Support',
-    question: 'How can I contact Vinyanak Surgicals?',
+    question: 'How can I contact Vinayak Surgicals?',
     answer:
       'You can reach us by phone, email or WhatsApp during business hours. Visit our Contact Us page for all contact details, our enquiry form and WhatsApp enquiry option. Our team is available Monday to Saturday to assist with your medical supply requirements.',
   },

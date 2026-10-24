@@ -8,7 +8,7 @@ export default function ShippingPolicy() {
       <SEO
         title="Shipping Policy | Vinayak Surgicals"
         description="Shipping and delivery policy for surgical instruments and medical supply orders from Vinayak Surgicals."
-        canonical="https://vinyanaksurgicals.com/shipping-policy"
+        canonical="https://vinayaksurgicals.vercel.app/shipping-policy"
       />
       <Breadcrumbs crumbs={[{ label: 'Shipping Policy' }]} />
 

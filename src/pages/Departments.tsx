@@ -24,7 +24,7 @@ export default function Departments() {
       <SEO
         title="Clinical Specialties & Surgical Departments We Serve | Vinayak Surgicals"
         description="Supplying specialized orthopaedic implants, locking plate systems, and external fixators tailored to hospital surgical departments across India."
-        canonical="https://vinyanaksurgicals.com/departments"
+        canonical="https://vinayaksurgicals.vercel.app/departments"
         keywords="orthopedic departments, trauma surgery supply, limb reconstruction, pediatric orthopaedics, hand surgery implants, foot and ankle surgery, hospital procurement India"
         image="/images/categories/tibia-locking-plates.jpg"
       />

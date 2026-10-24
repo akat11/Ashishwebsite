@@ -63,7 +63,7 @@ export default function ClinicalEngineering() {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-[#12C8E8]/15 px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider text-[#12C8E8] border border-[#12C8E8]/30">
               <Award className="h-3.5 w-3.5" />
-              <span>ABOUT VINAYAK ORTHOPAEDIC SOLUTIONS</span>
+              <span>ABOUT VINAYAK SURGICALS</span>
             </div>
 
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
@@ -75,7 +75,7 @@ export default function ClinicalEngineering() {
             </p>
 
             <p className="text-sm sm:text-base leading-relaxed text-slate-300">
-              Vinayak Orthopaedic Solutions is a premier supplier of high-precision orthopaedic implants, locking compression plate systems, modular external fixators, intramedullary nails, and specialized surgical instrument sets. We partner directly with healthcare institutions, trauma centers, and medical distributors across India to support optimal surgical outcomes and patient recovery.
+              Vinayak Surgicals is a premier supplier of high-precision orthopaedic implants, locking compression plate systems, modular external fixators, intramedullary nails, and specialized surgical instrument sets. We partner directly with healthcare institutions, trauma centers, and medical distributors across India to support optimal surgical outcomes and patient recovery.
             </p>
 
             {/* Checklist */}

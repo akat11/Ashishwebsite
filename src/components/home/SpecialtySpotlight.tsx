@@ -115,12 +115,18 @@ export default function SpecialtySpotlight({ onInspectProduct }: SpecialtySpotli
               className="group rounded-2xl bg-white border border-slate-200/90 hover:border-[#0875D1]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               <div className="relative aspect-[4/3] p-4 flex items-center justify-center bg-slate-50/50">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  loading="lazy"
-                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                />
+                <picture className="h-full w-full flex items-center justify-center">
+                  {product.image?.endsWith('.jpg') && (
+                    <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                  )}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
+                </picture>
               </div>
 
               <div className="p-4 flex-1 flex flex-col justify-between">
@@ -137,8 +143,13 @@ export default function SpecialtySpotlight({ onInspectProduct }: SpecialtySpotli
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                   <button
-                    onClick={() => onInspectProduct(product)}
-                    className="text-xs font-semibold text-slate-500 hover:text-[#0875D1] transition-colors"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onInspectProduct(product);
+                    }}
+                    className="text-xs font-semibold text-slate-500 hover:text-[#0875D1] transition-colors cursor-pointer"
+                    aria-label={`Quick Specifications for ${product.name}`}
                   >
                     Quick Specs
                   </button>

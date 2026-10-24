@@ -29,7 +29,7 @@ export default function Sitemap() {
       <SEO
         title="Complete Sitemap | Vinayak Surgicals"
         description="Complete sitemap of all routes, product categories, and business pages on the Vinayak Surgicals website."
-        canonical="https://vinyanaksurgicals.com/sitemap"
+        canonical="https://vinayaksurgicals.vercel.app/sitemap"
       />
       <Breadcrumbs crumbs={[{ label: 'Sitemap' }]} />
 

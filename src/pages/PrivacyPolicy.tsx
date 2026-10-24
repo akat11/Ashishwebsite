@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
       <SEO
         title="Privacy Policy | Vinayak Surgicals"
         description="Privacy policy for Vinayak Surgicals website. Learn how we handle your information when you contact us or request a quotation."
-        canonical="https://vinyanaksurgicals.com/privacy-policy"
+        canonical="https://vinayaksurgicals.vercel.app/privacy-policy"
       />
       <Breadcrumbs crumbs={[{ label: 'Privacy Policy' }]} />
 

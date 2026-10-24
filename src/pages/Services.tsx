@@ -85,7 +85,7 @@ export default function Services() {
       <SEO
         title="Orthopaedic Supply Services & Hospital Procurement | Vinayak Surgicals"
         description="Comprehensive orthopaedic supply services: product supply, institutional quotations, hospital tender fulfillment, and specialized trauma implant sourcing from Kanpur, India."
-        canonical="https://vinyanaksurgicals.com/services"
+        canonical="https://vinayaksurgicals.vercel.app/services"
         keywords="orthopedic supply services, hospital tender implants, bulk trauma plates, orthopedic procurement India, surgical instrument supply Kanpur"
         image="/images/services-product-supply-hd.jpg"
       />

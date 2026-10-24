@@ -92,7 +92,7 @@ export default function Brands() {
       <SEO
         title="Trusted Global Brands & Verified Manufacturers | Vinayak Surgicals"
         description="We partner with leading global and Indian manufacturers to bring high-quality orthopaedic implants, surgical instruments, and trauma systems to hospitals and clinics across India."
-        canonical="https://vinyanaksurgicals.com/brands"
+        canonical="https://vinayaksurgicals.vercel.app/brands"
         keywords="orthopedic manufacturers, medical brands, implant sourcing, surgical instruments supplier Kanpur, Stryker, DePuy Synthes, Zimmer Biomet, Vinayak Surgicals"
         image="/images/brands-hero-banner-4k.jpg"
       />

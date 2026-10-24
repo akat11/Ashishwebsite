@@ -13,7 +13,7 @@ export default function FAQ() {
       <SEO
         title="Frequently Asked Questions — Orthopedic Implants & Fixation | Vinayak Surgicals"
         description="Find answers to common questions about orthopedic locking plate systems, external fixators, material grades (SS 316L and Titanium Grade 5), quotations, and institutional orders."
-        canonical="https://vinyanaksurgicals.com/faq"
+        canonical="https://vinayaksurgicals.vercel.app/faq"
         keywords="orthopedic FAQ, locking plates questions, external fixator guidance, stainless steel 316L implants, titanium grade 5, Vinayak Surgicals Kanpur"
         jsonLd={{
           '@context': 'https://schema.org',

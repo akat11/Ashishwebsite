@@ -88,7 +88,7 @@ export default function QuoteForm() {
       ? validLines.map((l, i) => `${i + 1}. ${l.product} | Qty: ${l.quantity || 'TBD'} | Spec: ${l.specification || 'Standard'}`).join('\n')
       : 'No specific items specified';
 
-    return `*Quotation Request — Vinyanak Surgicals*\n\n` +
+    return `*Quotation Request — Vinayak Surgicals*\n\n` +
       `*Facility:* ${formData.orgName || 'N/A'}\n` +
       `*Contact Person:* ${formData.contactPerson || 'N/A'}\n` +
       `*Phone:* ${formData.contactPhone || 'N/A'}\n` +

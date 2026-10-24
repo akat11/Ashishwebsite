@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import Home from '@/pages/Home';
 
 // Route-level code splitting for faster initial page loads
@@ -42,30 +43,32 @@ export default function App() {
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about-us" element={<About />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:category" element={<ProductCategoryPage />} />
-              <Route path="/products/:category/:product" element={<ProductDetail />} />
-              <Route path="/departments" element={<Departments />} />
-              <Route path="/brands" element={<Brands />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/faq" element={<FAQ />} />
-              {/* Legacy and resource routes redirect cleanly */}
-              <Route path="/resources" element={<Navigate to="/products" replace />} />
-              <Route path="/resources/*" element={<Navigate to="/products" replace />} />
-              <Route path="/contact-us" element={<Contact />} />
-              <Route path="/request-a-quote" element={<Quote />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-              <Route path="/shipping-policy" element={<ShippingPolicy />} />
-              <Route path="/returns-and-claims" element={<ReturnsAndClaims />} />
-              <Route path="/sitemap" element={<Sitemap />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about-us" element={<About />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/products/:category" element={<ProductCategoryPage />} />
+                <Route path="/products/:category/:product" element={<ProductDetail />} />
+                <Route path="/departments" element={<Departments />} />
+                <Route path="/brands" element={<Brands />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/faq" element={<FAQ />} />
+                {/* Legacy and resource routes redirect cleanly */}
+                <Route path="/resources" element={<Navigate to="/products" replace />} />
+                <Route path="/resources/*" element={<Navigate to="/products" replace />} />
+                <Route path="/contact-us" element={<Contact />} />
+                <Route path="/request-a-quote" element={<Quote />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+                <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                <Route path="/returns-and-claims" element={<ReturnsAndClaims />} />
+                <Route path="/sitemap" element={<Sitemap />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </main>
         <Footer />
         <WhatsAppButton />

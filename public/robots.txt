@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vinyanaksurgicals.com/sitemap.xml
+Sitemap: https://vinayaksurgicals.vercel.app/sitemap.xml

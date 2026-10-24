@@ -11,11 +11,14 @@ export default function CategoryCard({ category }: { category: ProductCategory }
       {/* Large light blue-gray image area on top with subtle soft blue gradient */}
       <div className="relative aspect-[4/3] w-full bg-gradient-to-b from-[#EAF3FA] to-[#DCE8F2] p-4 sm:p-5 flex items-center justify-center overflow-hidden">
         <picture className="h-full w-full flex items-center justify-center">
-          <source srcSet={category.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+          {category.image?.endsWith('.jpg') && (
+            <source srcSet={category.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+          )}
           <img
             src={category.image}
             alt={category.name}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-108"
           />
         </picture>
