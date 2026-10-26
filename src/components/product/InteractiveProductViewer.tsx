@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import {
   ZoomIn,
   ZoomOut,
@@ -17,6 +17,7 @@ import {
   FileText,
   Move,
   Info,
+  MessageCircle,
 } from 'lucide-react';
 import type { Product } from '@/data/products';
 import { getProductAnatomy, type ProductHotspot, type ProductAnatomyDef } from '@/data/productAnatomy';
@@ -37,7 +38,10 @@ export default function InteractiveProductViewer({
   // Retrieve verified anatomy definitions if in allowlist
   const anatomyDef: ProductAnatomyDef | null = getProductAnatomy(product.slug);
   const hasHotspots = Boolean(anatomyDef && anatomyDef.verifiedHotspots.length > 0);
-  const hotspots: ProductHotspot[] = anatomyDef?.verifiedHotspots || [];
+  const hotspots: ProductHotspot[] = useMemo(
+    () => anatomyDef?.verifiedHotspots || [],
+    [anatomyDef]
+  );
 
   // Interaction State
   const [scale, setScale] = useState<number>(1);
@@ -773,8 +777,8 @@ export default function InteractiveProductViewer({
                   </div>
                 )}
 
-                {/* Footer Monograph Quick CTA */}
-                <div className="pt-4 border-t border-white/10">
+                {/* Footer Monograph & WhatsApp Quick CTAs */}
+                <div className="pt-4 border-t border-white/10 space-y-2">
                   <button
                     type="button"
                     onClick={() => {
@@ -786,6 +790,17 @@ export default function InteractiveProductViewer({
                     <FileText className="h-3.5 w-3.5" />
                     <span>Request Full Technical Monograph</span>
                   </button>
+                  {whatsappInquiryUrl && (
+                    <a
+                      href={whatsappInquiryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-semibold transition-colors"
+                    >
+                      <MessageCircle className="h-3.5 w-3.5" />
+                      <span>Inquire via WhatsApp</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

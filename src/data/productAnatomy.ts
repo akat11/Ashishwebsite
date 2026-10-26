@@ -13,7 +13,7 @@ export interface ProductHotspot {
   id: string;
   number: number;
   title: string;
-  zone: 'head' | 'neck' | 'shaft' | 'hole' | 'tip' | 'buttress';
+  zone: 'head' | 'neck' | 'shaft' | 'hole' | 'tip' | 'buttress' | 'feature';
   x: number; // percentage from left (0 - 100)
   y: number; // percentage from top (0 - 100)
   featureName: string;
