@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { products, type Product } from '@/data/products';
 import { productCategories } from '@/data/categories';
+import { filterProducts } from '@/utils/productFilters';
 
 interface ProductDiscoveryEngineProps {
   onInspectProduct: (product: Product) => void;
@@ -25,6 +26,7 @@ export default function ProductDiscoveryEngine({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedMaterial, setSelectedMaterial] = useState<string>('all');
+  const [visibleCount, setVisibleCount] = useState<number>(12);
 
   // Filter categories for the filter bar
   const filterCategories = useMemo(
@@ -35,46 +37,61 @@ export default function ProductDiscoveryEngine({
     []
   );
 
-  // Filtered products list
+  // Filtered products list using shared pure filtering engine
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      // Category filter
-      if (selectedCategory !== 'all' && product.category !== selectedCategory) {
-        return false;
-      }
-      // Material filter
-      if (selectedMaterial !== 'all') {
-        const materialSpec = product.specs.find((s) => s.label.toLowerCase().includes('material'));
-        if (
-          materialSpec &&
-          !materialSpec.value.toLowerCase().includes(selectedMaterial.toLowerCase())
-        ) {
-          return false;
-        }
-      }
-      // Search query
-      if (searchQuery.trim() !== '') {
-        const q = searchQuery.toLowerCase().trim();
-        const matchesName = product.name.toLowerCase().includes(q);
-        const matchesDesc = product.description.toLowerCase().includes(q);
-        const matchesSpecs = product.specs.some(
-          (s) => s.label.toLowerCase().includes(q) || s.value.toLowerCase().includes(q)
-        );
-        return matchesName || matchesDesc || matchesSpecs;
-      }
-      return true;
+    return filterProducts({
+      products,
+      category: selectedCategory,
+      material: selectedMaterial,
+      searchQuery,
+      sortBy: 'featured',
     });
   }, [selectedCategory, selectedMaterial, searchQuery]);
+
+  // Synchronize pagination and filter transitions
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    setVisibleCount(12);
+  };
+
+  const handleMaterialChange = (mat: string) => {
+    setSelectedMaterial(mat);
+    setVisibleCount(12);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setVisibleCount(12);
+  };
 
   // Handle filter reset
   const handleResetFilters = () => {
     setSearchQuery('');
     setSelectedCategory('all');
     setSelectedMaterial('all');
+    setVisibleCount(12);
   };
 
-  // Limit display to 12 items on homepage for optimal performance, with clear pagination/view all button
-  const displayedProducts = filteredProducts.slice(0, 12);
+  // Limit display to visibleCount items with Load More capability
+  const displayedProducts = filteredProducts.slice(0, visibleCount);
+
+  // Helper to accurately format biomaterial labels
+  const formatMaterialLabel = (val: string) => {
+    const lower = val.toLowerCase();
+    const hasTi = lower.includes('titanium') || lower.includes('ti-6al-4v') || lower.includes('gr.5');
+    const hasSS = lower.includes('stainless') || lower.includes('steel') || lower.includes('316l');
+
+    if (hasTi && hasSS) {
+      return 'Titanium Gr. 5 & SS 316L';
+    }
+    if (hasTi) {
+      return 'Titanium Grade 5';
+    }
+    if (hasSS) {
+      return 'Stainless Steel 316L';
+    }
+    return val;
+  };
 
   return (
     <section className="bg-[#F8FAFC] py-18 sm:py-24 border-t border-slate-200/80">
@@ -105,54 +122,69 @@ export default function ProductDiscoveryEngine({
 
         {/* Search & Filter Toolbar */}
         <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/90 mb-8 space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5">
-            {/* Search Input (7 cols) */}
-            <div className="md:col-span-7 relative">
-              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
+            {/* Search Input (5 cols) */}
+            <div className="md:col-span-5 relative">
+              <label htmlFor="homepage-product-search" className="sr-only">
+                Search catalogue by name, code, holes or clinical indication
+              </label>
+              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
               <input
+                id="homepage-product-search"
                 type="text"
                 placeholder="Search by implant name, catalogue code, hole count, or indication..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input-field pl-10 text-sm w-full bg-slate-50 border-slate-200 focus:bg-white"
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="input-field pl-10 pr-14 text-sm w-full bg-slate-50 border-slate-200 focus:bg-white"
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-600"
+                  type="button"
+                  onClick={() => handleSearchChange('')}
+                  className="absolute right-3 top-2.5 px-2 py-1 text-xs font-semibold text-slate-400 hover:text-slate-700 bg-slate-200/60 rounded cursor-pointer transition-colors"
                 >
                   Clear
                 </button>
               )}
             </div>
 
-            {/* Material Selector (3 cols) */}
-            <div className="md:col-span-3">
+            {/* Material Selector (4 cols - expanded to show full text without ellipsis) */}
+            <div className="md:col-span-4">
+              <label htmlFor="material-grade-select" className="sr-only">
+                Filter by Biomaterial Grade
+              </label>
               <select
+                id="material-grade-select"
                 value={selectedMaterial}
-                onChange={(e) => setSelectedMaterial(e.target.value)}
-                className="input-field text-sm bg-slate-50 border-slate-200"
-                aria-label="Filter by material grade"
+                onChange={(e) => handleMaterialChange(e.target.value)}
+                className="input-field text-sm bg-slate-50 border-slate-200 cursor-pointer w-full focus:bg-white pr-8"
+                aria-label="Filter products by biomaterial grade"
               >
                 <option value="all">All Biomaterial Grades</option>
-                <option value="Titanium">Titanium Grade 5 (Ti-6Al-4V ELI)</option>
-                <option value="Stainless Steel">Stainless Steel 316L (ASTM F138)</option>
+                <option value="titanium">Titanium Grade 5 (Ti-6Al-4V ELI)</option>
+                <option value="stainless-steel">Stainless Steel 316L (ASTM F138)</option>
               </select>
             </div>
 
-            {/* Reset / Count Indicator (2 cols) */}
-            <div className="md:col-span-2 flex items-center justify-between sm:justify-end gap-2">
+            {/* Reset / Count Indicator (3 cols - aligned directly next to select) */}
+            <div className="md:col-span-3 flex items-center justify-start gap-2">
               {(searchQuery || selectedCategory !== 'all' || selectedMaterial !== 'all') && (
                 <button
+                  type="button"
                   onClick={handleResetFilters}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors cursor-pointer shrink-0"
+                  title="Reset all filters to default"
                 >
-                  <RotateCcw className="h-3.5 w-3.5" />
+                  <RotateCcw className="h-3.5 w-3.5 pointer-events-none" />
                   <span>Reset</span>
                 </button>
               )}
-              <span className="text-xs font-mono font-bold text-slate-500 bg-slate-100 px-3 py-2 rounded-lg whitespace-nowrap">
-                {filteredProducts.length} Results
+              <span className="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-3 py-2 rounded-lg whitespace-nowrap border border-slate-200/60 shrink-0">
+                {filteredProducts.length === 0
+                  ? '0 Results'
+                  : filteredProducts.length <= 12
+                  ? `${filteredProducts.length} Results`
+                  : `Showing ${displayedProducts.length} of ${filteredProducts.length}`}
               </span>
             </div>
           </div>
@@ -167,12 +199,14 @@ export default function ProductDiscoveryEngine({
               return (
                 <button
                   key={cat.slug}
-                  onClick={() => setSelectedCategory(cat.slug)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                  type="button"
+                  onClick={() => handleCategoryChange(cat.slug)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     isSelected
                       ? 'bg-[#062D56] text-white shadow-xs'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
                   }`}
+                  aria-pressed={isSelected}
                 >
                   {cat.name}
                 </button>
@@ -226,28 +260,44 @@ export default function ProductDiscoveryEngine({
 
                     {/* Image Area with Zoom & Inspect Trigger */}
                     <div className="relative aspect-[4/3] p-4 flex items-center justify-center bg-gradient-to-b from-transparent to-slate-50/50">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        loading="lazy"
-                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 filter drop-shadow-sm"
-                      />
+                      <picture className="h-full w-full flex items-center justify-center">
+                        {product.image?.endsWith('.jpg') && (
+                          <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                        )}
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          loading="lazy"
+                          decoding="async"
+                          className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 filter drop-shadow-sm"
+                        />
+                      </picture>
                       {/* Floating Quick Action Overlay on hover */}
                       <div className="absolute inset-0 bg-[#062D56]/60 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 p-4">
                         <button
-                          onClick={() => onInspectProduct(product)}
-                          className="p-2.5 rounded-xl bg-white text-[#062D56] hover:bg-[#12C8E8] hover:text-[#062D56] transition-colors shadow-md text-xs font-bold flex items-center gap-1.5"
-                          title="Quick Spec Monograph"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onInspectProduct(product);
+                          }}
+                          className="p-2.5 rounded-xl bg-white text-[#062D56] hover:bg-[#12C8E8] hover:text-[#062D56] transition-colors shadow-md text-xs font-bold flex items-center gap-1.5 cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#12C8E8]"
+                          title={`Quick Spec Monograph: ${product.name}`}
+                          aria-label={`View Quick Specifications for ${product.name}`}
                         >
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 pointer-events-none" />
                           <span>Quick Specs</span>
                         </button>
                         <button
-                          onClick={() => onRequestCatalogue(product)}
-                          className="p-2.5 rounded-xl bg-[#12C8E8] text-[#062D56] hover:bg-white transition-colors shadow-md text-xs font-bold flex items-center gap-1.5"
-                          title="Request Monograph"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onRequestCatalogue(product);
+                          }}
+                          className="p-2.5 rounded-xl bg-[#12C8E8] text-[#062D56] hover:bg-white transition-colors shadow-md text-xs font-bold flex items-center gap-1.5 cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-white"
+                          title={`Request Monograph: ${product.name}`}
+                          aria-label={`Request Technical Monograph for ${product.name}`}
                         >
-                          <FileText className="h-4 w-4" />
+                          <FileText className="h-4 w-4 pointer-events-none" />
                           <span>Quote</span>
                         </button>
                       </div>
@@ -271,7 +321,7 @@ export default function ProductDiscoveryEngine({
                           )}
                           {materialSpec && (
                             <div className="truncate text-[11px] text-[#0875D1] font-semibold">
-                              {materialSpec.value.includes('Titanium') ? 'Titanium Grade 5' : 'SS 316L / Titanium'}
+                              {formatMaterialLabel(materialSpec.value)}
                             </div>
                           )}
                         </div>
@@ -280,10 +330,15 @@ export default function ProductDiscoveryEngine({
                       {/* Card Footer Actions */}
                       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                         <button
-                          onClick={() => onInspectProduct(product)}
-                          className="text-xs font-semibold text-slate-500 hover:text-[#0875D1] inline-flex items-center gap-1 transition-colors"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onInspectProduct(product);
+                          }}
+                          className="text-xs font-semibold text-slate-500 hover:text-[#0875D1] inline-flex items-center gap-1 transition-colors cursor-pointer"
+                          aria-label={`Inspect Specifications for ${product.name}`}
                         >
-                          <Eye className="h-3.5 w-3.5" />
+                          <Eye className="h-3.5 w-3.5 pointer-events-none" />
                           <span>Inspect</span>
                         </button>
 
@@ -303,10 +358,19 @@ export default function ProductDiscoveryEngine({
 
             {/* Pagination / View More CTA */}
             {filteredProducts.length > 12 && (
-              <div className="mt-10 text-center">
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
+                {visibleCount < filteredProducts.length && (
+                  <button
+                    type="button"
+                    onClick={() => setVisibleCount((prev) => prev + 12)}
+                    className="btn-cyan text-xs sm:text-sm py-2.5 px-6 shadow-sm cursor-pointer"
+                  >
+                    <span>Load More Implants ({filteredProducts.length - displayedProducts.length} remaining)</span>
+                  </button>
+                )}
                 <Link
                   to="/products"
-                  className="btn-blue text-sm py-3 px-8 shadow-md"
+                  className="btn-blue text-xs sm:text-sm py-2.5 px-6 shadow-sm"
                 >
                   <span>View All {filteredProducts.length} Products in Catalogue</span>
                   <ArrowRight className="h-4 w-4" />

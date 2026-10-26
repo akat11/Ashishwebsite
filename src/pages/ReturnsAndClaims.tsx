@@ -9,7 +9,7 @@ export default function ReturnsAndClaims() {
       <SEO
         title="Returns & Claims Policy | Vinayak Surgicals"
         description="Returns and claims policy for surgical instruments and medical supply orders from Vinayak Surgicals."
-        canonical="https://vinyanaksurgicals.com/returns-and-claims"
+        canonical="https://vinayaksurgicals.vercel.app/returns-and-claims"
       />
       <Breadcrumbs crumbs={[{ label: 'Returns & Claims' }]} />
 

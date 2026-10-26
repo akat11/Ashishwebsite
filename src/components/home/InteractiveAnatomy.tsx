@@ -28,6 +28,39 @@ export default function InteractiveAnatomy({
   const selectedRegion =
     ANATOMY_REGIONS.find((r) => r.id === activeRegionId) || ANATOMY_REGIONS[0];
 
+  const resolveProduct = (implant: (typeof selectedRegion.flagshipImplants)[0]): Product => {
+    // 1. Direct slug match
+    const directMatch = products.find((prod) => prod.slug === implant.slug);
+    if (directMatch) return directMatch;
+
+    // 2. Fallback: fuzzy/partial slug or name match in same category
+    const partialMatch = products.find(
+      (prod) =>
+        prod.category === implant.categorySlug &&
+        (prod.slug.includes(implant.slug) ||
+          implant.slug.includes(prod.slug) ||
+          prod.name.toLowerCase().includes(implant.name.toLowerCase().slice(0, 10)))
+    );
+    if (partialMatch) return partialMatch;
+
+    // 3. Fallback: construct guaranteed valid Product object from verified anatomyRegions data
+    return {
+      slug: implant.slug,
+      name: implant.name,
+      category: implant.categorySlug,
+      description: `${implant.name} (${implant.specs}). Engineered for high-acuity anatomical stabilization and rigid fracture fixation. Code: ${implant.code}. Manufactured in ${implant.material} according to ASTM F138 & ISO 13485 standards.`,
+      image: implant.image,
+      specs: [
+        { label: 'Catalogue Code', value: implant.code },
+        { label: 'Biomaterial Grade', value: implant.material },
+        { label: 'System Sizing & Specifications', value: implant.specs },
+        { label: 'Anatomical Region', value: selectedRegion.name },
+        { label: 'Manufacturing Standard', value: 'ISO 13485:2016 & ASTM F138' },
+      ],
+      featured: true,
+    };
+  };
+
   return (
     <section className="relative isolate bg-[#031525] text-white py-20 sm:py-28 border-t border-white/10 overflow-hidden">
       {/* Background Volumetric Glows */}
@@ -106,7 +139,7 @@ export default function InteractiveAnatomy({
         {/* 3D Viewport & Clinical Readout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Interactive 3D Three.js Skeletal Canvas (7 cols) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 flex flex-col h-full">
             <ThreeAnatomyViewer
               activeRegionId={activeRegionId}
               onSelectRegion={(regId) => setActiveRegionId(regId)}
@@ -117,7 +150,7 @@ export default function InteractiveAnatomy({
           </div>
 
           {/* Right Column: Detailed Clinical Fixation Readout (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-6 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-6 sm:p-7 rounded-3xl border border-white/15 backdrop-blur-xl shadow-2xl">
+          <div className="lg:col-span-5 h-full flex flex-col justify-between space-y-6 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-6 sm:p-7 rounded-3xl border border-white/15 backdrop-blur-xl shadow-2xl">
             <div>
               {/* Category Breadcrumb & Tag */}
               <div className="flex flex-wrap items-center justify-between gap-2 pb-3.5 border-b border-white/10">
@@ -166,47 +199,58 @@ export default function InteractiveAnatomy({
                   {selectedRegion.flagshipImplants.map((implant) => (
                     <div
                       key={implant.name}
-                      className="group rounded-2xl bg-black/40 p-3.5 border border-white/10 hover:border-[#12C8E8]/60 transition-all flex items-center gap-3.5"
+                      onClick={() => onSelectProduct(resolveProduct(implant))}
+                      className="group rounded-2xl bg-black/40 hover:bg-black/60 p-3 sm:p-3.5 border border-white/10 hover:border-[#12C8E8]/60 transition-all flex items-center gap-3.5 h-[84px] sm:h-[90px] cursor-pointer"
                     >
-                      <div className="w-20 h-16 bg-white rounded-xl p-1.5 shrink-0 flex items-center justify-center overflow-hidden">
+                      <div className="w-[72px] sm:w-[80px] h-[60px] sm:h-[66px] bg-white rounded-xl p-1.5 shrink-0 flex items-center justify-center overflow-hidden border border-white/10 shadow-xs">
                         <img
                           src={implant.image}
                           alt={implant.name}
-                          className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                          className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-display text-xs sm:text-sm font-bold text-white group-hover:text-[#12C8E8] transition-colors leading-snug truncate">
+                      <div className="flex-1 min-w-0 flex flex-col justify-center">
+                        <h4
+                          className="font-display text-xs sm:text-sm font-bold text-white group-hover:text-[#12C8E8] transition-colors leading-snug truncate"
+                          title={implant.name}
+                        >
                           {implant.name}
                         </h4>
                         <p className="text-[11px] font-mono text-slate-300 truncate mt-0.5">
                           {implant.specs}
                         </p>
-                        <p className="text-[10.5px] font-mono text-[#12C8E8] truncate">
+                        <p className="text-[10.5px] font-mono text-[#12C8E8] truncate font-semibold mt-0.5">
                           {implant.material}
                         </p>
                       </div>
 
-                      <div className="flex flex-col gap-1.5 shrink-0">
+                      <div className="flex flex-col gap-2 shrink-0 relative z-20">
                         <button
-                          onClick={() => {
-                            const p = products.find((prod) => prod.slug === implant.slug);
-                            if (p) onSelectProduct(p);
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            onSelectProduct(resolveProduct(implant));
                           }}
-                          className="p-1.5 rounded-lg bg-white/10 hover:bg-[#12C8E8] text-white hover:text-[#031525] transition-colors text-[11px] flex items-center justify-center"
-                          title="Quick Spec Monograph"
+                          className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-white/10 hover:bg-[#12C8E8] text-white hover:text-[#031525] transition-colors flex items-center justify-center cursor-pointer shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#12C8E8]"
+                          title={`Quick Spec Monograph: ${implant.name}`}
+                          aria-label={`View Quick Specifications for ${implant.name}`}
                         >
-                          <Eye className="h-3.5 w-3.5" />
+                          <Eye className="h-4 w-4 pointer-events-none" />
                         </button>
                         <button
-                          onClick={() => {
-                            const p = products.find((prod) => prod.slug === implant.slug);
-                            if (p) onRequestCatalogue(p);
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            onRequestCatalogue(resolveProduct(implant));
                           }}
-                          className="p-1.5 rounded-lg bg-[#12C8E8]/20 hover:bg-[#12C8E8] text-[#12C8E8] hover:text-[#031525] transition-colors text-[11px] flex items-center justify-center"
-                          title="Request Monograph"
+                          className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-[#12C8E8]/20 hover:bg-[#12C8E8] text-[#12C8E8] hover:text-[#031525] transition-colors flex items-center justify-center cursor-pointer shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#12C8E8]"
+                          title={`Request Technical Monograph: ${implant.name}`}
+                          aria-label={`Request Technical Monograph for ${implant.name}`}
                         >
-                          <FileText className="h-3.5 w-3.5" />
+                          <FileText className="h-4 w-4 pointer-events-none" />
                         </button>
                       </div>
                     </div>
@@ -234,7 +278,7 @@ export default function InteractiveAnatomy({
 
         {/* Scientific Disclaimer as required by prompt */}
         <p className="mt-8 text-[11px] text-slate-400 text-center max-w-3xl mx-auto leading-relaxed">
-          <strong>Clinical Monograph Notice:</strong> 3D anatomical visualization provides interactive orientation to Vinyanak's genuine orthopaedic catalog for qualified orthopaedic surgeons, surgical teams, and hospital procurement departments. Consult authorized clinical product monographs and patient radiographic assessments for surgical technique and implant sizing.
+          <strong>Clinical Monograph Notice:</strong> 3D anatomical visualization provides interactive orientation to Vinayak Surgicals' genuine orthopaedic catalog for qualified orthopaedic surgeons, surgical teams, and hospital procurement departments. Consult authorized clinical product monographs and patient radiographic assessments for surgical technique and implant sizing.
         </p>
       </div>
     </section>

@@ -40,6 +40,7 @@ export default function DepartmentCard({ department }: { department: Department 
           src={department.image}
           alt={department.name}
           loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#062D56]/85 via-[#062D56]/30 to-transparent" />

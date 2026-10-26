@@ -13,8 +13,9 @@ import BottomCTA from '@/components/BottomCTA';
 import ProductCard from '@/components/ProductCard';
 import { productCategories } from '@/data/categories';
 import { products } from '@/data/products';
+import { filterProducts, type ProductSortOption } from '@/utils/productFilters';
 
-type SortOption = 'featured' | 'name-asc' | 'name-desc';
+type SortOption = Extract<ProductSortOption, 'featured' | 'name-asc' | 'name-desc'>;
 
 const INITIAL_PAGE_SIZE = 24;
 
@@ -25,55 +26,15 @@ export default function Products() {
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [displayLimit, setDisplayLimit] = useState<number>(INITIAL_PAGE_SIZE);
 
-  // Filtered and sorted products
+  // Filtered and sorted products using shared pure filtering engine
   const filteredProducts = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-
-    return products
-      .filter((product) => {
-        // Category filter
-        if (selectedCategory !== 'all' && product.category !== selectedCategory) {
-          return false;
-        }
-
-        // Material filter
-        if (selectedMaterial !== 'all') {
-          const matSpec = product.specs.find((s) => s.label.toLowerCase().includes('material'));
-          if (
-            matSpec &&
-            !matSpec.value.toLowerCase().includes(selectedMaterial.toLowerCase())
-          ) {
-            return false;
-          }
-        }
-
-        // Search query filter (matches name, description, category, and specs/catalogue codes)
-        if (query) {
-          const matchName = product.name.toLowerCase().includes(query);
-          const matchDesc = product.description.toLowerCase().includes(query);
-          const matchCat = product.category.toLowerCase().includes(query);
-          const matchSpecs = product.specs.some(
-            (s) => s.label.toLowerCase().includes(query) || s.value.toLowerCase().includes(query)
-          );
-
-          return matchName || matchDesc || matchCat || matchSpecs;
-        }
-
-        return true;
-      })
-      .sort((a, b) => {
-        if (sortBy === 'name-asc') {
-          return a.name.localeCompare(b.name);
-        }
-        if (sortBy === 'name-desc') {
-          return b.name.localeCompare(a.name);
-        }
-        // 'featured'
-        if (a.featured === b.featured) {
-          return a.name.localeCompare(b.name);
-        }
-        return a.featured ? -1 : 1;
-      });
+    return filterProducts({
+      products,
+      category: selectedCategory,
+      material: selectedMaterial,
+      searchQuery,
+      sortBy,
+    });
   }, [searchQuery, selectedCategory, selectedMaterial, sortBy]);
 
   const visibleProducts = useMemo(() => {
@@ -103,7 +64,7 @@ export default function Products() {
       <SEO
         title="Orthopaedic Implants & Fixation Products Catalogue | Vinayak Surgicals"
         description="Search and explore over 110 verified orthopaedic locking plate systems, intramedullary nails, external fixators, and fixation screws in implant-grade Stainless Steel 316L and Titanium Grade 5."
-        canonical="https://vinyanaksurgicals.com/products"
+        canonical="https://vinayaksurgicals.vercel.app/products"
         keywords="orthopedic implants catalogue, locking plate systems, external fixators, ilizarov apparatus, distal radius plates, proximal tibia plates, femur locking plates, pediatric hip plates, cancellous screws, cortical locking screws, surgical implants supplier India"
       />
 

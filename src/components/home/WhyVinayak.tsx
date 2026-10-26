@@ -112,7 +112,7 @@ export default function WhyVinayak() {
         <div>
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
             <span className="text-xs font-bold tracking-widest text-[#0fb2ce] uppercase block mb-2">
-              WHY CHOOSE VINYANAK SURGICALS
+              WHY CHOOSE VINAYAK SURGICALS
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#062D56] tracking-tight font-display">
               Your Trusted Orthopaedic Manufacturing Partner

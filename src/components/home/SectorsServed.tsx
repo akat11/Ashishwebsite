@@ -40,7 +40,7 @@ export default function SectorsServed() {
             Trusted Across India's Healthcare Ecosystem
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-500 leading-relaxed">
-            From premier metropolitan trauma institutes to district healthcare supply chains, Vinyanak Surgicals delivers reliable orthopaedic solutions.
+            From premier metropolitan trauma institutes to district healthcare supply chains, Vinayak Surgicals delivers reliable orthopaedic solutions.
           </p>
         </div>
 

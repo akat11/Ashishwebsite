@@ -1,9 +1,9 @@
-// Central business configuration file for Vinyanak Surgicals
+// Central business configuration file for Vinayak Surgicals
 // All business details are stored here to avoid duplication across the site.
 
 export const businessConfig = {
-  name: 'Vinyanak Surgicals',
-  legalName: 'Vinyanak Surgicals',
+  name: 'Vinayak Surgicals',
+  legalName: 'Vinayak Surgicals',
   tagline: 'Orthopedic Locking Plates & External Fixator Systems',
   description:
     'Supplying orthopedic locking plate systems, external fixators, Ilizarov rings and fixation screws in implant-grade Stainless Steel 316L and Titanium to orthopedic surgeons, hospitals and trauma centers.',
@@ -42,14 +42,14 @@ export const businessConfig = {
   },
 
   // Website
-  website: 'https://vinyanaksurgicals.com',
+  website: 'https://vinayaksurgicals.vercel.app',
 
   // WhatsApp configuration flag
   whatsappConfigured: false, // Set to true once a valid number is set above
 
   // Default WhatsApp message
   whatsappDefaultMessage:
-    'Hello Vinyanak Surgicals, I would like to enquire about orthopedic locking plates and external fixator systems. Please contact me regarding product availability and quotation.',
+    'Hello Vinayak Surgicals, I would like to enquire about orthopedic locking plates and external fixator systems. Please contact me regarding product availability and quotation.',
 
   // Service areas
   serviceAreas: [
@@ -77,6 +77,32 @@ export const businessConfig = {
     citiesCovered: 14, // Based on serviceAreas list
     yearsInBusiness: 'Pan-India Enquiries', // Replace with confirmed year when available
   },
+
+  // Homepage hero statistics
+  heroStatistics: [
+    {
+      id: 'fixation-systems',
+      displayValue: '110+',
+      numericTarget: 110,
+      suffix: '+',
+      label: 'Fixation Systems',
+      highlight: false,
+    },
+    {
+      id: 'implant-biomaterials',
+      displayValue: '316L / Gr.5',
+      label: 'Implant Biomaterials',
+      highlight: true,
+    },
+    {
+      id: 'pan-india-distribution',
+      displayValue: '28+ States',
+      numericTarget: 28,
+      suffix: '+ States',
+      label: 'Pan-India Distribution',
+      highlight: false,
+    },
+  ],
 } as const;
 
 // Helper: build a WhatsApp link with optional custom message
@@ -87,6 +113,6 @@ export function buildWhatsAppLink(message?: string): string {
 
 // Helper: build a product-specific WhatsApp enquiry link
 export function buildProductWhatsAppLink(productName: string): string {
-  const msg = `Hello Vinyanak Surgicals, I would like to enquire about the following product: ${productName}. Please share availability, specifications and pricing.`;
+  const msg = `Hello Vinayak Surgicals, I would like to enquire about the following product: ${productName}. Please share availability, specifications and pricing.`;
   return buildWhatsAppLink(msg);
 }

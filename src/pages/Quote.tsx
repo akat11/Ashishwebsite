@@ -21,7 +21,7 @@ export default function Quote() {
       <SEO
         title="Request an Institutional Quote — Orthopaedic Implants & Fixation | Vinayak Surgicals"
         description="Submit an institutional quotation request for orthopaedic locking plates, intramedullary nails, external fixator systems, and surgical screws. Hospital and bulk inquiries welcome."
-        canonical="https://vinyanaksurgicals.com/request-a-quote"
+        canonical="https://vinayaksurgicals.vercel.app/request-a-quote"
         keywords="orthopedic quotation request, hospital implant pricing, bulk locking plates quotation, external fixator quote Kanpur, Vinayak Surgicals"
         image="/images/services-institutional-quotation.jpg"
       />

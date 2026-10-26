@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
-import { X, ExternalLink, ShieldCheck, CheckCircle2, MessageCircle } from 'lucide-react';
+import { X, ExternalLink, ShieldCheck, CheckCircle2, MessageCircle, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Product } from '@/data/products';
+import { useModalA11y } from '@/hooks/useModalA11y';
+import { getProductAnatomy } from '@/data/productAnatomy';
 
 interface QuickSpecModalProps {
   product: Product | null;
@@ -14,22 +15,11 @@ export default function QuickSpecModal({
   onClose,
   onRequestCatalogue,
 }: QuickSpecModalProps) {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (product) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [product, onClose]);
+  useModalA11y(Boolean(product), onClose);
 
   if (!product) return null;
 
+  const anatomy = getProductAnatomy(product.slug);
   const whatsappMessage = encodeURIComponent(
     `Hello Vinayak Surgicals, I am inquiring about the technical specifications and hospital supply pricing for: ${product.name} (Slug: ${product.slug}).`
   );
@@ -47,22 +37,40 @@ export default function QuickSpecModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="relative bg-gradient-to-r from-[#062D56] via-[#0b3866] to-[#0875D1] text-white px-6 py-5 shrink-0 flex items-start justify-between gap-4">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/15 text-[#12C8E8] text-[11px] font-bold uppercase tracking-wider mb-2 border border-white/10">
-              <ShieldCheck className="h-3 w-3" />
-              <span>Verified Technical Monograph</span>
+        <div className="relative bg-gradient-to-r from-[#062D56] via-[#0b3866] to-[#0875D1] text-white p-5 sm:p-6 shrink-0 flex items-start justify-between gap-4 border-b border-white/10">
+          <div className="flex-1 min-w-0 pr-2">
+            <div className="flex flex-wrap items-center gap-2 mb-2.5">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 text-[#12C8E8] text-[11px] font-bold uppercase tracking-wider border border-white/10 shadow-xs">
+                <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+                <span>Verified Technical Monograph</span>
+              </div>
+              {anatomy && (
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#12C8E8]/20 text-[#12C8E8] text-[11px] font-bold uppercase tracking-wider border border-[#12C8E8]/40 shadow-xs">
+                  <Sparkles className="h-3 w-3 shrink-0" />
+                  <span>Interactive Anatomy Ready</span>
+                </div>
+              )}
             </div>
-            <h3 id="modal-product-title" className="font-display text-lg sm:text-xl font-bold leading-snug">
+            <h3
+              id="modal-product-title"
+              className="font-display text-lg sm:text-xl md:text-2xl font-extrabold leading-snug text-white !text-white tracking-tight break-words"
+              style={{ color: '#ffffff' }}
+            >
               {product.name}
             </h3>
+            {product.category && (
+              <p className="mt-1 text-xs text-[#12C8E8] font-mono font-medium">
+                Series: {product.category.replace(/-/g, ' ').toUpperCase()}
+              </p>
+            )}
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-white/10 text-white/80 hover:text-white hover:bg-white/20 transition-colors shrink-0"
-            aria-label="Close modal"
+            className="p-2 rounded-xl bg-white/10 text-white/90 hover:text-white hover:bg-white/25 transition-all shrink-0 cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#12C8E8]"
+            aria-label="Close technical monograph"
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5 pointer-events-none" />
           </button>
         </div>
 
@@ -70,11 +78,17 @@ export default function QuickSpecModal({
         <div className="p-6 overflow-y-auto space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-5 items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
             <div className="aspect-square bg-white rounded-lg p-2 border border-slate-200/80 flex items-center justify-center overflow-hidden">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-              />
+              <picture className="w-full h-full flex items-center justify-center">
+                {product.image?.endsWith('.jpg') && (
+                  <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                )}
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  decoding="async"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                />
+              </picture>
             </div>
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#0875D1]">
@@ -122,7 +136,7 @@ export default function QuickSpecModal({
             to={`/products/${product.category}/${product.slug}`}
             className="text-xs sm:text-sm font-bold text-[#0875D1] hover:text-[#062D56] inline-flex items-center gap-1.5 transition-colors"
           >
-            <span>View Full Product Page</span>
+            <span>{anatomy ? 'Explore Interactive Anatomy & Specs' : 'View Full Product Page'}</span>
             <ExternalLink className="h-3.5 w-3.5" />
           </Link>
 

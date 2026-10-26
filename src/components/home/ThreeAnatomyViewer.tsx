@@ -30,13 +30,19 @@ export default function ThreeAnatomyViewer({
   const animationFrameIdRef = useRef<number | null>(null);
 
   // Camera animation target references
-  const targetCamPos = useRef<THREE.Vector3>(new THREE.Vector3(0, 0, 5.0));
+  const targetCamPos = useRef<THREE.Vector3>(new THREE.Vector3(0, 0, 5.4));
   const targetLookAt = useRef<THREE.Vector3>(new THREE.Vector3(0, 0, 0));
   const currentLookAt = useRef<THREE.Vector3>(new THREE.Vector3(0, 0, 0));
 
   // Pointer drag controls for 3D orbit
   const isDraggingRef = useRef(false);
   const previousMousePosition = useRef({ x: 0, y: 0 });
+
+  // Turntable ref to allow toggling without re-instantiating the WebGL scene
+  const isTurntableActiveRef = useRef(isTurntableActive);
+  useEffect(() => {
+    isTurntableActiveRef.current = isTurntableActive;
+  }, [isTurntableActive]);
 
   // Update target camera position when activeRegionId changes
   useEffect(() => {
@@ -66,14 +72,14 @@ export default function ThreeAnatomyViewer({
         });
       }
     } else {
-      targetCamPos.current.set(0, 0, 5.2);
+      targetCamPos.current.set(0, 0, 5.4);
       targetLookAt.current.set(0, 0, 0);
     }
   }, [activeRegionId]);
 
   // Reset View handler
   const handleReset = useCallback(() => {
-    targetCamPos.current.set(0, 0, 5.2);
+    targetCamPos.current.set(0, 0, 5.4);
     targetLookAt.current.set(0, 0, 0);
     if (modelGroupRef.current) {
       modelGroupRef.current.rotation.y = 0;
@@ -109,10 +115,15 @@ export default function ThreeAnatomyViewer({
     scene.fog = new THREE.FogExp2(0x04192d, 0.12);
 
     const width = container.clientWidth;
-    const height = container.clientHeight || 580;
+    const height = container.clientHeight || 640;
 
-    const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 50);
-    camera.position.set(0, 0, 5.2);
+    const camera = new THREE.PerspectiveCamera(
+      width < 480 ? 44 : width < 768 ? 40 : 36,
+      width / height,
+      0.1,
+      50
+    );
+    camera.position.set(0, 0, 5.4);
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({
@@ -313,8 +324,9 @@ export default function ThreeAnatomyViewer({
       bonesMap.set('foot' + sidePrefix, foot);
     });
 
-    // Position the entire skeleton comfortably in the viewport
-    modelGroup.position.set(0, 0.2, 0);
+    // Position and scale the entire skeleton comfortably in the viewport to prevent edge clipping
+    modelGroup.position.set(0, 0.1, 0);
+    modelGroup.scale.set(0.88, 0.88, 0.88);
     scene.add(modelGroup);
 
     // 5. Interactive Mouse Orbit Controls (Direct Drag without heavy controls library)
@@ -377,15 +389,29 @@ export default function ThreeAnatomyViewer({
     domElement.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleMouseUp);
 
-    // 6. Handle Window Resize
+    // 6. Handle Window & Container Resize with Dynamic FOV
     const handleResize = () => {
       if (!container || !camera || !renderer) return;
       const newWidth = container.clientWidth;
-      const newHeight = container.clientHeight || 580;
+      const newHeight = container.clientHeight || 640;
       camera.aspect = newWidth / newHeight;
+      // Adjust FOV dynamically on mobile/tablet portrait views to keep entire skeleton in view
+      if (newWidth < 480) {
+        camera.fov = 44;
+      } else if (newWidth < 768) {
+        camera.fov = 40;
+      } else {
+        camera.fov = 36;
+      }
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
     };
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => handleResize());
+      resizeObserver.observe(container);
+    }
     window.addEventListener('resize', handleResize);
 
     // 7. Animation Loop with Smooth Camera Lerp & Turntable
@@ -402,7 +428,7 @@ export default function ThreeAnatomyViewer({
       camera.lookAt(currentLookAt.current);
 
       // Auto turntable rotation when idle and user is not manually dragging
-      if (isTurntableActive && !isDraggingRef.current && modelGroupRef.current) {
+      if (isTurntableActiveRef.current && !isDraggingRef.current && modelGroupRef.current) {
         modelGroupRef.current.rotation.y += delta * 0.25;
       }
 
@@ -415,6 +441,7 @@ export default function ThreeAnatomyViewer({
     // Cleanup on unmount
     return () => {
       if (animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
+      if (resizeObserver) resizeObserver.disconnect();
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -434,10 +461,10 @@ export default function ThreeAnatomyViewer({
       });
       renderer.dispose();
     };
-  }, [isTurntableActive]);
+  }, []);
 
   return (
-    <div className="relative w-full h-[540px] sm:h-[620px] rounded-3xl overflow-hidden bg-gradient-to-b from-[#031525] via-[#051e36] to-[#031525] border border-white/15 shadow-2xl flex items-center justify-center">
+    <div className="relative w-full h-[580px] sm:h-[640px] lg:h-full lg:min-h-[640px] rounded-3xl overflow-hidden bg-gradient-to-b from-[#031525] via-[#051e36] to-[#031525] border border-white/15 shadow-2xl flex items-center justify-center">
       {/* 3D Canvas Mount Point */}
       {hasWebGL ? (
         <div

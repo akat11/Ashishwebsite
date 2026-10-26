@@ -9,7 +9,7 @@ async function generateSitemap() {
   const { productCategories } = await import('../src/data/categories.ts');
   const { products } = await import('../src/data/products.ts');
 
-  const BASE_URL = 'https://vinyanaksurgicals.com';
+  const BASE_URL = 'https://vinayaksurgicals.vercel.app';
   const currentDate = new Date().toISOString().split('T')[0];
 
   const staticRoutes = [

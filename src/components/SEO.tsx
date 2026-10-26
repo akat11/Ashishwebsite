@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const BASE_URL = 'https://vinyanaksurgicals.com';
+const BASE_URL = 'https://vinayaksurgicals.vercel.app';
 const DEFAULT_IMAGE = `${BASE_URL}/images/categories/distal-radius-locking-plates.jpg`;
 
 export interface SEOProps {

@@ -12,6 +12,7 @@ import {
   UserRound,
 } from 'lucide-react';
 import { businessConfig, buildWhatsAppLink } from '@/config/business';
+import { isValidEmail, sanitizeString } from '@/utils/validation';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 type FieldName = 'name' | 'phone' | 'email' | 'message' | 'consent';
@@ -34,19 +35,23 @@ export default function ContactForm() {
     const data = new FormData(e.currentTarget);
     const nextErrors: FieldErrors = {};
 
-    if (!String(data.get('name') ?? '').trim()) {
+    const name = sanitizeString(data.get('name'));
+    const phone = sanitizeString(data.get('phone'));
+    const email = sanitizeString(data.get('email'));
+    const message = sanitizeString(data.get('message'));
+
+    if (!name) {
       nextErrors.name = 'Please enter your name.';
     }
-    if (!String(data.get('phone') ?? '').trim()) {
+    if (!phone) {
       nextErrors.phone = 'Please enter your phone number.';
     }
-    const email = String(data.get('email') ?? '').trim();
     if (!email) {
       nextErrors.email = 'Please enter your email address.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (!isValidEmail(email)) {
       nextErrors.email = 'Please enter a valid email address.';
     }
-    if (!String(data.get('message') ?? '').trim()) {
+    if (!message) {
       nextErrors.message = 'Please describe your requirements.';
     }
     if (data.get('consent') !== 'on') {

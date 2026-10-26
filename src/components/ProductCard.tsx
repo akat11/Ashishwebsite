@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import type { Product } from '@/data/products';
 import { productCategories } from '@/data/categories';
+import { getProductAnatomy } from '@/data/productAnatomy';
 
 export default function ProductCard({ product }: { product: Product }) {
   const category = productCategories.find((c) => c.slug === product.category);
   const materialSpec = product.specs.find((s) => s.label.toLowerCase().includes('material'));
   const sizeSpec = product.specs.find((s) => s.label.toLowerCase().includes('size') || s.label.toLowerCase().includes('hole'));
+  const hasAnatomy = Boolean(getProductAnatomy(product.slug));
 
   return (
     <Link
@@ -16,11 +18,14 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* Product Image Stage */}
       <div className="relative aspect-[4/3] w-full bg-gradient-to-b from-slate-50 to-slate-100/60 p-5 flex items-center justify-center overflow-hidden">
         <picture className="h-full w-full flex items-center justify-center">
-          <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+          {product.image?.endsWith('.jpg') && (
+            <source srcSet={product.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+          )}
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
           />
         </picture>
@@ -34,6 +39,13 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.featured && (
           <span className="absolute top-3 right-3 rounded-md bg-amber-50 px-2 py-0.5 text-[10px] font-bold text-amber-700 border border-amber-200/60 shadow-2xs">
             Featured
+          </span>
+        )}
+
+        {hasAnatomy && (
+          <span className="absolute bottom-2.5 right-2.5 rounded-md bg-[#062D56]/85 backdrop-blur-xs px-2 py-0.5 text-[9.5px] font-bold text-[#12C8E8] border border-white/20 shadow-2xs flex items-center gap-1">
+            <Sparkles className="h-2.5 w-2.5" />
+            <span>Interactive</span>
           </span>
         )}
       </div>

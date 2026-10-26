@@ -11,12 +11,13 @@ export default function FlagshipShowcase({
   onInspectProduct,
   onRequestCatalogue,
 }: FlagshipShowcaseProps) {
-  const volarProduct = products.find(
-    (p) => p.slug === 'volar-distal-radius-locking-plate-2-7mm'
-  );
-  const tibiaProduct = products.find(
-    (p) => p.slug === 'proximal-tibia-medial-locking-plate-3-5mm-4-5mm-combo'
-  );
+  const volarProduct =
+    products.find((p) => p.slug === 'volar-distal-radius-locking-plate-2-7mm') ||
+    products.find((p) => p.category === 'distal-radius-locking-plates');
+  const tibiaProduct =
+    products.find((p) => p.slug === 'proximal-tibia-medial-locking-plate-3-5mm-4-5mm-combo') ||
+    products.find((p) => p.slug === 'proximal-lateral-tibia-locking-plate-5-0mm') ||
+    products.find((p) => p.category === 'tibia-locking-plates');
 
   return (
     <section className="bg-white py-18 sm:py-24 border-t border-slate-200/80">
@@ -31,7 +32,7 @@ export default function FlagshipShowcase({
             Flagship Fixation Systems
           </h2>
           <p className="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
-            In-depth engineering profiles of Vinyanak's most widely deployed trauma systems, trusted by orthopaedic surgeons for intra-articular stability and early patient mobilization.
+            In-depth engineering profiles of Vinayak Surgicals' most widely deployed trauma systems, trusted by orthopaedic surgeons for intra-articular stability and early patient mobilization.
           </p>
         </div>
 
@@ -41,11 +42,16 @@ export default function FlagshipShowcase({
           <div className="rounded-3xl bg-gradient-to-br from-[#F8FAFC] via-[#EDF5FA] to-white p-6 sm:p-10 border border-slate-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Product Image Stage (5 cols) */}
             <div className="lg:col-span-5 relative bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-center overflow-hidden aspect-[4/3] group">
-              <img
-                src="/images/products/volar-distal-radius-locking-plate-2-7mm.jpg"
-                alt="Volar Distal Radius Locking Plate 2.7mm"
-                className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-              />
+              <picture className="h-full w-full flex items-center justify-center">
+                <source srcSet="/images/products/volar-distal-radius-locking-plate-2-7mm.webp" type="image/webp" />
+                <img
+                  src="/images/products/volar-distal-radius-locking-plate-2-7mm.jpg"
+                  alt="Volar Distal Radius Locking Plate 2.7mm"
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </picture>
               <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#062D56] text-white text-[11px] font-mono font-bold">
                 SS 316L &amp; Titanium Gr. 5
               </div>
@@ -101,19 +107,29 @@ export default function FlagshipShowcase({
                 </Link>
                 {volarProduct && (
                   <button
-                    onClick={() => onInspectProduct(volarProduct)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onInspectProduct(volarProduct);
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#0875D1]"
+                    aria-label={`View Quick Specifications for ${volarProduct.name}`}
                   >
-                    <Eye className="h-4 w-4 text-[#0875D1]" />
+                    <Eye className="h-4 w-4 text-[#0875D1] pointer-events-none" />
                     <span>Quick Specs</span>
                   </button>
                 )}
                 {volarProduct && (
                   <button
-                    onClick={() => onRequestCatalogue(volarProduct)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRequestCatalogue(volarProduct);
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#0875D1]"
+                    aria-label={`Request Quote for ${volarProduct.name}`}
                   >
-                    <FileText className="h-4 w-4 text-[#0875D1]" />
+                    <FileText className="h-4 w-4 text-[#0875D1] pointer-events-none" />
                     <span>Quote</span>
                   </button>
                 )}
@@ -125,11 +141,16 @@ export default function FlagshipShowcase({
           <div className="rounded-3xl bg-gradient-to-br from-[#F8FAFC] via-[#EDF5FA] to-white p-6 sm:p-10 border border-slate-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Product Image Stage (5 cols) */}
             <div className="lg:col-span-5 relative bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex items-center justify-center overflow-hidden aspect-[4/3] group">
-              <img
-                src="/images/categories/tibia-locking-plates.jpg"
-                alt="Proximal Tibia Medial Locking Plate"
-                className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-              />
+              <picture className="h-full w-full flex items-center justify-center">
+                <source srcSet="/images/categories/tibia-locking-plates.webp" type="image/webp" />
+                <img
+                  src="/images/categories/tibia-locking-plates.jpg"
+                  alt="Proximal Tibia Medial Locking Plate"
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </picture>
               <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#062D56] text-white text-[11px] font-mono font-bold">
                 SS 316L &amp; Titanium Gr. 5
               </div>
@@ -185,19 +206,29 @@ export default function FlagshipShowcase({
                 </Link>
                 {tibiaProduct && (
                   <button
-                    onClick={() => onInspectProduct(tibiaProduct)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onInspectProduct(tibiaProduct);
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#0875D1]"
+                    aria-label={`View Quick Specifications for ${tibiaProduct.name}`}
                   >
-                    <Eye className="h-4 w-4 text-[#0875D1]" />
+                    <Eye className="h-4 w-4 text-[#0875D1] pointer-events-none" />
                     <span>Quick Specs</span>
                   </button>
                 )}
                 {tibiaProduct && (
                   <button
-                    onClick={() => onRequestCatalogue(tibiaProduct)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRequestCatalogue(tibiaProduct);
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#0875D1]"
+                    aria-label={`Request Rate Card for ${tibiaProduct.name}`}
                   >
-                    <FileText className="h-4 w-4 text-[#0875D1]" />
+                    <FileText className="h-4 w-4 text-[#0875D1] pointer-events-none" />
                     <span>Rate Card</span>
                   </button>
                 )}
