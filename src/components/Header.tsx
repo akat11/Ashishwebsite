@@ -297,7 +297,14 @@ export default function Header() {
               Contact
             </NavLink>
 
-            <div className="pt-2">
+            <div className="pt-3 border-t border-slate-100 space-y-2">
+              <a
+                href={`tel:${businessConfig.phoneRaw}`}
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-sm font-semibold text-[#062D56] hover:bg-slate-100 transition-colors"
+              >
+                <Phone className="h-4 w-4 text-[#0875D1]" />
+                <span>Call {businessConfig.phone}</span>
+              </a>
               <Link to="/request-a-quote" className="btn-blue w-full">
                 <span>Request a Quote</span>
                 <ArrowRight className="h-4 w-4" />

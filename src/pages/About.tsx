@@ -17,6 +17,7 @@ import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import BottomCTA from '@/components/BottomCTA';
 import PageHero from '@/components/PageHero';
+import { businessConfig } from '@/config/business';
 
 const strategicPillars = [
   {
@@ -295,9 +296,12 @@ export default function About() {
                   <span className="text-xs font-mono text-[#12C8E8] block mb-1">
                     CENTRAL CONTACT DESK
                   </span>
-                  <span className="font-display text-xl sm:text-2xl font-bold text-white block">
-                    +91 99355 55555
-                  </span>
+                  <a
+                    href={`tel:${businessConfig.phoneRaw}`}
+                    className="font-display text-xl sm:text-2xl font-bold text-white hover:text-[#12C8E8] transition-colors block"
+                  >
+                    {businessConfig.phone}
+                  </a>
                   <p className="text-xs text-slate-300 mt-2">
                     Available for institutional tender inquiries, surgeon consultations, and urgent case replenishment.
                   </p>

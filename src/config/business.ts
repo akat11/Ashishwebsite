@@ -9,21 +9,21 @@ export const businessConfig = {
     'Supplying orthopedic locking plate systems, external fixators, Ilizarov rings and fixation screws in implant-grade Stainless Steel 316L and Titanium to orthopedic surgeons, hospitals and trauma centers.',
 
   // Contact details
-  // Replace placeholder values with real verified business information before going live.
-  phone: '+91 90000 00000', // Replace with real business phone
-  phoneRaw: '+919000000000', // No spaces or special chars for tel: links
-  whatsapp: '+919000000000', // International format, no spaces or special chars
-  email: 'info@vinyanaksurgicals.in', // Replace with real email
-  emailSecondary: 'enquiries@vinyanaksurgicals.in',
+  phone: '+91 99355 86478',
+  phoneRaw: '+919935586478',
+  whatsapp: '919935586478',
+  email: 'ashishkumar864@gmail.com',
+  emailSecondary: '',
 
-  // Address — replace with verified Kanpur business address
+  // Address
   address: {
-    line1: 'Medical Market', // Replace with verified street address
-    line2: 'Kanpur',
-    city: 'Kanpur',
+    line1: 'Nankari, IIT Kanpur',
+    line2: 'Kanpur Nagar',
+    city: 'Kanpur Nagar',
     state: 'Uttar Pradesh',
-    pincode: '208001', // Replace with verified PIN code
+    pincode: '208016',
     country: 'India',
+    formatted: 'Nankari, IIT Kanpur, Kanpur Nagar, Uttar Pradesh – 208016, India',
   },
 
   // Business hours
@@ -45,7 +45,7 @@ export const businessConfig = {
   website: 'https://vinayaksurgicals.vercel.app',
 
   // WhatsApp configuration flag
-  whatsappConfigured: false, // Set to true once a valid number is set above
+  whatsappConfigured: true,
 
   // Default WhatsApp message
   whatsappDefaultMessage:

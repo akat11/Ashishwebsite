@@ -116,7 +116,7 @@ export default function Quote() {
                         WhatsApp Sizing Desk
                       </span>
                       <span className="font-display text-xs sm:text-sm font-bold text-[#062D56] group-hover:text-emerald-700 transition-colors">
-                        +91 99355 55555
+                        {businessConfig.phone}
                       </span>
                     </div>
                   </a>
