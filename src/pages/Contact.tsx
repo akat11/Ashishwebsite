@@ -134,7 +134,7 @@ export default function Contact() {
                         WhatsApp Fast Desk
                       </span>
                       <span className="font-display text-sm sm:text-base font-bold text-[#062D56] group-hover:text-emerald-700 transition-colors">
-                        +91 99355 55555
+                        {businessConfig.phone}
                       </span>
                       <span className="text-xs text-slate-500 block mt-0.5">
                         Instant monograph sharing &amp; photo verification
@@ -173,7 +173,7 @@ export default function Contact() {
                         Headquarters Depot
                       </span>
                       <span className="font-display text-sm font-bold text-[#062D56] block">
-                        Kanpur, Uttar Pradesh, India
+                        {businessConfig.address.formatted}
                       </span>
                       <span className="text-xs text-slate-500 block mt-0.5">
                         Serving hospitals and distributors across all Indian states.

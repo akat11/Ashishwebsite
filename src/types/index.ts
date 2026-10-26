@@ -50,10 +50,12 @@ export interface BreadcrumbItem {
 
 export interface BusinessAddress {
   line1: string;
+  line2?: string;
   city: string;
   state: string;
   pincode: string;
   country: string;
+  formatted?: string;
 }
 
 export interface BusinessHours {

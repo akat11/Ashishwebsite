@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Sparkles,
   Layers,
+  Phone,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -17,7 +18,7 @@ import BottomCTA from '@/components/BottomCTA';
 import CatalogueRequestModal from '@/components/home/CatalogueRequestModal';
 import { productCategories } from '@/data/categories';
 import { getProductBySlug, getProductsByCategory } from '@/data/products';
-import { buildProductWhatsAppLink } from '@/config/business';
+import { businessConfig, buildProductWhatsAppLink } from '@/config/business';
 import InteractiveProductViewer from '@/components/product/InteractiveProductViewer';
 import { getProductAnatomy } from '@/data/productAnatomy';
 
@@ -117,6 +118,20 @@ export default function ProductDetail() {
                   <FileText className="h-4 w-4 text-[#0875D1]" />
                   <span>Request Monograph</span>
                 </button>
+              </div>
+
+              {/* Direct Phone Assistance */}
+              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                <span className="flex items-center gap-2 font-medium">
+                  <Phone className="h-3.5 w-3.5 text-[#0875D1]" />
+                  <span>Immediate sizing assistance?</span>
+                </span>
+                <a
+                  href={`tel:${businessConfig.phoneRaw}`}
+                  className="font-bold text-[#062D56] hover:text-[#0875D1] transition-colors"
+                >
+                  {businessConfig.phone}
+                </a>
               </div>
             </div>
 

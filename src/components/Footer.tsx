@@ -40,14 +40,7 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const address = [
-    businessConfig.address.line1,
-    businessConfig.address.city,
-    businessConfig.address.state,
-    businessConfig.address.country,
-  ]
-    .filter(Boolean)
-    .join(', ');
+  const address = businessConfig.address.formatted;
 
   return (
     <footer className="bg-white text-slate-600 border-t border-slate-200 relative">

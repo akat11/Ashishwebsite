@@ -71,7 +71,12 @@ export default function PrivacyPolicy() {
                 If you have questions regarding this privacy policy or wish to review the information on file with us, please contact our administrative desk at{' '}
                 <a href={`mailto:${businessConfig.email}`} className="font-semibold text-[#123B66] hover:underline">
                   {businessConfig.email}
-                </a>.
+                </a>{' '}
+                (or telephone{' '}
+                <a href={`tel:${businessConfig.phoneRaw}`} className="font-semibold text-[#123B66] hover:underline">
+                  {businessConfig.phone}
+                </a>
+                ).
               </p>
             </div>
           </div>
