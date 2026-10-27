@@ -5,7 +5,7 @@ export default function WhatsAppButton() {
   if (businessConfig.whatsappConfigured) {
     return (
       <a
-        href={buildWhatsAppLink()}
+        href={buildWhatsAppLink('Hello Vinayak Surgicals, I would like to inquire about your orthopedic implants and surgical instruments.')}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Vinayak Surgicals on WhatsApp"

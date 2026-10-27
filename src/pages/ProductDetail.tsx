@@ -51,14 +51,17 @@ export default function ProductDetail() {
   };
 
   const quoteUrl = `/request-a-quote?product=${encodeURIComponent(product.name)}&code=${encodeURIComponent(primaryCode)}&category=${encodeURIComponent(category.name)}`;
-  const whatsappUrl = buildProductWhatsAppLink(product.name);
+  const whatsappUrl = buildProductWhatsAppLink(
+    product.name,
+    primaryCode ? `Catalogue Code: ${primaryCode}` : `Category: ${category.name}`
+  );
 
   return (
     <>
       <SEO
         title={`${product.name} — Technical Monograph & Specifications | Vinayak Surgicals`}
         description={`${product.description} Verified catalogue specifications in implant-grade Stainless Steel 316L and Titanium Grade 5.`}
-        canonical={`https://vinyanaksurgicals.com/products/${category.slug}/${product.slug}`}
+        canonical={`https://vinayaksurgicals.vercel.app/products/${category.slug}/${product.slug}`}
         image={product.image}
         type="product"
         keywords={`${product.name}, ${category.name}, orthopedic implants, catalogue codes, compatible screws, Vinayak Surgicals, trauma implants Kanpur India`}
