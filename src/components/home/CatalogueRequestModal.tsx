@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
-import { X, Send, CheckCircle2, ShieldCheck, Mail, Phone, Building, User } from 'lucide-react';
+import { X, ShieldCheck, Mail, Phone, Building, User, MessageCircle } from 'lucide-react';
 import type { Product } from '@/data/products';
 import { useModalA11y } from '@/hooks/useModalA11y';
+import { buildMonographRequestWhatsAppLink } from '@/config/business';
+import { isValidEmail, isValidPhone } from '@/utils/validation';
 
 interface CatalogueRequestModalProps {
   product: Product | null;
@@ -15,6 +17,8 @@ export default function CatalogueRequestModal({
   onClose,
 }: CatalogueRequestModalProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,6 +29,8 @@ export default function CatalogueRequestModal({
 
   const handleResetAndClose = useCallback(() => {
     setSubmitted(false);
+    setWhatsappUrl('');
+    setErrors({});
     onClose();
   }, [onClose]);
 
@@ -34,7 +40,46 @@ export default function CatalogueRequestModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate instant dispatch acknowledgment
+
+    const nextErrors: Record<string, string> = {};
+    if (!formData.name.trim()) {
+      nextErrors.name = 'Please enter your name.';
+    }
+    if (!formData.phone.trim()) {
+      nextErrors.phone = 'Please enter your phone number.';
+    } else if (!isValidPhone(formData.phone)) {
+      nextErrors.phone = 'Please enter a valid phone number (at least 7 to 15 digits).';
+    }
+    if (!formData.email.trim()) {
+      nextErrors.email = 'Please enter your email address.';
+    } else if (!isValidEmail(formData.email)) {
+      nextErrors.email = 'Please enter a valid email address.';
+    }
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+
+    const codeSpec = product?.specs?.find((s) => s.label.toLowerCase().includes('code'));
+    const catalogueCode = codeSpec?.value;
+
+    const url = buildMonographRequestWhatsAppLink({
+      doctorName: formData.name,
+      organization: formData.organization,
+      phone: formData.phone,
+      email: formData.email,
+      requirementType: formData.requirementType,
+      productName: product ? product.name : undefined,
+      catalogueCode,
+    });
+
+    setWhatsappUrl(url);
+
+    try {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch {
+      // Ignored: fallback URL is rendered in the dialog
+    }
+
     setSubmitted(true);
   };
 
@@ -90,23 +135,36 @@ export default function CatalogueRequestModal({
         </div>
 
         {submitted ? (
-          <div className="p-8 text-center space-y-4">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-              <CheckCircle2 className="h-8 w-8" />
+          <div className="p-6 sm:p-8 text-center space-y-4">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366]/20 text-[#25D366]">
+              <MessageCircle className="h-8 w-8" />
             </div>
             <h4 className="font-display text-lg font-bold text-[#062D56]">
-              Request Received Successfully
+              WhatsApp Ready — Monograph Request Formatted
             </h4>
             <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
-              Our clinical logistics desk has logged your request for{' '}
-              <strong className="text-slate-900">{product ? product.name : 'Catalogue'}</strong>. Our Kanpur headquarters team will send the official product monograph and institutional pricing directly to your contact within 1–2 business hours.
+              Your request for <strong className="text-slate-900">{product ? product.name : 'Catalogue'}</strong> has been loaded into WhatsApp. <strong>Please click &ldquo;Send&rdquo; in WhatsApp</strong> so our Kanpur dispatch desk at <strong>+91 99355 86478</strong> can immediately forward the technical monograph PDF and pricing.
             </p>
-            <button
-              onClick={handleResetAndClose}
-              className="btn-cyan mt-4 w-full"
-            >
-              <span>Done</span>
-            </button>
+
+            <div className="pt-2 space-y-2.5">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp w-full justify-center shadow-md py-3 text-sm font-bold inline-flex items-center gap-2"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span>Open in WhatsApp</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={handleResetAndClose}
+                className="w-full py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold transition-colors"
+              >
+                Close Window
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
@@ -121,10 +179,16 @@ export default function CatalogueRequestModal({
                   required
                   placeholder="Dr. Rajesh Sharma"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="input-field pl-9 text-sm"
+                  onChange={(e) => {
+                    setFormData({ ...formData, name: e.target.value });
+                    if (errors.name) setErrors({ ...errors, name: '' });
+                  }}
+                  className={`input-field pl-9 text-sm ${errors.name ? 'border-red-500 ring-1 ring-red-500' : ''}`}
                 />
               </div>
+              {errors.name && (
+                <p className="mt-1 text-xs text-red-600">{errors.name}</p>
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -139,10 +203,16 @@ export default function CatalogueRequestModal({
                     required
                     placeholder="doctor@hospital.org"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="input-field pl-9 text-sm"
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                      if (errors.email) setErrors({ ...errors, email: '' });
+                    }}
+                    className={`input-field pl-9 text-sm ${errors.email ? 'border-red-500 ring-1 ring-red-500' : ''}`}
                   />
                 </div>
+                {errors.email && (
+                  <p className="mt-1 text-xs text-red-600">{errors.email}</p>
+                )}
               </div>
 
               <div>
@@ -156,10 +226,16 @@ export default function CatalogueRequestModal({
                     required
                     placeholder="+91 98765 43210"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="input-field pl-9 text-sm"
+                    onChange={(e) => {
+                      setFormData({ ...formData, phone: e.target.value });
+                      if (errors.phone) setErrors({ ...errors, phone: '' });
+                    }}
+                    className={`input-field pl-9 text-sm ${errors.phone ? 'border-red-500 ring-1 ring-red-500' : ''}`}
                   />
                 </div>
+                {errors.phone && (
+                  <p className="mt-1 text-xs text-red-600">{errors.phone}</p>
+                )}
               </div>
             </div>
 
@@ -196,10 +272,10 @@ export default function CatalogueRequestModal({
             <div className="pt-2">
               <button
                 type="submit"
-                className="btn-cyan w-full justify-center shadow-md py-3 text-sm font-bold"
+                className="btn-whatsapp w-full justify-center shadow-md py-3 text-sm font-bold inline-flex items-center gap-2"
               >
-                <Send className="h-4 w-4" />
-                <span>Submit &amp; Request Monograph Dispatch</span>
+                <MessageCircle className="h-4 w-4" />
+                <span>Submit &amp; Request via WhatsApp</span>
               </button>
               <p className="text-[11px] text-center text-slate-400 mt-2">
                 🔒 Strictly confidential. Your details are used solely to fulfill technical catalogue requests.

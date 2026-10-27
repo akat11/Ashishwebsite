@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import type { Product } from '@/data/products';
 import { useModalA11y } from '@/hooks/useModalA11y';
 import { getProductAnatomy } from '@/data/productAnatomy';
-import { buildWhatsAppLink } from '@/config/business';
+import { buildProductWhatsAppLink } from '@/config/business';
 
 interface QuickSpecModalProps {
   product: Product | null;
@@ -21,6 +21,8 @@ export default function QuickSpecModal({
   if (!product) return null;
 
   const anatomy = getProductAnatomy(product.slug);
+  const codeSpec = product.specs?.find((s) => s.label.toLowerCase().includes('code'));
+  const specsSummary = codeSpec ? `Catalogue Code: ${codeSpec.value}` : `Category: ${product.category}`;
 
   return (
     <div
@@ -140,9 +142,7 @@ export default function QuickSpecModal({
 
           <div className="flex items-center gap-2.5">
             <a
-              href={buildWhatsAppLink(
-                `Hello Vinayak Surgicals, I am inquiring about the technical specifications and hospital supply pricing for: ${product.name} (Slug: ${product.slug}).`
-              )}
+              href={buildProductWhatsAppLink(product.name, specsSummary)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs"

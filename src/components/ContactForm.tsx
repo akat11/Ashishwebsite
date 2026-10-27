@@ -1,58 +1,71 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  AlertCircle,
   Building2,
-  CheckCircle2,
   FileText,
   Mail,
+  MessageCircle,
   Phone,
   Send,
   Tag,
   UserRound,
 } from 'lucide-react';
-import { businessConfig, buildWhatsAppLink } from '@/config/business';
-import { isValidEmail, sanitizeString } from '@/utils/validation';
+import { buildContactEnquiryWhatsAppLink } from '@/config/business';
+import { isValidEmail, isValidPhone, sanitizeString } from '@/utils/validation';
 
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+type FormStatus = 'idle' | 'submitting' | 'whatsapp_opened';
 type FieldName = 'name' | 'phone' | 'email' | 'message' | 'consent';
 type FieldErrors = Partial<Record<FieldName, string>>;
+
+const ENQUIRY_PURPOSE_LABELS: Record<string, string> = {
+  general: 'General Medical Supply Enquiry',
+  product: 'Product Availability & Sizing',
+  quotation: 'Institutional Quotation Request',
+  sourcing: 'Specialized Implants Sourcing',
+  support: 'After-Sales & Instrumentation Support',
+};
 
 export default function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [whatsappUrl, setWhatsappUrl] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     const field = e.target.name as FieldName;
     if (field in errors) {
       setErrors((current) => ({ ...current, [field]: undefined }));
     }
-    if (status === 'error') setStatus('idle');
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status === 'submitting') return;
+
     const data = new FormData(e.currentTarget);
     const nextErrors: FieldErrors = {};
 
     const name = sanitizeString(data.get('name'));
+    const organisation = sanitizeString(data.get('organisation'));
     const phone = sanitizeString(data.get('phone'));
     const email = sanitizeString(data.get('email'));
+    const enquiryType = sanitizeString(data.get('enquiryType')) || 'general';
     const message = sanitizeString(data.get('message'));
 
     if (!name) {
-      nextErrors.name = 'Please enter your name.';
+      nextErrors.name = 'Please enter your full name.';
     }
     if (!phone) {
       nextErrors.phone = 'Please enter your phone number.';
+    } else if (!isValidPhone(phone)) {
+      nextErrors.phone = 'Please enter a valid phone number (e.g. +91 99355 86478).';
     }
     if (!email) {
       nextErrors.email = 'Please enter your email address.';
     } else if (!isValidEmail(email)) {
-      nextErrors.email = 'Please enter a valid email address.';
+      nextErrors.email = 'Please enter a valid email address (e.g. doctor@hospital.org).';
     }
     if (!message) {
-      nextErrors.message = 'Please describe your requirements.';
+      nextErrors.message = 'Please describe your requirements or enquiry.';
     }
     if (data.get('consent') !== 'on') {
       nextErrors.consent = 'Please provide consent to continue.';
@@ -66,10 +79,26 @@ export default function ContactForm() {
 
     setStatus('submitting');
 
-    // Without a configured backend, do not claim that an enquiry was sent.
-    setTimeout(() => {
-      setStatus('error');
-    }, 800);
+    const purposeLabel = ENQUIRY_PURPOSE_LABELS[enquiryType] || enquiryType;
+    const url = buildContactEnquiryWhatsAppLink({
+      name,
+      organisation,
+      phone,
+      email,
+      enquiryPurpose: purposeLabel,
+      message,
+    });
+
+    setWhatsappUrl(url);
+
+    // Open WhatsApp in new tab / app
+    try {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch {
+      // Ignored: fallback URL is rendered in the notification box below
+    }
+
+    setStatus('whatsapp_opened');
   };
 
   const inputClasses = (hasError?: boolean) =>
@@ -260,42 +289,58 @@ export default function ContactForm() {
         )}
       </div>
 
-      {status === 'error' && (
-        <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-xs sm:text-sm text-red-800">
-          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
-          <div>
-            <p className="font-semibold text-red-900">Form submission service note:</p>
-            <p className="mt-0.5 text-red-700">
-              For immediate assistance, please call us directly or click below to connect on WhatsApp. Our medical supply team is ready to help.
-            </p>
-            {businessConfig.whatsappConfigured && (
-              <a
-                href={buildWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp mt-2.5 !py-2 !px-4 !text-xs"
-              >
-                Chat on WhatsApp
-              </a>
-            )}
+      {/* Submission status & instructions */}
+      {status === 'whatsapp_opened' && (
+        <div className="rounded-xl border border-emerald-300 bg-emerald-50/80 p-4 sm:p-5 text-xs sm:text-sm text-[#062D56] space-y-3 animate-fade-in">
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xs">
+              <MessageCircle className="h-5 w-5" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-bold text-[#062D56] text-sm sm:text-base">
+                WhatsApp Ready — Press Send in WhatsApp
+              </p>
+              <p className="text-slate-600 leading-relaxed text-xs sm:text-sm">
+                Your enquiry has been formatted and loaded into WhatsApp. <strong>Please click &ldquo;Send&rdquo; in WhatsApp</strong> to transmit your requirements directly to our clinical supply desk at <strong>+91 99355 86478</strong>.
+              </p>
+            </div>
           </div>
-        </div>
-      )}
 
-      {status === 'success' && (
-        <div className="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-4 text-xs sm:text-sm text-green-800">
-          <CheckCircle2 className="h-5 w-5 shrink-0 text-[#16a34a]" />
-          <p>Thank you for your enquiry. Our team will review your requirements and respond within 1–2 business days.</p>
+          <div className="pt-2 border-t border-emerald-200/80 flex flex-wrap items-center justify-between gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-bold transition-all shadow-xs"
+            >
+              <MessageCircle className="h-4 w-4" />
+              <span>Click Here if WhatsApp Didn&apos;t Open Automatically</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => setStatus('idle')}
+              className="text-xs text-slate-500 hover:text-[#0875D1] font-semibold underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              Edit Form / Send Another
+            </button>
+          </div>
         </div>
       )}
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="btn-primary w-full shadow-sm"
+        className="btn-primary w-full shadow-sm flex items-center justify-center gap-2 !py-3"
       >
-        {status === 'submitting' ? 'Submitting Enquiry...' : 'Send Enquiry'}
-        <Send className="h-4 w-4" />
+        <MessageCircle className="h-4 w-4 text-[#25D366]" />
+        <span>
+          {status === 'submitting'
+            ? 'Preparing WhatsApp Message...'
+            : status === 'whatsapp_opened'
+            ? 'Re-Open WhatsApp with Enquiry'
+            : 'Send Enquiry via WhatsApp'}
+        </span>
+        <Send className="h-3.5 w-3.5 opacity-70" />
       </button>
     </form>
   );

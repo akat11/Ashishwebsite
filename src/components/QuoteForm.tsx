@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Send, Plus, Trash2, AlertCircle, RotateCcw, Mail, CheckCircle2 } from 'lucide-react';
-import { businessConfig, buildWhatsAppLink } from '@/config/business';
+import { Plus, Trash2, RotateCcw, CheckCircle2, MessageCircle } from 'lucide-react';
+import { businessConfig, buildQuoteEnquiryWhatsAppLink } from '@/config/business';
+import { isValidEmail, isValidPhone } from '@/utils/validation';
 
-type FormStatus = 'idle' | 'submitting' | 'submitted' | 'error';
+type FormStatus = 'idle' | 'submitting' | 'whatsapp_opened';
 
 interface QuoteLine {
   product: string;
@@ -18,6 +19,8 @@ export default function QuoteForm() {
   const prefilledCategory = searchParams.get('category') || '';
 
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [whatsappUrl, setWhatsappUrl] = useState<string>('');
   const [formData, setFormData] = useState({
     orgName: '',
     contactPerson: '',
@@ -80,32 +83,59 @@ export default function QuoteForm() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const generateEnquirySummary = () => {
-    const validLines = lines.filter((l) => l.product.trim());
-    const itemsText = validLines.length > 0
-      ? validLines.map((l, i) => `${i + 1}. ${l.product} | Qty: ${l.quantity || 'TBD'} | Spec: ${l.specification || 'Standard'}`).join('\n')
-      : 'No specific items specified';
-
-    return `*Quotation Request — Vinayak Surgicals*\n\n` +
-      `*Facility:* ${formData.orgName || 'N/A'}\n` +
-      `*Contact Person:* ${formData.contactPerson || 'N/A'}\n` +
-      `*Phone:* ${formData.contactPhone || 'N/A'}\n` +
-      `*Email:* ${formData.contactEmail || 'N/A'}\n` +
-      `*Department:* ${formData.dept || 'N/A'}\n` +
-      `*Destination:* ${formData.destination || 'N/A'}\n\n` +
-      `*Required Products:*\n${itemsText}\n\n` +
-      (formData.additional ? `*Additional Notes:*\n${formData.additional}` : '');
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status === 'submitting') return;
+
+    const nextErrors: Record<string, string> = {};
+    if (!formData.orgName.trim()) nextErrors.orgName = 'Please enter your organisation or hospital name.';
+    if (!formData.contactPerson.trim()) nextErrors.contactPerson = 'Please enter the contact person name.';
+    if (!formData.contactPhone.trim()) {
+      nextErrors.contactPhone = 'Please enter your phone number.';
+    } else if (!isValidPhone(formData.contactPhone)) {
+      nextErrors.contactPhone = 'Please enter a valid phone number (at least 7 to 15 digits).';
+    }
+    if (!formData.contactEmail.trim()) {
+      nextErrors.contactEmail = 'Please enter your email address.';
+    } else if (!isValidEmail(formData.contactEmail)) {
+      nextErrors.contactEmail = 'Please enter a valid email address.';
+    }
+
+    const validItems = lines.filter((l) => l.product.trim());
+    if (validItems.length === 0) {
+      nextErrors.products = 'Please specify at least one product for quotation.';
+    }
+
+    setFormErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+
     setStatus('submitting');
-    // Backend API hook simulation with fallback instructions
-    setTimeout(() => {
-      setStatus('error');
-    }, 600);
+
+    const url = buildQuoteEnquiryWhatsAppLink({
+      orgName: formData.orgName,
+      contactPerson: formData.contactPerson,
+      contactPhone: formData.contactPhone,
+      contactEmail: formData.contactEmail,
+      dept: formData.dept,
+      destination: formData.destination,
+      additional: formData.additional,
+      items: validItems,
+    });
+
+    setWhatsappUrl(url);
+
+    try {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch {
+      // Ignored: fallback URL is rendered in the notification box below
+    }
+
+    setStatus('whatsapp_opened');
   };
 
   const emailSubject = encodeURIComponent(`Institutional Quotation Request — ${formData.orgName || 'Hospital/Clinic'}`);
@@ -166,9 +196,12 @@ export default function QuoteForm() {
               required
               value={formData.orgName}
               onChange={handleInputChange}
-              className="input-field"
+              className={`input-field ${formErrors.orgName ? '!border-[#dc2626]' : ''}`}
               placeholder="Hospital, clinic or institution"
             />
+            {formErrors.orgName && (
+              <p className="mt-1 text-xs font-medium text-[#dc2626]">{formErrors.orgName}</p>
+            )}
           </div>
           <div>
             <label htmlFor="contactPerson" className="label-field">
@@ -181,9 +214,12 @@ export default function QuoteForm() {
               required
               value={formData.contactPerson}
               onChange={handleInputChange}
-              className="input-field"
+              className={`input-field ${formErrors.contactPerson ? '!border-[#dc2626]' : ''}`}
               placeholder="Doctor or Procurement Lead"
             />
+            {formErrors.contactPerson && (
+              <p className="mt-1 text-xs font-medium text-[#dc2626]">{formErrors.contactPerson}</p>
+            )}
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -212,9 +248,12 @@ export default function QuoteForm() {
               required
               value={formData.contactPhone}
               onChange={handleInputChange}
-              className="input-field"
+              className={`input-field ${formErrors.contactPhone ? '!border-[#dc2626]' : ''}`}
               placeholder="+91 98765 43210"
             />
+            {formErrors.contactPhone && (
+              <p className="mt-1 text-xs font-medium text-[#dc2626]">{formErrors.contactPhone}</p>
+            )}
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -229,9 +268,12 @@ export default function QuoteForm() {
               required
               value={formData.contactEmail}
               onChange={handleInputChange}
-              className="input-field"
+              className={`input-field ${formErrors.contactEmail ? '!border-[#dc2626]' : ''}`}
               placeholder="procurement@hospital.org"
             />
+            {formErrors.contactEmail && (
+              <p className="mt-1 text-xs font-medium text-[#dc2626]">{formErrors.contactEmail}</p>
+            )}
           </div>
           <div>
             <label htmlFor="destination" className="label-field">
@@ -283,6 +325,12 @@ export default function QuoteForm() {
             </button>
           </div>
         </div>
+
+        {formErrors.products && (
+          <p role="alert" className="text-xs font-medium text-[#dc2626] bg-red-50 border border-red-200 rounded-lg p-2.5">
+            {formErrors.products}
+          </p>
+        )}
 
         {lines.map((line, idx) => (
           <div key={idx} className="rounded-xl border border-[#E0E8EF] p-4 bg-[#F4F8FB]/80">
@@ -369,32 +417,47 @@ export default function QuoteForm() {
         </label>
       </div>
 
-      {status === 'error' && (
-        <div className="flex items-start gap-3 rounded-xl bg-amber-50 border border-amber-200 p-4 text-xs sm:text-sm text-amber-900">
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5 text-amber-600" />
-          <div className="space-y-2">
-            <p className="font-semibold text-amber-900">Direct Procurement Routing:</p>
-            <p className="text-amber-800 leading-relaxed">
-              To guarantee immediate processing without email server delays, please forward your quotation requirements directly to our sales desk via Email or WhatsApp. All your form details are pre-packaged:
-            </p>
-            <div className="flex flex-wrap gap-2.5 pt-1">
+      {status === 'whatsapp_opened' && (
+        <div className="rounded-xl border border-emerald-300 bg-emerald-50/80 p-4 sm:p-5 text-xs sm:text-sm text-[#062D56] space-y-3 animate-fade-in">
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xs">
+              <MessageCircle className="h-5 w-5" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-bold text-[#062D56] text-sm sm:text-base">
+                Quotation Requisition Prepared in WhatsApp
+              </p>
+              <p className="text-slate-600 leading-relaxed text-xs sm:text-sm">
+                Your itemized requisition has been formatted and loaded into WhatsApp. <strong>Please click &ldquo;Send&rdquo; in WhatsApp</strong> to transmit your requirements directly to our sales desk at <strong>+91 99355 86478</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-emerald-200/80 flex flex-wrap items-center justify-between gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-bold transition-all shadow-xs"
+            >
+              <MessageCircle className="h-4 w-4" />
+              <span>Click Here if WhatsApp Didn&apos;t Open Automatically</span>
+            </a>
+            <div className="flex items-center gap-2">
               <a
                 href={`mailto:${businessConfig.email}?subject=${emailSubject}&body=${emailBody}`}
-                className="btn-primary !bg-[#123B66] hover:!bg-[#0c2642] !py-2 !px-4 !text-xs inline-flex items-center gap-1.5"
+                className="text-xs text-slate-600 hover:text-[#0875D1] font-semibold underline underline-offset-2 transition-colors"
               >
-                <Mail className="h-3.5 w-3.5" />
-                <span>Submit via Official Email</span>
+                Or Send via Email Client
               </a>
-              {businessConfig.whatsappConfigured && (
-                <a
-                  href={buildWhatsAppLink(generateEnquirySummary())}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-whatsapp !py-2 !px-4 !text-xs inline-flex items-center gap-1.5"
-                >
-                  <span>Submit via WhatsApp</span>
-                </a>
-              )}
+              <span className="text-slate-300">|</span>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className="text-xs text-slate-500 hover:text-[#0875D1] font-semibold underline underline-offset-2 transition-colors cursor-pointer"
+              >
+                Edit Requisition
+              </button>
             </div>
           </div>
         </div>
@@ -403,10 +466,16 @@ export default function QuoteForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="btn-primary w-full shadow-sm"
+        className="btn-primary w-full shadow-sm inline-flex items-center justify-center gap-2 !bg-[#25D366] hover:!bg-[#20ba59]"
       >
-        {status === 'submitting' ? 'Processing Request...' : 'Submit Quotation Request'}
-        <Send className="h-4 w-4" />
+        <MessageCircle className="h-5 w-5" />
+        <span>
+          {status === 'submitting'
+            ? 'Preparing WhatsApp Quotation...'
+            : status === 'whatsapp_opened'
+            ? 'Re-Open WhatsApp with Quotation'
+            : 'Submit Quotation Request via WhatsApp'}
+        </span>
       </button>
     </form>
   );
